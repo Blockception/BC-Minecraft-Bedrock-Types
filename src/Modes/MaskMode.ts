@@ -1,10 +1,10 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const MaskMode: ModeCollection = {
-  Name: "Mask Mode",
-  Modes: [
-    { Name: "filtered", Description: "Using a filtered setting" },
-    { Name: "masked", Description: "Clones the area using a mask" },
-    { Name: "replace", Description: "Replaces the specified block" },
+  name: "Mask Mode",
+  modes: [
+    { name: "filtered", documentation: "Using a filtered setting" },
+    { name: "masked", documentation: "Clones the area using a mask" },
+    { name: "replace", documentation: "Replaces the specified block" },
   ],
 };

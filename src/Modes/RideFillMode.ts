@@ -1,9 +1,9 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const RideFillMode: ModeCollection = {
-  Name: "Ride Fill Mode",
-  Modes: [
-    { Name: "if_group_fits", Description: "If the entity fits then its placed" },
-    { Name: "until_full", Description: "Keep adding entities until full" },
+  name: "Ride Fill Mode",
+  modes: [
+    { name: "if_group_fits", documentation: "If the entity fits then its placed" },
+    { name: "until_full", documentation: "Keep adding entities until full" },
   ],
 };

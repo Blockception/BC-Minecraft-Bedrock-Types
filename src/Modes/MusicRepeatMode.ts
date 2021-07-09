@@ -1,9 +1,9 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const MusicRepeatMode: ModeCollection = {
-  Name: "Music Repeat Mode",
-  Modes: [
-    { Name: "loop", Description: "Loops the given track" },
-    { Name: "play_once", Description: "Only plays the given track once" },
+  name: "Music Repeat Mode",
+  modes: [
+    { name: "loop", documentation: "Loops the given track" },
+    { name: "play_once", documentation: "Only plays the given track once" },
   ],
 };

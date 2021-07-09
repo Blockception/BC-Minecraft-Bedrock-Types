@@ -1,9 +1,9 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const ReplaceMode: ModeCollection = {
-  Name: "Fill mode",
-  Modes: [
-    { Name: "destroy", Description: "Destroy the old" },
-    { Name: "keep", Description: "Keeps the old if there is any" },
+  name: "Fill mode",
+  modes: [
+    { name: "destroy", documentation: "Destroy the old" },
+    { name: "keep", documentation: "Keeps the old if there is any" },
   ],
 };

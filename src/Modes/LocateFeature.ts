@@ -1,21 +1,21 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const LocateFeatureMode: ModeCollection = {
-  Name: "Locate Feature Mode",
-  Modes: [
-    { Name: "bastionremnant", Description: "A bastion remnant in the nether" },
-    { Name: "buriedtreasure", Description: "A buried chest under ground" },
-    { Name: "endcity", Description: "A end city" },
-    { Name: "fortress", Description: "A nether fortress" },
-    { Name: "mansion", Description: "A woodland mansion" },
-    { Name: "mineshaft", Description: "Mine shafts" },
-    { Name: "monument", Description: "A ocean monument" },
-    { Name: "ruins", Description: "Ocean ruins" },
-    { Name: "pillageroutpost", Description: "Pillager outpost" },
-    { Name: "ruinedportal", Description: "A ruined portal to the nether" },
-    { Name: "shipwreck", Description: "A ocean sunken ship" },
-    { Name: "stronghold", Description: "The stronghold" },
-    { Name: "temple", Description: "Can be a desert pyramid, igloo, jungle pyramid or swamp hut" },
-    { Name: "village", Description: "A default village" },
+  name: "Locate Feature Mode",
+  modes: [
+    { name: "bastionremnant", documentation: "A bastion remnant in the nether" },
+    { name: "buriedtreasure", documentation: "A buried chest under ground" },
+    { name: "endcity", documentation: "A end city" },
+    { name: "fortress", documentation: "A nether fortress" },
+    { name: "mansion", documentation: "A woodland mansion" },
+    { name: "mineshaft", documentation: "Mine shafts" },
+    { name: "monument", documentation: "A ocean monument" },
+    { name: "ruins", documentation: "Ocean ruins" },
+    { name: "pillageroutpost", documentation: "Pillager outpost" },
+    { name: "ruinedportal", documentation: "A ruined portal to the nether" },
+    { name: "shipwreck", documentation: "A ocean sunken ship" },
+    { name: "stronghold", documentation: "The stronghold" },
+    { name: "temple", documentation: "Can be a desert pyramid, igloo, jungle pyramid or swamp hut" },
+    { name: "village", documentation: "A default village" },
   ],
 };

@@ -1,14 +1,14 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const CloneMode: ModeCollection = {
-  Name: "Clone Mode",
-  Modes: [
-    { Name: "force", Description: "Forces the clone even if the source and destination regions overlap." },
+  name: "Clone Mode",
+  modes: [
+    { name: "force", documentation: "Forces the clone even if the source and destination regions overlap." },
     {
-      Name: "move",
-      Description:
+      name: "move",
+      documentation:
         "Clone the source region to the destination region, then replace the source region with air. When used in filtered mask mode, only the cloned blocks are replaced with air.",
     },
-    { Name: "normal", Description: "Execute the clone under default operations." },
+    { name: "normal", documentation: "Execute the clone under default operations." },
   ],
 };

@@ -1,17 +1,19 @@
 /** The interface that marks a gamemode*/
 export interface ModeCollection {
   /**The collection of different modes*/
-  Modes: Mode[];
+  modes: Mode[];
   /**The name of the collection*/
-  Name: string;
+  name: string;
 }
 
 /** The mode interface */
 export interface Mode {
   /**The name of this mode*/
-  Name: string;
-  /**The description of this mode*/
-  Description: string;
+  name: string;
+  /**The documentation of this mode*/
+  documentation: string;
+  /** */
+  eduOnly? : boolean;
 }
 
 export namespace ModeCollection {
@@ -20,7 +22,7 @@ export namespace ModeCollection {
     if (value) {
       let temp = value as ModeCollection;
 
-      if (temp.Name && temp.Modes && Array.isArray(value.Modes)) return true;
+      if (temp.name && temp.modes && Array.isArray(value.modes)) return true;
     }
 
     return false;
@@ -30,12 +32,12 @@ export namespace ModeCollection {
    * 
    */
   export function isValue(Collection : ModeCollection, value : string) : boolean {
-    const M = Collection.Modes;
+    const M = Collection.modes;
 
     for (var I = 0; I < M.length; I++) {
       const elemt = M[I];
 
-      if (elemt.Name === value) return true;
+      if (elemt.name === value) return true;
     }
 
     return false;
@@ -49,16 +51,16 @@ export namespace ModeCollection {
    */
   export function get(Collection : ModeCollection, index : string | number) : Mode | undefined {
     if (typeof index === "string") {
-      const M = Collection.Modes;
+      const M = Collection.modes;
 
       for (var I = 0; I < M.length; I++) {
         const elemt = M[I];
   
-        if (elemt.Name === index) return elemt;
+        if (elemt.name === index) return elemt;
       }
     }
     else {
-      return Collection.Modes[index];
+      return Collection.modes[index];
     }
 
     return undefined;
@@ -73,7 +75,7 @@ export namespace Mode {
    * @returns 
    */
   export function is(value: any): value is Mode {
-    if (value && value.Name && value.Description) return true;
+    if (value && value.name && value.documentation) return true;
 
     return false;
   }

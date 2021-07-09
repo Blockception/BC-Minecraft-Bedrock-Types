@@ -1,12 +1,12 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const FillMode: ModeCollection = {
-  Name: "Fill mode",
-  Modes: [
-    { Name: "destroy", Description: "Destroy the old block, if tile drops is on, they all will drop an item" },
-    { Name: "hollow", Description: "Create a hollow cube" },
-    { Name: "keep", Description: "Keeps the old blocks, replaces only air" },
-    { Name: "outline", Description: "Just sets the outline" },
-    { Name: "replace", Description: "Replaces a specified block with the given block" },
+  name: "Fill mode",
+  modes: [
+    { name: "destroy", documentation: "Destroy the old block, if tile drops is on, they all will drop an item" },
+    { name: "hollow", documentation: "Create a hollow cube" },
+    { name: "keep", documentation: "Keeps the old blocks, replaces only air" },
+    { name: "outline", documentation: "Just sets the outline" },
+    { name: "replace", documentation: "Replaces a specified block with the given block" },
   ],
 };

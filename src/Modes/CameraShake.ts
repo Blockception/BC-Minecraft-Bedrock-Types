@@ -1,9 +1,9 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const CameraShakeMode: ModeCollection = {
-  Name: "Camera Shake Modes",
-  Modes: [
-    { Name: "positional", Description: "Shakes the camera using relatives position" },
-    { Name: "rotational", Description: "Shakes the camera using rotations" },
+  name: "Camera Shake modes",
+  modes: [
+    { name: "positional", documentation: "Shakes the camera using relatives position" },
+    { name: "rotational", documentation: "Shakes the camera using rotations" },
   ],
 };

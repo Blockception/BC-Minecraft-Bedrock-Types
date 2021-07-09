@@ -1,11 +1,11 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const MirrorMode: ModeCollection = {
-  Name: "Mirror mode",
-  Modes: [
-    { Name: "none", Description: "Does not mirror the structure" },
-    { Name: "x", Description: "Mirrors the structure using the x - axis as the mirror" },
-    { Name: "xz", Description: "Mirrors the structure using the x - axis and z - axis as the mirror" },
-    { Name: "z", Description: "Mirrors the structure using the z - axis as the mirror" },
+  name: "Mirror mode",
+  modes: [
+    { name: "none", documentation: "Does not mirror the structure" },
+    { name: "x", documentation: "Mirrors the structure using the x - axis as the mirror" },
+    { name: "xz", documentation: "Mirrors the structure using the x - axis and z - axis as the mirror" },
+    { name: "z", documentation: "Mirrors the structure using the z - axis as the mirror" },
   ],
 };

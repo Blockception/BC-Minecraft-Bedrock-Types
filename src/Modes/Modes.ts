@@ -14,6 +14,8 @@ import { RideFillMode } from './RideFillMode';
 import { RideRulesMode } from './RideRulesMode';
 import { RotationMode } from './RotationMode';
 import { SaveMode } from './SaveMode';
+import { SelectorAttributeMode } from './SelectorAttribute';
+import { SelectorTypeMode } from './SelectorType';
 import { StructureAnimationMode } from './StructureAnimationMode';
 import { TeleportRulesMode } from './TeleportRulesMode';
 
@@ -49,6 +51,10 @@ export namespace Modes {
   export const Rotation = new ModeHandler(RotationMode);
   /** The mode: Save **/
   export const Save = new ModeHandler(SaveMode);
+  /** The mode: Selector Attribute **/
+  export const SelectorAttribute = new ModeHandler(SelectorAttributeMode)
+  /** The mode: Selector Type **/
+  export const SelectorType = new ModeHandler(SelectorTypeMode)
   /** The mode: StructureAnimation **/
   export const StructureAnimation = new ModeHandler(StructureAnimationMode);
   /** The mode: TeleportRules **/

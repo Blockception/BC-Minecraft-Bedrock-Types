@@ -2,13 +2,13 @@ import { Mode, ModeCollection } from './ModeCollection';
 
 export class ModeHandler implements ModeCollection {
   /**The collection of different modes*/
-  public Modes: Mode[];
+  public modes: Mode[];
   /**The name of the collection*/
-  public Name: string;
+  public name: string;
 
   constructor(collection : ModeCollection) {
-    this.Modes = collection.Modes;
-    this.Name = collection.Name;
+    this.modes = collection.modes;
+    this.name = collection.name;
   }
 
   isValue(value : string) : boolean {
@@ -20,6 +20,6 @@ export class ModeHandler implements ModeCollection {
   }
 
   foreach(callbackfn: (value: Mode, index: number, array: Mode[]) => void, thisArg?: any): void {
-    return this.Modes.forEach(callbackfn, thisArg);
+    return this.modes.forEach(callbackfn, thisArg);
   }
 }

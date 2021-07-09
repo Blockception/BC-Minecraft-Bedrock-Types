@@ -1,22 +1,22 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const DifficultyMode: ModeCollection = {
-  Name: "Difficulty Mode",
-  Modes: [
-    { Name: "1", Description: "Easy mode, mobs will attack in this mode. but at a minimum." },
-    { Name: "e", Description: "Easy mode, mobs will attack in this mode. but at a minimum." },
-    { Name: "easy", Description: "Easy mode, mobs will attack in this mode. but at a minimum." },
+  name: "Difficulty Mode",
+  modes: [
+    { name: "1", documentation: "Easy mode, mobs will attack in this mode. but at a minimum." },
+    { name: "e", documentation: "Easy mode, mobs will attack in this mode. but at a minimum." },
+    { name: "easy", documentation: "Easy mode, mobs will attack in this mode. but at a minimum." },
 
-    { Name: "2", Description: "The default difficulty mode for minecraft, mobs will attack." },
-    { Name: "n", Description: "The default difficulty mode for minecraft, mobs will attack." },
-    { Name: "normal", Description: "The default difficulty mode for minecraft, mobs will attack." },
+    { name: "2", documentation: "The default difficulty mode for minecraft, mobs will attack." },
+    { name: "n", documentation: "The default difficulty mode for minecraft, mobs will attack." },
+    { name: "normal", documentation: "The default difficulty mode for minecraft, mobs will attack." },
 
-    { Name: "3", Description: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
-    { Name: "h", Description: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
-    { Name: "hard", Description: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
+    { name: "3", documentation: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
+    { name: "h", documentation: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
+    { name: "hard", documentation: "The most difficult mode for minecraft, mobs will attack somewhat harder." },
 
-    { Name: "0", Description: "The relaxed mode, no mobs with attacking behavior can be spawned" },
-    { Name: "p", Description: "The relaxed mode, no mobs with attacking behavior can be spawned" },
-    { Name: "peacefull", Description: "The relaxed mode, no mobs with attacking behavior can be spawned" },
+    { name: "0", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
+    { name: "p", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
+    { name: "peacefull", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
   ],
 };

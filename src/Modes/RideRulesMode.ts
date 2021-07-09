@@ -1,10 +1,10 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const RideRulesMode: ModeCollection = {
-  Name: "Ride Rules Mode",
-  Modes: [
-    { Name: "no_ride_change", Description: "Does not change riders positions" },
-    { Name: "reassign_rides", Description: "Does change riders positions" },
-    { Name: "skip_riders", Description: "Skips riders" },
+  name: "Ride Rules Mode",
+  modes: [
+    { name: "no_ride_change", documentation: "Does not change riders positions" },
+    { name: "reassign_rides", documentation: "Does change riders positions" },
+    { name: "skip_riders", documentation: "Skips riders" },
   ],
 };

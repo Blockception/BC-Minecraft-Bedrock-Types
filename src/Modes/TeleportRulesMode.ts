@@ -1,9 +1,9 @@
 import { ModeCollection } from "./ModeCollection";
 
 export const TeleportRulesMode: ModeCollection = {
-  Name: "Teleport Rules Mode",
-  Modes: [
-    { Name: "teleport_ride", Description: "Teleports the ride to the rider" },
-    { Name: "teleport_rider", Description: "Teleports the rider to the ride" },
+  name: "Teleport Rules Mode",
+  modes: [
+    { name: "teleport_ride", documentation: "Teleports the ride to the rider" },
+    { name: "teleport_rider", documentation: "Teleports the rider to the ride" },
   ],
 };
