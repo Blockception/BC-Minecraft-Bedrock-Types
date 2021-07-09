@@ -27,6 +27,19 @@ describe("Selector", () => {
     expect(sel.contains("rm")).to.be.true;
     expect(sel.contains("tag")).to.be.true;
   })
+
+  it('is valid type', ()=>{
+    expect(Selector.isValidType("@a")).to.be.true;
+    expect(Selector.isValidType("@s")).to.be.true;
+    expect(Selector.isValidType("@c")).to.be.true;
+    expect(Selector.isValidType("@v")).to.be.true;
+    expect(Selector.isValidType("@e")).to.be.true;
+    expect(Selector.isValidType("@p")).to.be.true;
+    expect(Selector.isValidType("@r")).to.be.true;
+    expect(Selector.isValidType("@initiator")).to.be.true;
+
+    expect(Selector.isValidType("@x")).to.be.false;
+  })
 })
 
 function testBaseParse(text: string, offset: number, selector: Selector) {
