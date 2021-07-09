@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Selector } from './Selector';
+import { Selector } from '../src/Types/Selector/Selector';
 
 describe("Selector", () => {
   it("parse1", () => {
