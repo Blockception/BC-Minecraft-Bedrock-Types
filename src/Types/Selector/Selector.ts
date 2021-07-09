@@ -75,7 +75,7 @@ export class Selector {
     return false;
   }
 
-    /**
+  /**
    * 
    * @param parameter 
    * @returns 
@@ -103,6 +103,31 @@ export class Selector {
       return this.scores;
 
     return this.attributes.filter((x) => x.name === parameter);
+  }
+
+  /**
+   * 
+   * @param cursor 
+   * @returns 
+   */
+  isInScore(cursor: number): boolean {
+    let max = Number.MIN_SAFE_INTEGER;
+    let min = Number.MAX_SAFE_INTEGER;
+
+    this.scores.forEach(s => {
+      max = Math.max(max, SelectorAttribute.getEndOffset(s));
+      min = Math.min(min, s.offset)
+    })
+
+    //scores={ at start
+    min -= 7;
+    //} at the end
+    max += 1;
+
+    if (cursor >= min && cursor <= max)
+      return true;
+
+    return false;
   }
 }
 
@@ -187,6 +212,26 @@ export namespace Selector {
 
     return Out;
   }
+
+  export function isSelector(value: string, wildcard: boolean = false, allowFakePlayers: boolean = false): boolean {
+    if (value.startsWith("@")) return true;
+
+    if (wildcard === true) {
+      if (value === "*") return true;
+    }
+
+    if (allowFakePlayers === true) {
+      if (value.startsWith('"') && value.endsWith('"')) return true;
+
+      if (value.includes(" ")) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return false;
+  }
 }
 
 /**
@@ -255,6 +300,29 @@ export namespace SelectorAttribute {
     else {
       receiver.push(new SelectorAttribute(name, value, offset));
     }
+  }
+
+  /**
+   * 
+   * @param p 
+   * @param cursor 
+   * @returns 
+   */
+  export function isCursor(p: SelectorAttribute, cursor: number): boolean {
+    if (p.offset >= cursor) {
+      if (cursor <= getEndOffset(p)) return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * 
+   * @param p 
+   * @returns 
+   */
+  export function getEndOffset(p: SelectorAttribute): number {
+    return p.name.length + p.value.length + 1 + p.offset;
   }
 }
 

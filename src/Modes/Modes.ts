@@ -2,6 +2,7 @@ import { CameraShakeMode } from './CameraShake';
 import { CloneMode } from './Clone';
 import { DifficultyMode } from './Difficulty';
 import { FillMode } from './FillMode';
+import { GameMode } from './GameMode';
 import { LocateFeatureMode } from './LocateFeature';
 import { MaskMode } from './MaskMode';
 import { MirrorMode } from './MirrorMode';
@@ -29,6 +30,8 @@ export namespace Modes {
   export const Difficulty = new ModeHandler(DifficultyMode);
   /** The mode: Fill **/
   export const Fill = new ModeHandler(FillMode);
+  /** The mode: Gamemode **/
+  export const Gamemode = new ModeHandler(GameMode);
   /** The mode: LocateFeature **/
   export const LocateFeature = new ModeHandler(LocateFeatureMode);
   /** The mode: Mask **/
