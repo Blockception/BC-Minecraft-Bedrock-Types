@@ -57,14 +57,64 @@ export class Selector {
 
     return out;
   }
+
+  /**
+   * 
+   * @param parameter 
+   * @returns 
+   */
+  contains(parameter: string): boolean {
+    if (parameter === "scores")
+      return this.scores.length > 0;
+
+    for (let index = 0; index < this.attributes.length; index++) {
+      const element = this.attributes[index];
+      if (element.name === parameter) return true;
+    }
+
+    return false;
+  }
+
+    /**
+   * 
+   * @param parameter 
+   * @returns 
+   */
+  count(parameter: string): number {
+    if (parameter === "scores")
+      return this.scores.length > 0 ? 1 : 0;
+
+    let Out = 0;
+    for (let index = 0; index < this.attributes.length; index++) {
+      const element = this.attributes[index];
+      if (element.name === parameter) Out++;
+    }
+
+    return Out;
+  }
+
+  /**
+   * 
+   * @param parameter 
+   * @returns 
+   */
+  get(parameter: string): SelectorAttribute[] {
+    if (parameter === "scores")
+      return this.scores;
+
+    return this.attributes.filter((x) => x.name === parameter);
+  }
 }
 
 /**
  * 
  */
 export class SelectorAttribute {
+  /** */
   public offset: number;
+  /** */
   public name: string;
+  /** */
   public value: string;
 
   /**
@@ -73,7 +123,7 @@ export class SelectorAttribute {
    * @param value 
    * @param offset 
    */
-  constructor(name : string, value: string, offset : number = 0) {
+  constructor(name: string, value: string, offset: number = 0) {
     this.name = name;
     this.value = value;
     this.offset = offset;
@@ -83,7 +133,7 @@ export class SelectorAttribute {
    * 
    * @returns 
    */
-  toString() : string {
+  toString(): string {
     return `${this.name}=${this.value}`;
   }
 }
@@ -132,7 +182,7 @@ export namespace Selector {
     offset += type.length;
 
     if (data.startsWith("[") && data.endsWith("]")) {
-      SelectorAttribute.parseParameters(data.substring(1, data.length - 1), offset, Out, Out.attributes);
+      SelectorAttribute.parseParameters(data.substring(1, data.length - 1), offset + 1, Out, Out.attributes);
     }
 
     return Out;
@@ -150,7 +200,7 @@ export namespace SelectorAttribute {
    * @param selector 
    * @param receiver 
    */
-  export function parseParameters(text: string, offset: number, selector : Selector, receiver : SelectorAttribute[]): void {
+  export function parseParameters(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
     let start: number = 0;
     let level: number = 0;
 
@@ -188,7 +238,7 @@ export namespace SelectorAttribute {
    * @param selector 
    * @param receiver 
    */
-  export function parse(text: string, offset: number, selector : Selector, receiver : SelectorAttribute[]): void {
+  export function parse(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
     let Index = text.indexOf("=");
 
     if (Index < 0) throw new Error("index cannot be lower then 0");
@@ -199,7 +249,7 @@ export namespace SelectorAttribute {
 
     if (name === "scores") {
       if (value.startsWith('{') && value.endsWith('}')) {
-        parseParameters(value.substring(1, value.length - 1), Index + offset, selector, selector.scores);
+        parseParameters(value.substring(1, value.length - 1), Index + offset + 1, selector, selector.scores);
       }
     }
     else {
