@@ -1,30 +1,30 @@
-import { Modes } from '../../modes/modes';
+import { Modes } from "../../modes/modes";
 
 /**
- * 
+ *
  */
 export class Selector {
   /**
-   * 
+   *
    */
   public offset: number;
   /**
-   * 
+   *
    */
   public type: string;
   /**
-   * 
+   *
    */
   public attributes: SelectorAttribute[];
   /**
-   * 
+   *
    */
   public scores: SelectorAttribute[];
 
   /**
-   * 
-   * @param type 
-   * @param offset 
+   *
+   * @param type
+   * @param offset
    */
   constructor(type: string, offset: number = 0) {
     this.type = type;
@@ -34,38 +34,39 @@ export class Selector {
   }
 
   /**
-   * 
-   * @returns 
+   *
+   * @returns
    */
   toString(): string {
-    const attr = this.attributes.map(x => x.toString()).join(',');
-    const scores = this.scores.map(x => x.toString()).join(',');
+    const attr = this.attributes.map((x) => x.toString()).join(",");
+    const scores = this.scores.map((x) => x.toString()).join(",");
 
     let out = this.type;
     const hAttr = attr.length > 0;
     const hScores = attr.length > 0;
 
     if (hAttr || hScores) {
-      out += '[';
+      out += "[";
 
       if (hAttr) out += attr;
-      if (hAttr && hScores) { out += ',' }
+      if (hAttr && hScores) {
+        out += ",";
+      }
       if (hScores) out += scores;
 
-      out += ']';
+      out += "]";
     }
 
     return out;
   }
 
   /**
-   * 
-   * @param parameter 
-   * @returns 
+   *
+   * @param parameter
+   * @returns
    */
   contains(parameter: string): boolean {
-    if (parameter === "scores")
-      return this.scores.length > 0;
+    if (parameter === "scores") return this.scores.length > 0;
 
     for (let index = 0; index < this.attributes.length; index++) {
       const element = this.attributes[index];
@@ -76,13 +77,12 @@ export class Selector {
   }
 
   /**
-   * 
-   * @param parameter 
-   * @returns 
+   *
+   * @param parameter
+   * @returns
    */
   count(parameter: string): number {
-    if (parameter === "scores")
-      return this.scores.length > 0 ? 1 : 0;
+    if (parameter === "scores") return this.scores.length > 0 ? 1 : 0;
 
     let Out = 0;
     for (let index = 0; index < this.attributes.length; index++) {
@@ -94,45 +94,43 @@ export class Selector {
   }
 
   /**
-   * 
-   * @param parameter 
-   * @returns 
+   *
+   * @param parameter
+   * @returns
    */
   get(parameter: string): SelectorAttribute[] {
-    if (parameter === "scores")
-      return this.scores;
+    if (parameter === "scores") return this.scores;
 
     return this.attributes.filter((x) => x.name === parameter);
   }
 
   /**
-   * 
-   * @param cursor 
-   * @returns 
+   *
+   * @param cursor
+   * @returns
    */
   isInScore(cursor: number): boolean {
     let max = Number.MIN_SAFE_INTEGER;
     let min = Number.MAX_SAFE_INTEGER;
 
-    this.scores.forEach(s => {
+    this.scores.forEach((s) => {
       max = Math.max(max, SelectorAttribute.getEndOffset(s));
-      min = Math.min(min, s.offset)
-    })
+      min = Math.min(min, s.offset);
+    });
 
     //scores={ at start
     min -= 7;
     //} at the end
     max += 1;
 
-    if (cursor >= min && cursor <= max)
-      return true;
+    if (cursor >= min && cursor <= max) return true;
 
     return false;
   }
 }
 
 /**
- * 
+ *
  */
 export class SelectorAttribute {
   /** */
@@ -143,10 +141,10 @@ export class SelectorAttribute {
   public value: string;
 
   /**
-   * 
-   * @param name 
-   * @param value 
-   * @param offset 
+   *
+   * @param name
+   * @param value
+   * @param offset
    */
   constructor(name: string, value: string, offset: number = 0) {
     this.name = name;
@@ -155,8 +153,8 @@ export class SelectorAttribute {
   }
 
   /**
-   * 
-   * @returns 
+   *
+   * @returns
    */
   toString(): string {
     return `${this.name}=${this.value}`;
@@ -164,37 +162,39 @@ export class SelectorAttribute {
 }
 
 /**
- * 
+ *
  */
 export namespace Selector {
   /**
-   * 
-   * @param type 
-   * @returns 
+   *
+   * @param type
+   * @returns
    */
   export function isValidType(type: string | Selector): boolean {
-    if (typeof type !== "string") { type = type.type; }
+    if (typeof type !== "string") {
+      type = type.type;
+    }
 
     return Modes.SelectorType.isValue(type);
   }
 
   /**
-   * 
-   * @param text 
-   * @returns 
+   *
+   * @param text
+   * @returns
    */
   export function getType(text: string): string {
-    let index = text.indexOf('[');
+    let index = text.indexOf("[");
     if (index < 0) index = text.length;
 
     return text.substring(0, index);
   }
 
   /**
-   * 
-   * @param text 
-   * @param offset 
-   * @returns 
+   *
+   * @param text
+   * @param offset
+   * @returns
    */
   export function parse(text: string, offset: number = 0): Selector {
     const type = getType(text);
@@ -235,15 +235,15 @@ export namespace Selector {
 }
 
 /**
- * 
+ *
  */
 export namespace SelectorAttribute {
   /**
-   * 
-   * @param text 
-   * @param offset 
-   * @param selector 
-   * @param receiver 
+   *
+   * @param text
+   * @param offset
+   * @param selector
+   * @param receiver
    */
   export function parseParameters(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
     let start: number = 0;
@@ -277,11 +277,11 @@ export namespace SelectorAttribute {
   }
 
   /**
-   * 
-   * @param text 
-   * @param offset 
-   * @param selector 
-   * @param receiver 
+   *
+   * @param text
+   * @param offset
+   * @param selector
+   * @param receiver
    */
   export function parse(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
     let Index = text.indexOf("=");
@@ -293,20 +293,19 @@ export namespace SelectorAttribute {
     const value = text.substring(Index, text.length);
 
     if (name === "scores") {
-      if (value.startsWith('{') && value.endsWith('}')) {
+      if (value.startsWith("{") && value.endsWith("}")) {
         parseParameters(value.substring(1, value.length - 1), Index + offset + 1, selector, selector.scores);
       }
-    }
-    else {
+    } else {
       receiver.push(new SelectorAttribute(name, value, offset));
     }
   }
 
   /**
-   * 
-   * @param p 
-   * @param cursor 
-   * @returns 
+   *
+   * @param p
+   * @param cursor
+   * @returns
    */
   export function isCursor(p: SelectorAttribute, cursor: number): boolean {
     if (p.offset >= cursor) {
@@ -317,12 +316,11 @@ export namespace SelectorAttribute {
   }
 
   /**
-   * 
-   * @param p 
-   * @returns 
+   *
+   * @param p
+   * @returns
    */
   export function getEndOffset(p: SelectorAttribute): number {
     return p.name.length + p.value.length + 1 + p.offset;
   }
 }
-
