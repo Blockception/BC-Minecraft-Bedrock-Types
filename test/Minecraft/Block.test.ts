@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Block, BlockState } from "../../src/General/include";
+import { Block, BlockState } from "../../src/Minecraft/include";
 import { Location } from "../../src/Types/include";
 
 const blockDescription: string = "minecraft:log[direction=west,stripped=true,half=top]";
