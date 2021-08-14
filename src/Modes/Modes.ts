@@ -1,25 +1,25 @@
 import { CameraShakeMode } from "./CameraShake";
 import { CloneMode } from "./Clone";
 import { DifficultyMode } from "./Difficulty";
-import { FillMode } from "./FillMode";
+import { FillMode } from "./Fill";
 import { GameMode } from "./GameMode";
 import { LocateFeatureMode } from "./LocateFeature";
-import { MaskMode } from "./MaskMode";
-import { MirrorMode } from "./MirrorMode";
+import { MaskMode } from "./Mask";
+import { MirrorMode } from "./Mirror";
 import { ModeHandler } from "./ModeHandler";
-import { MusicRepeatMode } from "./MusicRepeatMode";
-import { OldBlockMode } from "./OldBlockMode";
+import { MusicRepeatMode } from "./MusicRepeat";
+import { OldBlockMode } from "./OldBlock";
 import { OperationMode } from "./Operation";
-import { ReplaceMode } from "./ReplaceMode";
-import { RideFillMode } from "./RideFillMode";
-import { RideRulesMode } from "./RideRulesMode";
-import { RotationMode } from "./RotationMode";
-import { SaveMode } from "./SaveMode";
+import { ReplaceMode } from "./Replace";
+import { RideFillMode } from "./RideFill";
+import { RideRulesMode } from "./RideRules";
+import { RotationMode } from "./Rotation";
+import { SaveMode } from "./Save";
 import { SelectorAttributeMode } from "./SelectorAttribute";
 import { SelectorTypeMode } from "./SelectorType";
 import { SlotTypeModes } from "./SlotType";
-import { StructureAnimationMode } from "./StructureAnimationMode";
-import { TeleportRulesMode } from "./TeleportRulesMode";
+import { StructureAnimationMode } from "./StructureAnimation";
+import { TeleportRulesMode } from "./TeleportRules";
 
 /**The collection of modes for minecraft */
 export namespace Modes {
