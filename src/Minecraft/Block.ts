@@ -1,5 +1,5 @@
-import { Documentated, Identifiable, Locatable } from "../../Types/include";
-import { Location } from "../../Types/Location/Location";
+import { Documentated, Identifiable, Locatable } from "../Types/include";
+import { Location } from "../Types/Location";
 
 /**
  *
@@ -50,7 +50,7 @@ export namespace BlockState {
 /**
  *
  */
-export interface Block extends Locatable.Locatable, Documentated.Documentated, Identifiable.Identifiable {
+export interface Block extends Locatable, Documentated, Identifiable {
   /** */
   states: BlockState[];
 }

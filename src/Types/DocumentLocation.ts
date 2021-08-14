@@ -1,6 +1,6 @@
-import { JsonPath } from "../Json/JsonPath";
-import { Position } from "../Position/Position";
-import { Range } from "../Range/Range";
+import { JsonPath } from "./JsonPath";
+import { Position } from "./Position";
+import { Range } from "./Range";
 
 /**The type of a document location */
 export type DocumentLocation = Position | JsonPath | number;
