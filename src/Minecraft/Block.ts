@@ -1,4 +1,6 @@
-import { Documentated, Identifiable, Locatable } from "../Types/include";
+import { Documentated } from "../Types/Documentated";
+import { Identifiable } from "../Types/Identifiable";
+import { Locatable } from "../Types/Locatable";
 import { Location } from "../Types/Location";
 
 /**

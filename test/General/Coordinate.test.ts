@@ -1,37 +1,37 @@
 import { expect } from "chai";
-import { IsCoordinate } from "../../src/Lib/Types/Coordinate";
+import { Coordinate } from "../../src/General/Coordinate";
 
 describe("Coordinates", () => {
-  it("IsCoordinate", () => {
+  it("is", () => {
     //Positive integers
-    expect(IsCoordinate("^+5")).to.true;
-    expect(IsCoordinate("~+5")).to.true;
-    expect(IsCoordinate("^5")).to.true;
-    expect(IsCoordinate("~5")).to.true;
+    expect(Coordinate.is("^+5")).to.true;
+    expect(Coordinate.is("~+5")).to.true;
+    expect(Coordinate.is("^5")).to.true;
+    expect(Coordinate.is("~5")).to.true;
 
     //Positive floats
-    expect(IsCoordinate("^+5.2")).to.true;
-    expect(IsCoordinate("~+5.3")).to.true;
-    expect(IsCoordinate("~+0.5")).to.true;
-    expect(IsCoordinate("~+.5")).to.true;
-    expect(IsCoordinate("^5.2")).to.true;
-    expect(IsCoordinate("~5.3")).to.true;
-    expect(IsCoordinate("~.5")).to.true;
-    expect(IsCoordinate("~0.5")).to.true;
+    expect(Coordinate.is("^+5.2")).to.true;
+    expect(Coordinate.is("~+5.3")).to.true;
+    expect(Coordinate.is("~+0.5")).to.true;
+    expect(Coordinate.is("~+.5")).to.true;
+    expect(Coordinate.is("^5.2")).to.true;
+    expect(Coordinate.is("~5.3")).to.true;
+    expect(Coordinate.is("~.5")).to.true;
+    expect(Coordinate.is("~0.5")).to.true;
 
     //Negative integers
-    expect(IsCoordinate("^-5")).to.true;
-    expect(IsCoordinate("~-5")).to.true;
-    expect(IsCoordinate("~-.5")).to.true;
+    expect(Coordinate.is("^-5")).to.true;
+    expect(Coordinate.is("~-5")).to.true;
+    expect(Coordinate.is("~-.5")).to.true;
 
     //Negative floats
-    expect(IsCoordinate("^-5.2")).to.true;
-    expect(IsCoordinate("~-5.3")).to.true;
+    expect(Coordinate.is("^-5.2")).to.true;
+    expect(Coordinate.is("~-5.3")).to.true;
 
     //Other
-    expect(IsCoordinate("^")).to.true;
-    expect(IsCoordinate("~")).to.true;
-    expect(IsCoordinate("^0")).to.true;
-    expect(IsCoordinate("~0")).to.true;
+    expect(Coordinate.is("^")).to.true;
+    expect(Coordinate.is("~")).to.true;
+    expect(Coordinate.is("^0")).to.true;
+    expect(Coordinate.is("~0")).to.true;
   });
 });

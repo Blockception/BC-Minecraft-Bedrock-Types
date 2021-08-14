@@ -1,20 +1,20 @@
 import { expect } from "chai";
-import { IsArray, IsObject } from "../../src/Lib/Types/Json";
+import { Json } from "../../src/General/Json";
 
 describe("Json", () => {
-  it("IsObject", () => {
-    expect(IsObject('{"rawtext":[{"text":"example"}]}')).be.true;
+  it("isObject", () => {
+    expect(Json.isObject('{"rawtext":[{"text":"example"}]}')).be.true;
 
-    expect(IsObject('{"rawtext":[{"text":"example}]')).be.false;
+    expect(Json.isObject('{"rawtext":[{"text":"example}]')).be.false;
   });
 
-  it("IsArray", () => {
-    expect(IsArray("[foo:1]")).be.true;
+  it("isArray", () => {
+    expect(Json.isArray("[foo:1]")).be.true;
 
-    expect(IsArray("[example:something,hello:1]")).be.true;
+    expect(Json.isArray("[example:something,hello:1]")).be.true;
 
-    expect(IsArray("[foo:1")).be.false;
+    expect(Json.isArray("[foo:1")).be.false;
 
-    expect(IsArray("example:something,hello:1")).be.false;
+    expect(Json.isArray("example:something,hello:1")).be.false;
   });
 });

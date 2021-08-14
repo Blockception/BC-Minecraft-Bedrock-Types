@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import { IsInteger } from "../../src/Lib/Types/Integer";
+import { Integer } from "../../src/General/Integer";
 
 describe("Integer", () => {
-  it("IsInteger", () => {
-    expect(IsInteger("-123456")).be.true;
-    expect(IsInteger("123456")).be.true;
+  it("is", () => {
+    expect(Integer.is("-123456")).be.true;
+    expect(Integer.is("123456")).be.true;
 
-    expect(IsInteger("foo")).be.false;
+    expect(Integer.is("foo")).be.false;
   });
 });
