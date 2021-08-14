@@ -16,8 +16,8 @@ describe("Boolean", () => {
   it("parse", () => {
     expect(Boolean.parse("true")).to.equal(true);
     expect(Boolean.parse("True")).to.equal(true);
-    expect(Boolean.parse("false")).to.equal(true);
-    expect(Boolean.parse("False")).to.equal(true);
+    expect(Boolean.parse("false")).to.equal(false);
+    expect(Boolean.parse("False")).to.equal(false);
 
     expect(Boolean.parse("foo")).to.equal(false);
     expect(Boolean.parse("1")).to.equal(true);
