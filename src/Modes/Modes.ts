@@ -1,25 +1,25 @@
-import { CameraShakeMode } from './CameraShake';
-import { CloneMode } from './Clone';
-import { DifficultyMode } from './Difficulty';
-import { FillMode } from './FillMode';
-import { GameMode } from './GameMode';
-import { LocateFeatureMode } from './LocateFeature';
-import { MaskMode } from './MaskMode';
-import { MirrorMode } from './MirrorMode';
-import { ModeHandler } from './ModeHandler';
-import { MusicRepeatMode } from './MusicRepeatMode';
-import { OldBlockMode } from './OldBlockMode';
-import { OperationMode } from './Operation';
-import { ReplaceMode } from './ReplaceMode';
-import { RideFillMode } from './RideFillMode';
-import { RideRulesMode } from './RideRulesMode';
-import { RotationMode } from './RotationMode';
-import { SaveMode } from './SaveMode';
-import { SelectorAttributeMode } from './SelectorAttribute';
-import { SelectorTypeMode } from './SelectorType';
-import { SlotTypeModes } from './SlotType';
-import { StructureAnimationMode } from './StructureAnimationMode';
-import { TeleportRulesMode } from './TeleportRulesMode';
+import { CameraShakeMode } from "./CameraShake";
+import { CloneMode } from "./Clone";
+import { DifficultyMode } from "./Difficulty";
+import { FillMode } from "./FillMode";
+import { GameMode } from "./GameMode";
+import { LocateFeatureMode } from "./LocateFeature";
+import { MaskMode } from "./MaskMode";
+import { MirrorMode } from "./MirrorMode";
+import { ModeHandler } from "./ModeHandler";
+import { MusicRepeatMode } from "./MusicRepeatMode";
+import { OldBlockMode } from "./OldBlockMode";
+import { OperationMode } from "./Operation";
+import { ReplaceMode } from "./ReplaceMode";
+import { RideFillMode } from "./RideFillMode";
+import { RideRulesMode } from "./RideRulesMode";
+import { RotationMode } from "./RotationMode";
+import { SaveMode } from "./SaveMode";
+import { SelectorAttributeMode } from "./SelectorAttribute";
+import { SelectorTypeMode } from "./SelectorType";
+import { SlotTypeModes } from "./SlotType";
+import { StructureAnimationMode } from "./StructureAnimationMode";
+import { TeleportRulesMode } from "./TeleportRulesMode";
 
 /**The collection of modes for minecraft */
 export namespace Modes {
@@ -66,5 +66,3 @@ export namespace Modes {
   /** The mode: TeleportRules **/
   export const TeleportRules = new ModeHandler(TeleportRulesMode);
 }
-
-

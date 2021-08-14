@@ -1,1 +1,23 @@
-export type SelectorAttribute = "c" | "dx" | "dy" | "dz" | "family" | "lm" | "l" | "m" | "name" | "rm" | "r" | "scores" | "type" | "tag" | "x" | "y" | "z" | "rx" | "rxm" | "ry" | "rym";
+/**The selector names for attribute */
+export type SelectorAttribute =
+  | "c"
+  | "dx"
+  | "dy"
+  | "dz"
+  | "family"
+  | "lm"
+  | "l"
+  | "m"
+  | "name"
+  | "rm"
+  | "r"
+  | "scores"
+  | "type"
+  | "tag"
+  | "x"
+  | "y"
+  | "z"
+  | "rx"
+  | "rxm"
+  | "ry"
+  | "rym";

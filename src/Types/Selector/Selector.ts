@@ -1,31 +1,19 @@
 import { Modes } from "../../modes/modes";
 
-/**
- *
- */
+/**An object that represents a selector*/
 export class Selector {
-  /**
-   *
-   */
+  /**The offset in the document where this selector starts*/
   public offset: number;
-  /**
-   *
-   */
+  /**The selector type such as @a | @e*/
   public type: string;
-  /**
-   *
-   */
+  /**The attribute assigned to the selector*/
   public attributes: SelectorAttribute[];
-  /**
-   *
-   */
+  /**The scores assigned to the selector*/
   public scores: SelectorAttribute[];
 
-  /**
-   *
-   * @param type
-   * @param offset
-   */
+  /**Creates a new instance of a selector
+   * @param type The type of the selector such as @a | @e
+   * @param offset The offset the selector starts in the document*/
   constructor(type: string, offset: number = 0) {
     this.type = type;
     this.offset = offset;
