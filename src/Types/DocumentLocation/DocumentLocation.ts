@@ -5,7 +5,8 @@ import { Range } from "../Range/Range";
 /**The type of a document location */
 export type DocumentLocation = Position | JsonPath | number;
 
-type TextOrDoc = string | { getText(): string };
+/** */
+export type TextOrDoc = string | { getText(): string };
 
 function ToText(value: TextOrDoc): string {
   return typeof value === "string" ? value : value.getText();

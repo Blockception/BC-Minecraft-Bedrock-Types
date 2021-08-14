@@ -11,7 +11,6 @@ const blockStates: BlockState[] = [
 ];
 
 describe("Block", () => {
-  blockDescription;
   it("get id", () => {
     const id = Block.getId(blockDescription);
 

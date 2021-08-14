@@ -49,7 +49,7 @@ export namespace Position {
 
       if (c == NewLine) {
         count++;
-        Index = I;
+        Index = I + 1;
 
         if (count >= P.line) {
           return Index + P.character;
@@ -73,7 +73,7 @@ export namespace Position {
 
       if (c == NewLine) {
         count++;
-        Index = I;
+        Index = I + 1;
       }
     }
 
