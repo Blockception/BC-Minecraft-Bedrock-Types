@@ -1,2 +1,2 @@
-export * from './modes/modes';
-export * as Types from './Types/include'
+export * from "./Modes/Modes";
+export * as Types from "./Types/include";

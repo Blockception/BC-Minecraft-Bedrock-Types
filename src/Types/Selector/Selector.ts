@@ -1,4 +1,4 @@
-import { Modes } from "../../modes/modes";
+import { Modes } from "../../Modes/Modes";
 
 /**An object that represents a selector*/
 export class Selector {
