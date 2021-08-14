@@ -36,6 +36,12 @@ jobs:
         name: Indexes for Types
         with:
           folder: ${{github.workspace}}/src/Types
+          
+      - uses: DaanV2/Typescript-Action-Create-Includes@v1.2
+        id: minecraft_create
+        name: Indexes for Types
+        with:
+          folder: ${{github.workspace}}/src/Minecraft
 
       - name: Commit changes
         continue-on-error: true
