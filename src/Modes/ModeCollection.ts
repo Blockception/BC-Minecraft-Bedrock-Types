@@ -13,14 +13,18 @@ export interface Mode {
   /**The documentation of this mode*/
   documentation: string;
   /** */
-  eduOnly? : boolean;
+  eduOnly?: boolean;
 }
 
+/** */
 export namespace ModeCollection {
-  /** */
+  /**Checks if the given object is implements ModeCollection
+   * @param value
+   * @returns
+   */
   export function is(value: any): value is ModeCollection {
     if (value) {
-      let temp = value as ModeCollection;
+      const temp = value as ModeCollection;
 
       if (temp.name && temp.modes && Array.isArray(value.modes)) return true;
     }
@@ -29,9 +33,9 @@ export namespace ModeCollection {
   }
 
   /**
-   * 
+   *
    */
-  export function isValue(Collection : ModeCollection, value : string) : boolean {
+  export function isValue(Collection: ModeCollection, value: string): boolean {
     const M = Collection.modes;
 
     for (var I = 0; I < M.length; I++) {
@@ -44,22 +48,21 @@ export namespace ModeCollection {
   }
 
   /**
-   * 
-   * @param Collection 
-   * @param index 
-   * @returns 
+   *
+   * @param Collection
+   * @param index
+   * @returns
    */
-  export function get(Collection : ModeCollection, index : string | number) : Mode | undefined {
+  export function get(Collection: ModeCollection, index: string | number): Mode | undefined {
     if (typeof index === "string") {
       const M = Collection.modes;
 
       for (var I = 0; I < M.length; I++) {
         const elemt = M[I];
-  
+
         if (elemt.name === index) return elemt;
       }
-    }
-    else {
+    } else {
       return Collection.modes[index];
     }
 
@@ -70,9 +73,9 @@ export namespace ModeCollection {
 /** */
 export namespace Mode {
   /**
-   * 
-   * @param value 
-   * @returns 
+   *
+   * @param value
+   * @returns
    */
   export function is(value: any): value is Mode {
     if (value && value.name && value.documentation) return true;

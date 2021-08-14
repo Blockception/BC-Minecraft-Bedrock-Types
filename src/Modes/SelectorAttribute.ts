@@ -1,4 +1,4 @@
-import { ModeCollection } from './ModeCollection';
+import { ModeCollection } from "./ModeCollection";
 
 export const SelectorAttributeMode: ModeCollection = {
   name: "Selector Attribute Mode",
@@ -22,6 +22,6 @@ export const SelectorAttributeMode: ModeCollection = {
     { name: "tag", documentation: "Tests if the target has or does not have the specified tag" },
     { name: "x", documentation: "The x coordinate this selector works from, can be relative, but not local" },
     { name: "y", documentation: "The y coordinate this selector works from, can be relative, but not local" },
-    { name: "y", documentation: "The z coordinate this selector works from, can be relative, but not local" }
+    { name: "y", documentation: "The z coordinate this selector works from, can be relative, but not local" },
   ],
 };
