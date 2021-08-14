@@ -1,14 +1,12 @@
-/**
- *
- * @param text
- * @returns
- */
-export function IsCoordinate(text: string): boolean {
-  let match = text.match(/^[\~\^\+\-\d][\+\-\.\d]*$/);
+export namespace Coordinate {
+  export const pattern = /^[\~\^\+\-\d][\+\-\.\d]*$/;
 
-  if (match) {
-    return true;
+  /**
+   *
+   * @param text
+   * @returns
+   */
+  export function is(text: string): boolean {
+    return pattern.test(text) !== undefined;
   }
-
-  return false;
 }

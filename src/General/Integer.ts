@@ -1,8 +1,12 @@
-/**
- *
- * @param text
- * @returns
- */
-export function IsInteger(text: string): boolean {
-  return /^[\-\d]*$/.test(text);
+export namespace Integer {
+  export const pattern = /^[\-\d]*$/;
+
+  /**
+   *
+   * @param text
+   * @returns
+   */
+  export function is(text: string): boolean {
+    return pattern.test(text);
+  }
 }

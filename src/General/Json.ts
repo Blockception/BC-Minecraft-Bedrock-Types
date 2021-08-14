@@ -1,11 +1,23 @@
-export function IsObject(value: string): boolean {
-  if (value.startsWith("{") && value.endsWith("}")) return true;
+export namespace Json {
+  /**
+   *
+   * @param value
+   * @returns
+   */
+  export function isObject(value: string): boolean {
+    if (value.startsWith("{") && value.endsWith("}")) return true;
 
-  return false;
-}
+    return false;
+  }
 
-export function IsArray(value: string): boolean {
-  if (value.startsWith("[") && value.endsWith("]")) return true;
+  /**
+   *
+   * @param value
+   * @returns
+   */
+  export function isArray(value: string): boolean {
+    if (value.startsWith("[") && value.endsWith("]")) return true;
 
-  return false;
+    return false;
+  }
 }
