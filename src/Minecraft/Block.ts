@@ -120,7 +120,9 @@ export namespace Block {
    *
    * @param blockDescription
    */
-  export function fromBlockDescriptor(blockDescription: string, Location: Location): Block {
+  export function fromBlockDescriptor(blockDescription: string, Loc: Location | undefined = undefined): Block {
+    if (!Loc) Loc = Location.empty();
+
     const out: BlockState[] = [];
     let id: string;
     let startindex = blockDescription.indexOf("[");
@@ -142,7 +144,7 @@ export namespace Block {
       id = blockDescription;
     }
 
-    const block = Block.create(id, Location);
+    const block = Block.create(id, Loc);
     block.states = out;
 
     return block;

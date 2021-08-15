@@ -33,4 +33,12 @@ export namespace Location {
   export function create(uri: string, position: DocumentLocation = 0): Location {
     return { uri: uri, position: position };
   }
+
+  /**
+   *
+   * @returns
+   */
+  export function empty() {
+    return create("");
+  }
 }
