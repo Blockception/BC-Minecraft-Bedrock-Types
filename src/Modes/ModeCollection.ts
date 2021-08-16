@@ -32,7 +32,7 @@ export namespace ModeCollection {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    */
   export function isValue(Collection: ModeCollection, value: string): boolean {
@@ -47,7 +47,7 @@ export namespace ModeCollection {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param Collection
    * @param index
@@ -72,7 +72,7 @@ export namespace ModeCollection {
 
 /** */
 export namespace Mode {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns

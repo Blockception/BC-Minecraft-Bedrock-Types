@@ -6,7 +6,7 @@ export interface Identifiable {
 
 /** */
 export namespace Identifiable {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -17,7 +17,7 @@ export namespace Identifiable {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param items
    * @param id
@@ -33,7 +33,7 @@ export namespace Identifiable {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param items
    * @param id
@@ -49,7 +49,7 @@ export namespace Identifiable {
     return undefined;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param carrier
    * @returns

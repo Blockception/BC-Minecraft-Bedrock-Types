@@ -5,7 +5,7 @@ export type JsonPath = string;
 export namespace JsonPath {
   export const seperator = "/";
 
-  /**
+  /**TODO add documentation
    *
    * @param text
    * @param path
@@ -28,7 +28,7 @@ export namespace JsonPath {
     return index;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param path
    * @returns
@@ -37,7 +37,7 @@ export namespace JsonPath {
     return path.join(JsonPath.seperator);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns

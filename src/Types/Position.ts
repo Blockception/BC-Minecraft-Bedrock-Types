@@ -8,7 +8,7 @@ export interface Position {
 
 /** */
 export namespace Position {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -19,7 +19,7 @@ export namespace Position {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param line
    * @param character

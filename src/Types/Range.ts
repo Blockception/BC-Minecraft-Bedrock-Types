@@ -10,7 +10,7 @@ export interface Range {
 
 /** */
 export namespace Range {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -21,7 +21,7 @@ export namespace Range {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param start
    * @param end
@@ -31,7 +31,7 @@ export namespace Range {
     return { start: start, end: end };
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param start
    * @param end

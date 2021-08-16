@@ -3,7 +3,7 @@ import { Identifiable } from "../Types/Identifiable";
 import { Locatable } from "../Types/Locatable";
 import { Location } from "../Types/Location";
 
-/**
+/**TODO add documentation
  *
  */
 export interface BlockState {
@@ -13,11 +13,11 @@ export interface BlockState {
   value: string;
 }
 
-/**
+/**TODO add documentation
  *
  */
 export namespace BlockState {
-  /**
+  /**TODO add documentation
    *
    * @param data
    * @returns
@@ -35,7 +35,7 @@ export namespace BlockState {
     return undefined;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param property
    * @param value
@@ -49,7 +49,7 @@ export namespace BlockState {
   }
 }
 
-/**
+/**TODO add documentation
  *
  */
 export interface Block extends Locatable, Documentated, Identifiable {
@@ -57,11 +57,11 @@ export interface Block extends Locatable, Documentated, Identifiable {
   states: BlockState[];
 }
 
-/**
+/**TODO add documentation
  *
  */
 export namespace Block {
-  /**
+  /**TODO add documentation
    *
    * @param id
    * @param Location
@@ -75,7 +75,7 @@ export namespace Block {
     };
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param blockDescription
    * @returns
@@ -90,7 +90,7 @@ export namespace Block {
     return blockDescription;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param blockDescription
    * @returns
@@ -116,7 +116,7 @@ export namespace Block {
     return out;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param blockDescription
    */

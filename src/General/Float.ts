@@ -1,4 +1,4 @@
-/**
+/**TODO add documentation
  *
  */
 export namespace Float {

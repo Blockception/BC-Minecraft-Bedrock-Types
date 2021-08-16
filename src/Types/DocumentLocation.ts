@@ -12,11 +12,11 @@ function ToText(value: TextOrDoc): string {
   return typeof value === "string" ? value : value.getText();
 }
 
-/**
+/**TODO add documentation
  *
  */
 export namespace DocumentLocation {
-  /**
+  /**TODO add documentation
    *
    * @param data
    * @param text
@@ -42,7 +42,7 @@ export namespace DocumentLocation {
 
   const NewLine = "\n".charCodeAt(0);
 
-  /**
+  /**TODO add documentation
    *
    * @param data
    * @param text
@@ -66,7 +66,7 @@ export namespace DocumentLocation {
     }
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param data
    * @param text

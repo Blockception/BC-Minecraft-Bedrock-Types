@@ -8,7 +8,7 @@ export interface Locatable {
 
 /** */
 export namespace Locatable {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -21,7 +21,7 @@ export namespace Locatable {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @returns
    */

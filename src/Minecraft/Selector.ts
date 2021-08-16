@@ -21,7 +21,7 @@ export class Selector {
     this.scores = [];
   }
 
-  /**
+  /**TODO add documentation
    *
    * @returns
    */
@@ -48,7 +48,7 @@ export class Selector {
     return out;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param parameter
    * @returns
@@ -64,7 +64,7 @@ export class Selector {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param parameter
    * @returns
@@ -81,7 +81,7 @@ export class Selector {
     return Out;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param parameter
    * @returns
@@ -92,7 +92,7 @@ export class Selector {
     return this.attributes.filter((x) => x.name === parameter);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param cursor
    * @returns
@@ -117,7 +117,7 @@ export class Selector {
   }
 }
 
-/**
+/**TODO add documentation
  *
  */
 export class SelectorAttribute {
@@ -128,7 +128,7 @@ export class SelectorAttribute {
   /** */
   public value: string;
 
-  /**
+  /**TODO add documentation
    *
    * @param name
    * @param value
@@ -140,7 +140,7 @@ export class SelectorAttribute {
     this.offset = offset;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @returns
    */
@@ -149,11 +149,11 @@ export class SelectorAttribute {
   }
 }
 
-/**
+/**TODO add documentation
  *
  */
 export namespace Selector {
-  /**
+  /**TODO add documentation
    *
    * @param type
    * @returns
@@ -166,7 +166,7 @@ export namespace Selector {
     return Modes.SelectorType.isValue(type);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param text
    * @returns
@@ -178,7 +178,7 @@ export namespace Selector {
     return text.substring(0, index);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param text
    * @param offset
@@ -222,11 +222,11 @@ export namespace Selector {
   }
 }
 
-/**
+/**TODO add documentation
  *
  */
 export namespace SelectorAttribute {
-  /**
+  /**TODO add documentation
    *
    * @param text
    * @param offset
@@ -264,7 +264,7 @@ export namespace SelectorAttribute {
     }
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param text
    * @param offset
@@ -289,7 +289,7 @@ export namespace SelectorAttribute {
     }
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param p
    * @param cursor
@@ -303,7 +303,7 @@ export namespace SelectorAttribute {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param p
    * @returns

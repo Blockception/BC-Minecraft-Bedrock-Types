@@ -11,7 +11,7 @@ export interface Location {
 
 /** */
 export namespace Location {
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -24,7 +24,7 @@ export namespace Location {
     return false;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param uri
    * @param position
@@ -34,7 +34,7 @@ export namespace Location {
     return { uri: uri, position: position };
   }
 
-  /**
+  /**TODO add documentation
    *
    * @returns
    */

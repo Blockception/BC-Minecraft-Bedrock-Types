@@ -1,6 +1,6 @@
 import { Mode, ModeCollection } from "./ModeCollection";
 
-/**
+/**TODO add documentation
  *
  */
 export class ModeHandler implements ModeCollection {
@@ -14,7 +14,7 @@ export class ModeHandler implements ModeCollection {
     this.name = collection.name;
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param value
    * @returns
@@ -23,7 +23,7 @@ export class ModeHandler implements ModeCollection {
     return ModeCollection.isValue(this, value);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param index
    * @returns
@@ -32,7 +32,7 @@ export class ModeHandler implements ModeCollection {
     return ModeCollection.get(this, index);
   }
 
-  /**
+  /**TODO add documentation
    *
    * @param callbackfn
    * @param thisArg
