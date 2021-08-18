@@ -60,6 +60,12 @@ export namespace Position {
     return P.character;
   }
 
+  /**
+   *
+   * @param offset
+   * @param text
+   * @returns
+   */
   export function toPosition(offset: number, text: string | { positionAt(offset: number): Position }): Position {
     if (typeof text === "object") return text.positionAt(offset);
 
