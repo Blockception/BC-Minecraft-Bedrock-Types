@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const SelectorTypeMode: ModeCollection = {
-  name: "selector Type mode",
+  name: "selector Type",
   modes: [
     { name: "@a", documentation: "Targets all players" },
     { name: "@e", documentation: "Targets all entities" },

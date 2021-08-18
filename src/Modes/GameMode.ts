@@ -1,5 +1,6 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const GameMode: ModeCollection = {
   name: "gamemodes",
   modes: [

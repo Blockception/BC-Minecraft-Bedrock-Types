@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const OldBlockMode: ModeCollection = {
-  name: "Old block modes",
+  name: "Old Block",
   modes: [
     { name: "destroy", documentation: "Destroys the old block" },
     { name: "replace", documentation: "Replaces the old block without destroying it" },

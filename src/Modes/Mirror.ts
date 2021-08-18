@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const MirrorMode: ModeCollection = {
-  name: "Mirror mode",
+  name: "Mirror",
   modes: [
     { name: "none", documentation: "Does not mirror the structure" },
     { name: "x", documentation: "Mirrors the structure using the x - axis as the mirror" },

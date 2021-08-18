@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const CloneMode: ModeCollection = {
-  name: "Clone Mode",
+  name: "Clone",
   modes: [
     { name: "force", documentation: "Forces the clone even if the source and destination regions overlap." },
     {

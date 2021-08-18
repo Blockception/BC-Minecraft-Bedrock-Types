@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const OperationMode: ModeCollection = {
-  name: "scoreboard operation",
+  name: "Operation",
   modes: [
     { name: "=", documentation: "Assigns the targets score to that of the source" },
     { name: ">", documentation: "Calculates the maximum value of the sources and the target and stores it in the target" },

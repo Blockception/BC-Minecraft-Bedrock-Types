@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const SelectorAttributeMode: ModeCollection = {
-  name: "Selector Attribute Mode",
+  name: "Selector Attribute",
   modes: [
     { name: "c", documentation: "limits the amount of entities/player to be targeted" },
     { name: "dx", documentation: "The length of the box over the axis X" },

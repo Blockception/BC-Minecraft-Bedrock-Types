@@ -1,15 +1,25 @@
 import { Mode, ModeCollection } from "./ModeCollection";
 
+/** */
 export interface SlotTypeModeCollection extends ModeCollection {
+  /** */
   modes: SlotTypeMode[];
 }
 
+/** */
 export interface SlotTypeMode extends Mode {
-  range?: { min: number; max: number };
+  /** */
+  range?: {
+    /** */
+    min: number;
+    /** */
+    max: number;
+  };
 }
 
+/** */
 export const SlotTypeModes: SlotTypeModeCollection = {
-  name: "slot type",
+  name: "Slot Type",
   modes: [
     { name: "slot.armor.chest", documentation: "The slot that targets the chest area of armor" },
     { name: "slot.armor.feet", documentation: "The slot that targets the feet area of armor" },

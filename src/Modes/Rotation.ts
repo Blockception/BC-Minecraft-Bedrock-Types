@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const RotationMode: ModeCollection = {
-  name: "Rotation mode",
+  name: "Rotation",
   modes: [
     { name: "0_degrees", documentation: "Do not rotate the structure" },
     { name: "90_degrees", documentation: "Rotates the structure clockwise 90 degrees" },

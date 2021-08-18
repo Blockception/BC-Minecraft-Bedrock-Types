@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const FillMode: ModeCollection = {
-  name: "Fill mode",
+  name: "Fill",
   modes: [
     { name: "destroy", documentation: "Destroy the old block, if tile drops is on, they all will drop an item" },
     { name: "hollow", documentation: "Create a hollow cube" },

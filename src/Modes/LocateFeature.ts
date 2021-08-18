@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const LocateFeatureMode: ModeCollection = {
-  name: "Locate Feature Mode",
+  name: "Locate Feature",
   modes: [
     { name: "bastionremnant", documentation: "A bastion remnant in the nether" },
     { name: "buriedtreasure", documentation: "A buried chest under ground" },

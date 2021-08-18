@@ -1,7 +1,8 @@
 import { ModeCollection } from "./ModeCollection";
 
+/** */
 export const DifficultyMode: ModeCollection = {
-  name: "Difficulty Mode",
+  name: "Difficulty",
   modes: [
     { name: "1", documentation: "Easy mode, mobs will attack in this mode. but at a minimum." },
     { name: "e", documentation: "Easy mode, mobs will attack in this mode. but at a minimum." },
