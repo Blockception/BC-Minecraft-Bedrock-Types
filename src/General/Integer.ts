@@ -1,3 +1,4 @@
+/** */
 export namespace Integer {
   /**The regex pattern that matches a integer */
   export const pattern: RegExp = /^[\-\d]*$/;

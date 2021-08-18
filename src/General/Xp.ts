@@ -1,3 +1,4 @@
+/** */
 export namespace XP {
   /**The regex pattern that matches a XP value */
   export const pattern: RegExp = /^([\-\d]*|[\-\d]*[Ll])$/;

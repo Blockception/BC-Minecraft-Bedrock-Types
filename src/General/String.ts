@@ -1,3 +1,4 @@
+/** */
 export namespace String {
   /**Checks if the given text value is a valid string
    * @param value The valued to compare to

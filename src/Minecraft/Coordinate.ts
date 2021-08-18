@@ -1,3 +1,4 @@
+/** */
 export namespace Coordinate {
   /**The regex pattern that matches a coordinate */
   export const pattern: RegExp = /^[\~\^\+\-\d][\+\-\.\d]*$/;
