@@ -78,7 +78,9 @@ export namespace Mode {
    * @returns
    */
   export function is(value: any): value is Mode {
-    if (value && value.name && value.documentation) return true;
+    if (typeof value === "object" && typeof value.name === "string" && typeof value.documentation === "string") {
+      return true;
+    }
 
     return false;
   }
