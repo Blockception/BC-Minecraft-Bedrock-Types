@@ -1,5 +1,7 @@
 /*	Auto generated	*/
 
+export * from "./Conditional";
+export * from "./Definition";
 export * from "./DocumentLocation";
 export * from "./Documentated";
 export * from "./Identifiable";
