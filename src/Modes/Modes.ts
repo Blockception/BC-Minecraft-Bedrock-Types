@@ -20,6 +20,7 @@ import { SelectorTypeMode } from "./SelectorType";
 import { SlotTypeModes } from "./SlotType";
 import { StructureAnimationMode } from "./StructureAnimation";
 import { TeleportRulesMode } from "./TeleportRules";
+import { TimeMode } from "./Time";
 
 /**The collection of modes for minecraft */
 export namespace Modes {
@@ -65,4 +66,6 @@ export namespace Modes {
   export const StructureAnimation = new ModeHandler(StructureAnimationMode);
   /** The mode: TeleportRules **/
   export const TeleportRules = new ModeHandler(TeleportRulesMode);
+  /** The mode: Time **/
+  export const Time = new ModeHandler(TimeMode);
 }
