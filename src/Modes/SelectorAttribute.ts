@@ -21,6 +21,7 @@ export const SelectorAttributeMode: ModeCollection = {
     { name: "rym", documentation: "The minimum horizontal rotation" },
     { name: "scores", documentation: "The testing of scores" },
     { name: "tag", documentation: "Tests if the target has or does not have the specified tag" },
+    { name: "type", documentation: "Tests if the target has the specified entity type or not" },
     { name: "x", documentation: "The x coordinate this selector works from, can be relative, but not local" },
     { name: "y", documentation: "The y coordinate this selector works from, can be relative, but not local" },
     { name: "y", documentation: "The z coordinate this selector works from, can be relative, but not local" },
