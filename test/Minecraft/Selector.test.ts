@@ -9,6 +9,7 @@ describe("Selector", () => {
     const sel = Selector.parse(text, offset);
     testBaseParse(text, offset, sel);
 
+    expect(sel.type).to.equal("@a");
     expect(sel.contains("tag")).to.be.true;
     expect(sel.contains("scores")).to.be.true;
   });
@@ -20,6 +21,7 @@ describe("Selector", () => {
     const sel = Selector.parse(text, offset);
     testBaseParse(text, offset, sel);
 
+    expect(sel.type).to.equal("@a");
     expect(sel.contains("x")).to.be.true;
     expect(sel.contains("y")).to.be.true;
     expect(sel.contains("z")).to.be.true;

@@ -289,6 +289,18 @@ export namespace SelectorAttribute {
     }
   }
 
+  export function is(value: any): value is SelectorAttribute {
+    if (typeof value === "object") {
+      if (typeof value.offset !== "number") return false;
+      if (typeof value.name !== "string") return false;
+      if (typeof value.value !== "string") return false;
+
+      return true;
+    }
+
+    return false;
+  }
+
   /**TODO add documentation
    *
    * @param p
