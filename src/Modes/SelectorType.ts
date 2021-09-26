@@ -13,6 +13,8 @@ export namespace InternalSelectorTypeMode {
   /** */
   export const Nearest = { name: "@p", documentation: "Targets the nearest player" };
   /** */
+  export const Self = { name: "@s", documentation: "Targets the executing entity" };
+  /** */
   export const Initiator = { name: "@initiator", documentation: "Target the initiating entity" };
   /** */
   export const Agents = { name: "@c", documentation: "Targets the executing players agent", eduOnly: true };
@@ -31,5 +33,6 @@ export const SelectorTypeMode: ModeCollection = {
     InternalSelectorTypeMode.Initiator,
     InternalSelectorTypeMode.Nearest,
     InternalSelectorTypeMode.Random,
+    InternalSelectorTypeMode.Self,
   ],
 };
