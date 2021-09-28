@@ -1,5 +1,6 @@
 /*	Auto generated	*/
 
+export * from "./BaseObject";
 export * from "./Conditional";
 export * from "./Definition";
 export * from "./DocumentLocation";
