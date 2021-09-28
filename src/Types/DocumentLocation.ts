@@ -1,9 +1,10 @@
 import { JsonPath } from "./JsonPath";
+import { OffsetWord } from './OffsetWord';
 import { Position } from "./Position";
 import { Range } from "./Range";
 
 /**The type of a document location */
-export type DocumentLocation = Position | JsonPath | number;
+export type DocumentLocation = Position | OffsetWord | JsonPath | number;
 
 /** */
 export type TextOrDoc = string | { getText(): string };
@@ -33,6 +34,10 @@ export namespace DocumentLocation {
 
       //Position
       case "object":
+        if (OffsetWord.is(data)) {
+          return data.offset;
+        }
+
         return Position.toOffset(data, ToText(text));
 
       default:
@@ -59,6 +64,10 @@ export namespace DocumentLocation {
 
       //Position
       case "object":
+        if (OffsetWord.is(data)) {
+          return Position.toPosition(data.offset, data.text);
+        }
+
         return data;
 
       default:
@@ -74,6 +83,11 @@ export namespace DocumentLocation {
    * @returns
    */
   export function ToRange(data: DocumentLocation, text: TextOrDoc, length: number): Range {
+    if (OffsetWord.is(data)) {
+      const t = data.text;
+      return Range.create(Position.toPosition(data.offset, t), Position.toPosition(data.offset + t.length, t));
+    }
+
     const startindex = toOffset(data, text);
     const endindex = startindex + length;
     const t = ToText(text);
