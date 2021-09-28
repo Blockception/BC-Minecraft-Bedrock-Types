@@ -1,4 +1,5 @@
 import { Modes } from "../Modes/Modes";
+import { OffsetWord } from '../Types/OffsetWord';
 
 /**An object that represents a selector*/
 export class Selector {
@@ -146,6 +147,14 @@ export class SelectorAttribute {
    */
   toString(): string {
     return `${this.name}=${this.value}`;
+  }
+
+  getName(): OffsetWord {
+    return { text: this.name, offset: this.offset };
+  }
+
+  getValue(): OffsetWord {
+    return { text: this.value, offset: this.offset + this.name.length + 1 };
   }
 }
 
