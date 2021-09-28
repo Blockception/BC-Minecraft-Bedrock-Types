@@ -39,13 +39,11 @@ export namespace Conditional {
    * @param callbackfn
    * @returns
    */
-  export function forEach(
-    data: (Conditional | string)[] | undefined,
+  export function forEach(data: (Conditional | string)[] | Conditional[] | string[] | undefined,
     callbackfn: (id: string, value: string | number, index: number, data: (Conditional | string)[]) => void
   ): void {
     if (!data) return;
 
-    data.map;
     data.forEach((item, index) => {
       if (typeof item === "string") {
         callbackfn(item, "1.0", index, data);
