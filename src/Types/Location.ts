@@ -17,8 +17,8 @@ export namespace Location {
    * @returns
    */
   export function is(value: any): value is Location {
-    if (value) {
-      if (value.uri && value.position) return true;
+    if (typeof value === "object") {
+      if (typeof value.uri === "string" && typeof value.position !== "undefined") return true;
     }
 
     return false;
