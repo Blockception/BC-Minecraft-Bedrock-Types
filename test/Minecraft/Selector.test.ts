@@ -42,6 +42,14 @@ describe("Selector", () => {
 
     expect(Selector.isValidType("@x")).to.be.false;
   });
+
+  it("parse3", ()=>{
+    const offset = 5;
+    const text = "@e[family=]";
+    
+    const sel = Selector.parse(text, offset);
+    testBaseParse(text, offset, sel);
+  })
 });
 
 function testBaseParse(text: string, offset: number, selector: Selector) {

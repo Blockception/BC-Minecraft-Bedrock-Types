@@ -229,6 +229,17 @@ export namespace Selector {
 
     return false;
   }
+
+  export function getAttribute(attribute: string, selector: string): string[] {
+    const regex = new RegExp(`${attribute}=([^\,\]]+)`, "gim");
+    const matches = regex.exec(selector);
+
+    if (matches) {
+      return matches;
+    }
+
+    return [];
+  }
 }
 
 /**TODO add documentation
