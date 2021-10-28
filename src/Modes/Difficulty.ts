@@ -18,6 +18,6 @@ export const DifficultyMode: ModeCollection = {
 
     { name: "0", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
     { name: "p", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
-    { name: "peacefull", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
+    { name: "peaceful", documentation: "The relaxed mode, no mobs with attacking behavior can be spawned" },
   ],
 };
