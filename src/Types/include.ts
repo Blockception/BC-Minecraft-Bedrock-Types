@@ -12,3 +12,4 @@ export * from "./Location";
 export * from "./OffsetWord";
 export * from "./Position";
 export * from "./Range";
+export * from "./Version";
