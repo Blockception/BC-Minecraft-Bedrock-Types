@@ -25,6 +25,23 @@ export namespace Version {
    * @param value 
    * @returns 
    */
+  export function is(value: any): value is Version {
+    if (typeof value === "object") {
+      if (typeof value.major !== "number") return false;
+      if (typeof value.minor !== "number") return false;
+      if (typeof value.patch !== "number") return false;
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * 
+   * @param value 
+   * @returns 
+   */
   export function parse(value: string): Version {
     const out: Version = {
       major: 0,
@@ -52,6 +69,31 @@ export namespace Version {
     return out;
   }
 
+  export function fromArray(version: number[]): Version {
+    const out: Version = {
+      major: 0,
+      minor: 0,
+      patch: 0
+    }
+
+    switch (version.length) {
+      default:
+      case 3:
+        out.patch = version[2];
+
+      case 2:
+        out.minor = version[1];
+
+      case 1:
+        out.major = version[0];
+
+      case 0:
+        break;
+    }
+
+    return out;
+  }
+
   /**
    * 
    * @param value 
@@ -65,9 +107,12 @@ export namespace Version {
    * @param a 
    * @param b 
    */
-  export function compare(a: Version | string, b: Version | string): number {
-    if (typeof a === "string") a = Version.parse(a);
-    if (typeof b === "string") b = Version.parse(b);
+  export function compare(a: Version | string | number[], b: Version | string | number[]): number {
+    if (typeof a === "string") { a = Version.parse(a); }
+    else if (Array.isArray(a)) { a = Version.fromArray(a); }
+
+    if (typeof b === "string") { b = Version.parse(b); }
+    else if (Array.isArray(b)) { b = Version.fromArray(b); }
 
     let r: number;
     if ((r = Math.sign(a.major - b.major)) !== 0) return r;
