@@ -44,4 +44,16 @@ describe("Position", () => {
 
     expect(offset).to.eql(identifierOffset);
   });
+
+  it("is", () => {
+    expect(Position.is({ character: 0, line: 0 })).to.be.true;
+    expect(Position.is({ character: -15, line: 135 })).to.be.true;
+
+    expect(Position.is({ character: "false", line: 135 })).to.be.false;
+    expect(Position.is({ character: -15, line: "135" })).to.be.false;
+
+    expect(Position.is({ character: false, line: "135" })).to.be.false;
+    expect(Position.is({ line: 135 })).to.be.false;
+    expect(Position.is({ character: 0 })).to.be.false;
+  });
 });

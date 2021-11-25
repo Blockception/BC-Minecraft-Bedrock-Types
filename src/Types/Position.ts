@@ -14,7 +14,7 @@ export namespace Position {
    * @returns
    */
   export function is(value: any): value is Position {
-    if (value && typeof value.line === "number" && value.character === "number") return true;
+    if (value && typeof value.line === "number" && typeof value.character === "number") return true;
 
     return false;
   }
