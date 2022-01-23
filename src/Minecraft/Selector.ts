@@ -285,7 +285,6 @@ export namespace SelectorAttribute {
   }
 
   /**TODO add documentation
-   *
    * @param text
    * @param offset
    * @param selector
@@ -296,7 +295,7 @@ export namespace SelectorAttribute {
 
     if (Index < 0) throw new Error("index cannot be lower then 0");
 
-    const name = text.substring(0, Index);
+    const name = text.substring(0, Index).trim();
     Index = Index + 1;
     const value = text.substring(Index, text.length);
 

@@ -50,6 +50,21 @@ describe("Selector", () => {
     const sel = Selector.parse(text, offset);
     testBaseParse(text, offset, sel);
   })
+
+  it("parse spaces test", () => {
+    const offset = 5;
+    const text = "@a[x =~0.5, y=50, z =~50,r =50, rm =3,tag =something,tag =!foo]";
+
+    const sel = Selector.parse(text, offset);
+
+    expect(sel.type).to.equal("@a");
+    expect(sel.contains("x")).to.be.true;
+    expect(sel.contains("y")).to.be.true;
+    expect(sel.contains("z")).to.be.true;
+    expect(sel.contains("r")).to.be.true;
+    expect(sel.contains("rm")).to.be.true;
+    expect(sel.contains("tag")).to.be.true;
+  });
 });
 
 function testBaseParse(text: string, offset: number, selector: Selector) {
