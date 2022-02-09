@@ -3,6 +3,7 @@ import { CloneMode } from "./Clone";
 import { DifficultyMode } from "./Difficulty";
 import { FillMode } from "./Fill";
 import { GameMode } from "./GameMode";
+import { HandTypeMode } from './HandType';
 import { LocateFeatureMode } from "./LocateFeature";
 import { MaskMode } from "./Mask";
 import { MirrorMode } from "./Mirror";
@@ -21,11 +22,14 @@ import { SlotTypeModes } from "./SlotType";
 import { StructureAnimationMode } from "./StructureAnimation";
 import { TeleportRulesMode } from "./TeleportRules";
 import { TimeMode } from "./Time";
+import {CauseTypeMode } from "./CauseType";
 
 /**The collection of modes for minecraft */
 export namespace Modes {
   /** The mode: CameraShake **/
   export const CameraShake = new ModeHandler(CameraShakeMode);
+  /** The mode: CauseType **/
+  export const CauseType = new ModeHandler(CauseTypeMode);
   /** The mode: Clone **/
   export const Clone = new ModeHandler(CloneMode);
   /** The mode: Difficulty **/
@@ -34,6 +38,8 @@ export namespace Modes {
   export const Fill = new ModeHandler(FillMode);
   /** The mode: Gamemode **/
   export const Gamemode = new ModeHandler(GameMode);
+  /** The mode: Gamemode **/
+  export const HandType = new ModeHandler(HandTypeMode);
   /** The mode: LocateFeature **/
   export const LocateFeature = new ModeHandler(LocateFeatureMode);
   /** The mode: Mask **/
