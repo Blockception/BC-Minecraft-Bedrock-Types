@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { SelectorScoreAttribute } from '../../src/Minecraft/Selector/ScoreAttribute';
 import { Selector } from "../../src/Minecraft/Selector/Selector";
 
 describe("Selector", () => {
@@ -80,13 +81,17 @@ function testBaseParse(text: string, offset: number, selector: Selector) {
   const required = text.indexOf("scores={");
 
   if (required >= 0) {
-    for (let I = 0; I < selector.scores.length; I++) {
-      const attr = selector.scores[I];
+    const scores = selector.get("scores")[0];
 
-      expect(attr.offset).to.equal(
-        offset + text.indexOf(attr.toString()),
-        `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`
-      );
+    if (SelectorScoreAttribute.is(scores)) {
+      for (let I = 0; I < scores.values.length; I++) {
+        const attr = scores.values[I];
+
+        expect(attr.offset).to.equal(
+          offset + text.indexOf(attr.toString()),
+          `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`
+        );
+      }
     }
   }
 }

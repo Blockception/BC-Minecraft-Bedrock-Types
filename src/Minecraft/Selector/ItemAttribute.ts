@@ -10,7 +10,6 @@ export class SelectorItemAttribute {
   public values: SelectorValueAttribute[];
 
   /**TODO add documentation
-   *
    * @param name
    * @param value
    * @param offset
@@ -58,9 +57,8 @@ export namespace SelectorItemAttribute {
    */
   export function parse(text: string,offset: number = 0): SelectorItemAttribute {
     const index = text.indexOf("=");
-    const name = text.substring(0, index);
     const values = text
-      .substring(index + 1)
+      .substring(index + 2, text.length - 1)
       .split(",")
       .map((v) => SelectorValueAttribute.parse(v, offset));
 

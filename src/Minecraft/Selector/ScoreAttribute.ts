@@ -61,7 +61,7 @@ export namespace SelectorScoreAttribute {
     const index = text.indexOf("=");
     const name = text.substring(0, index);
     const values = text
-      .substring(index + 1)
+      .substring(index + 2, text.length - 1)
       .split(",")
       .map((v) => SelectorValueAttribute.parse(v, offset));
 
