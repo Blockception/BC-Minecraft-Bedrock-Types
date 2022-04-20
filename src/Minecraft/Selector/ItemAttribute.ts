@@ -15,8 +15,8 @@ export class SelectorItemAttribute {
    * @param value
    * @param offset
    */
-  constructor(values : SelectorValueAttribute[], offset: number = 0) {
-    this.name = "hasitem"
+  constructor(values: SelectorValueAttribute[], offset: number = 0) {
+    this.name = "hasitem";
     this.offset = offset;
     this.values = values;
   }
@@ -56,10 +56,7 @@ export namespace SelectorItemAttribute {
    * @param offset
    * @returns
    */
-  export function parse(
-    text: string,
-    offset: number = 0
-  ): SelectorItemAttribute {
+  export function parse(text: string,offset: number = 0): SelectorItemAttribute {
     const index = text.indexOf("=");
     const name = text.substring(0, index);
     const values = text
@@ -68,5 +65,17 @@ export namespace SelectorItemAttribute {
       .map((v) => SelectorValueAttribute.parse(v, offset));
 
     return new SelectorItemAttribute(values, offset);
+  }
+
+  export function is(value: any): value is SelectorItemAttribute {
+    if (typeof value === "object") {
+      if (typeof value.offset !== "number") return false;
+      if (value.name !== "hasitem") return false;
+      if (!Array.isArray(value.values)) return false;
+
+      return true;
+    }
+
+    return false;
   }
 }

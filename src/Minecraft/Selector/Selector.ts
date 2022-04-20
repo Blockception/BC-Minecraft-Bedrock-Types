@@ -68,13 +68,13 @@ export class Selector {
     return this.attributes.filter((attribute) => attribute.name === parameter);
   }
 
-  /**TODO add documentation
-   *
-   * @param cursor
-   * @returns
+  /**
+   * 
+   * @param cursor 
+   * @returns 
    */
-  isInScore(cursor: number): boolean {
-    return this.attributes.findIndex((attribute) => attribute.name === "scores" && attribute.isCursorHere(cursor)) !== -1;
+  getParameterCursorIn(cursor: number): SelectorAttribute | undefined {
+    return this.attributes.find((attribute) => attribute.isCursorHere(cursor));
   }
 }
 

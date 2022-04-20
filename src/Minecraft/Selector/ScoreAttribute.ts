@@ -67,4 +67,16 @@ export namespace SelectorScoreAttribute {
 
     return new SelectorScoreAttribute(values, offset);
   }
+
+  export function is(value: any): value is SelectorScoreAttribute {
+    if (typeof value === "object") {
+      if (typeof value.offset !== "number") return false;
+      if (value.name !== "scores") return false;
+      if (!Array.isArray(value.values)) return false;
+
+      return true;
+    }
+
+    return false;
+  }
 }

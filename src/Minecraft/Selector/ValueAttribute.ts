@@ -61,4 +61,17 @@ export namespace SelectorValueAttribute {
 
     return new SelectorValueAttribute(name, value, offset);
   }
+  
+
+  export function is(value: any): value is SelectorValueAttribute {
+    if (typeof value === "object") {
+      if (typeof value.offset !== "number") return false;
+      if (typeof value.name !== "string") return false;
+      if (!Array.isArray(value.values)) return false;
+
+      return true;
+    }
+
+    return false;
+  }
 }
