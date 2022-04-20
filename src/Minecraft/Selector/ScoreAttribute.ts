@@ -13,8 +13,7 @@ export class SelectorScoreAttribute {
    * @param value
    * @param offset
    */
-  constructor(value: SelectorValueAttribute[],offset: number = 0
-  ) {
+  constructor(value: SelectorValueAttribute[], offset: number = 0) {
     this.name = "scores";
     this.values = value;
     this.offset = offset;
@@ -59,11 +58,10 @@ export namespace SelectorScoreAttribute {
     offset: number = 0
   ): SelectorScoreAttribute {
     const index = text.indexOf("=");
-    const name = text.substring(0, index);
     const values = text
       .substring(index + 2, text.length - 1)
       .split(",")
-      .map((v) => SelectorValueAttribute.parse(v, offset));
+      .map((v) => SelectorValueAttribute.parse(v, text.indexOf(v) + offset));
 
     return new SelectorScoreAttribute(values, offset);
   }

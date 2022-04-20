@@ -71,11 +71,9 @@ describe("Selector", () => {
 function testBaseParse(text: string, offset: number, selector: Selector) {
   for (let I = 0; I < selector.attributes.length; I++) {
     const attr = selector.attributes[I];
-
-    expect(attr.offset).to.equal(
-      offset + text.indexOf(attr.toString()),
-      `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`
-    );
+    const found_offset = offset + text.indexOf(attr.name)
+    
+    expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`);
   }
 
   const required = text.indexOf("scores={");
@@ -86,11 +84,9 @@ function testBaseParse(text: string, offset: number, selector: Selector) {
     if (SelectorScoreAttribute.is(scores)) {
       for (let I = 0; I < scores.values.length; I++) {
         const attr = scores.values[I];
+        const found_offset = offset + text.indexOf(attr.name)
 
-        expect(attr.offset).to.equal(
-          offset + text.indexOf(attr.toString()),
-          `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`
-        );
+        expect(attr.offset).to.equal(found_offset, `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`);
       }
     }
   }
