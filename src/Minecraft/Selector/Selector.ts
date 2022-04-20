@@ -1,5 +1,12 @@
-import { Modes } from "../Modes/Modes";
-import { OffsetWord } from '../Types/OffsetWord';
+import { Modes } from "../../Modes/Modes";
+import { SelectorItemAttribute } from "./ItemAttribute";
+import { SelectorScoreAttribute } from "./ScoreAttribute";
+import { SelectorValueAttribute } from "./ValueAttribute";
+
+export type SelectorAttribute =
+  | SelectorValueAttribute
+  | SelectorScoreAttribute
+  | SelectorItemAttribute;
 
 /**An object that represents a selector*/
 export class Selector {
@@ -9,8 +16,6 @@ export class Selector {
   public type: string;
   /**The attribute assigned to the selector*/
   public attributes: SelectorAttribute[];
-  /**The scores assigned to the selector*/
-  public scores: SelectorAttribute[];
 
   /**Creates a new instance of a selector
    * @param type The type of the selector such as @a | @e
@@ -19,7 +24,6 @@ export class Selector {
     this.type = type;
     this.offset = offset;
     this.attributes = [];
-    this.scores = [];
   }
 
   /**TODO add documentation
@@ -27,26 +31,11 @@ export class Selector {
    * @returns
    */
   toString(): string {
-    const attr = this.attributes.map((x) => x.toString()).join(",");
-    const scores = this.scores.map((x) => x.toString()).join(",");
-
-    let out = this.type;
-    const hAttr = attr.length > 0;
-    const hScores = attr.length > 0;
-
-    if (hAttr || hScores) {
-      out += "[";
-
-      if (hAttr) out += attr;
-      if (hAttr && hScores) {
-        out += ",";
-      }
-      if (hScores) out += scores;
-
-      out += "]";
+    if (this.attributes.length=== 0) {
+      return this.type;
     }
 
-    return out;
+    return `${this.type}[${this.attributes.map((attribute) => attribute.toString()).join(",")}]`;
   }
 
   /**TODO add documentation
@@ -55,14 +44,10 @@ export class Selector {
    * @returns
    */
   contains(parameter: string): boolean {
-    if (parameter === "scores") return this.scores.length > 0;
-
-    for (let index = 0; index < this.attributes.length; index++) {
-      const element = this.attributes[index];
-      if (element.name === parameter) return true;
-    }
-
-    return false;
+    return (
+      this.attributes.findIndex((attribute) => attribute.name === parameter) !==
+      -1
+    );
   }
 
   /**TODO add documentation
@@ -71,15 +56,7 @@ export class Selector {
    * @returns
    */
   count(parameter: string): number {
-    if (parameter === "scores") return this.scores.length > 0 ? 1 : 0;
-
-    let Out = 0;
-    for (let index = 0; index < this.attributes.length; index++) {
-      const element = this.attributes[index];
-      if (element.name === parameter) Out++;
-    }
-
-    return Out;
+    return this.get(parameter).length;
   }
 
   /**TODO add documentation
@@ -88,9 +65,7 @@ export class Selector {
    * @returns
    */
   get(parameter: string): SelectorAttribute[] {
-    if (parameter === "scores") return this.scores;
-
-    return this.attributes.filter((x) => x.name === parameter);
+    return this.attributes.filter((attribute) => attribute.name === parameter);
   }
 
   /**TODO add documentation
@@ -99,62 +74,7 @@ export class Selector {
    * @returns
    */
   isInScore(cursor: number): boolean {
-    let max = Number.MIN_SAFE_INTEGER;
-    let min = Number.MAX_SAFE_INTEGER;
-
-    this.scores.forEach((s) => {
-      max = Math.max(max, SelectorAttribute.getEndOffset(s));
-      min = Math.min(min, s.offset);
-    });
-
-    //scores={ at start
-    min -= 7;
-    //} at the end
-    max += 1;
-
-    if (cursor >= min && cursor <= max) return true;
-
-    return false;
-  }
-}
-
-/**TODO add documentation
- *
- */
-export class SelectorAttribute {
-  /** */
-  public offset: number;
-  /** */
-  public name: string;
-  /** */
-  public value: string;
-
-  /**TODO add documentation
-   *
-   * @param name
-   * @param value
-   * @param offset
-   */
-  constructor(name: string, value: string, offset: number = 0) {
-    this.name = name;
-    this.value = value;
-    this.offset = offset;
-  }
-
-  /**TODO add documentation
-   *
-   * @returns
-   */
-  toString(): string {
-    return `${this.name}=${this.value}`;
-  }
-
-  getName(): OffsetWord {
-    return { text: this.name, offset: this.offset };
-  }
-
-  getValue(): OffsetWord {
-    return { text: this.value, offset: this.offset + this.name.length + 1 };
+    return this.attributes.findIndex((attribute) => attribute.name === "scores" && attribute.isCursorHere(cursor)) !== -1;
   }
 }
 
@@ -204,13 +124,22 @@ export namespace Selector {
     offset += type.length;
 
     if (data.startsWith("[") && data.endsWith("]")) {
-      SelectorAttribute.parseParameters(data.substring(1, data.length - 1), offset + 1, Out, Out.attributes);
+      SelectorAttribute.parseParameters(
+        data.substring(1, data.length - 1),
+        offset + 1,
+        Out,
+        Out.attributes
+      );
     }
 
     return Out;
   }
 
-  export function isSelector(value: string, wildcard: boolean = false, allowFakePlayers: boolean = false): boolean {
+  export function isSelector(
+    value: string,
+    wildcard: boolean = false,
+    allowFakePlayers: boolean = false
+  ): boolean {
     if (value.startsWith("@")) return true;
 
     if (wildcard === true) {
@@ -253,7 +182,12 @@ export namespace SelectorAttribute {
    * @param selector
    * @param receiver
    */
-  export function parseParameters(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
+  export function parseParameters(
+    text: string,
+    offset: number,
+    selector: Selector,
+    receiver: SelectorAttribute[]
+  ): void {
     let start: number = 0;
     let level: number = 0;
 
@@ -270,7 +204,8 @@ export namespace SelectorAttribute {
 
         case ",":
           if (level == 0) {
-            SelectorAttribute.parse(text.substring(start, index), offset + start, selector, receiver);
+            const p = text.substring(start, index);
+            SelectorAttribute.parse(p, offset + start, receiver);
             start = index + 1;
           }
 
@@ -280,7 +215,8 @@ export namespace SelectorAttribute {
     }
 
     if (start < text.length) {
-      SelectorAttribute.parse(text.substring(start, text.length), offset + start, selector, receiver);
+      const p = text.substring(start, text.length);
+      SelectorAttribute.parse(p, offset + start, receiver);
     }
   }
 
@@ -290,21 +226,27 @@ export namespace SelectorAttribute {
    * @param selector
    * @param receiver
    */
-  export function parse(text: string, offset: number, selector: Selector, receiver: SelectorAttribute[]): void {
+  export function parse(text: string,offset: number,receiver: SelectorAttribute[]): void {
     let Index = text.indexOf("=");
 
     if (Index < 0) throw new Error("index cannot be lower then 0");
 
     const name = text.substring(0, Index).trim();
-    Index = Index + 1;
-    const value = text.substring(Index, text.length);
 
-    if (name === "scores") {
-      if (value.startsWith("{") && value.endsWith("}")) {
-        parseParameters(value.substring(1, value.length - 1), Index + offset + 1, selector, selector.scores);
-      }
-    } else {
-      receiver.push(new SelectorAttribute(name, value, offset));
+    switch (name) {
+      case "scores":
+        receiver.push(SelectorScoreAttribute.parse(text, offset));
+        break;
+
+      case "hasitem":
+        receiver.push(SelectorItemAttribute.parse(text, offset));
+        break;
+
+      default:
+        Index = Index + 1;
+        const value = text.substring(Index, text.length);
+        receiver.push(new SelectorValueAttribute(name, value, offset));
+        break;
     }
   }
 
@@ -318,28 +260,5 @@ export namespace SelectorAttribute {
     }
 
     return false;
-  }
-
-  /**TODO add documentation
-   *
-   * @param p
-   * @param cursor
-   * @returns
-   */
-  export function isCursor(p: SelectorAttribute, cursor: number): boolean {
-    if (p.offset >= cursor) {
-      if (cursor <= getEndOffset(p)) return true;
-    }
-
-    return false;
-  }
-
-  /**TODO add documentation
-   *
-   * @param p
-   * @returns
-   */
-  export function getEndOffset(p: SelectorAttribute): number {
-    return p.name.length + p.value.length + 1 + p.offset;
   }
 }

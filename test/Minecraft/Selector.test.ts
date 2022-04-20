@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Selector } from "../../src/Minecraft/Selector";
+import { Selector } from "../../src/Minecraft/Selector/Selector";
 
 describe("Selector", () => {
   it("parse1", () => {
