@@ -33,8 +33,7 @@ export class SelectorItemAttribute {
   }
 
   isCursorHere(cursor: number): boolean {
-    if (cursor >= this.offset && cursor <= this.offset + this.name.length + 1)
-      return true;
+    if (cursor >= this.offset && cursor <= this.offset + this.name.length + 1) return true;
 
     for (let i = 0; i < this.values.length; i++) {
       if (this.values[i].isCursorHere(cursor)) return true;
@@ -55,13 +54,20 @@ export namespace SelectorItemAttribute {
    * @param offset
    * @returns
    */
-  export function parse(text: string,offset: number = 0): SelectorItemAttribute {
+  export function parse(text: string, offset: number = 0): SelectorItemAttribute {
     const index = text.indexOf("=");
-    const values = text
-      .substring(index + 2, text.length - 1)
-      .split(",")
-      .filter((v) => v.length > 0)
-      .map((v) => SelectorValueAttribute.parse(v, text.indexOf(v) + offset));
+    const valuetext = text.substring(index + 1, text.length);
+
+    let matches = valuetext.match(/([a-z]+=[^\,\}\]]+)/gim);
+    let values: SelectorValueAttribute[] = [];
+
+    if (matches) {
+      for (let i = 0; i < matches.length; i++) {
+        const m = matches[i];
+        const item = SelectorValueAttribute.parse(m, text.indexOf(m) + offset);
+        values.push(item);
+      }
+    }
 
     return new SelectorItemAttribute(values, offset);
   }

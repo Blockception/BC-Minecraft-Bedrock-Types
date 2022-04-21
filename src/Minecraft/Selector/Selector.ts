@@ -176,9 +176,11 @@ export namespace SelectorAttribute {
 
       switch (char) {
         case "{":
+        case "[":
           level++;
           break;
         case "}":
+        case "]":
           level--;
           break;
 
