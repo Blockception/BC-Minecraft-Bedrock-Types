@@ -9,6 +9,7 @@ export const SelectorAttributeMode: ModeCollection = {
     { name: "dy", documentation: "The length of the box over the axis Y" },
     { name: "dz", documentation: "The length of the box over the axis Z" },
     { name: "family", documentation: "Tests whether or not the target has a given family type. Can be either string or single word" },
+    { name: "hasitem", documentation: "Tests the inventory of the entity" },
     { name: "l", documentation: "The maximum amount of XP the target has" },
     { name: "lm", documentation: "The minimum amount of XP the target has" },
     { name: "m", documentation: "The gamemode of the player" },
