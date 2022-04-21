@@ -3,10 +3,7 @@ import { SelectorItemAttribute } from "./ItemAttribute";
 import { SelectorScoreAttribute } from "./ScoreAttribute";
 import { SelectorValueAttribute } from "./ValueAttribute";
 
-export type SelectorAttribute =
-  | SelectorValueAttribute
-  | SelectorScoreAttribute
-  | SelectorItemAttribute;
+export type SelectorAttribute = SelectorValueAttribute | SelectorScoreAttribute | SelectorItemAttribute;
 
 /**An object that represents a selector*/
 export class Selector {
@@ -35,9 +32,7 @@ export class Selector {
       return this.type;
     }
 
-    return `${this.type}[${this.attributes
-      .map((attribute) => attribute.toString())
-      .join(",")}]`;
+    return `${this.type}[${this.attributes.map((attribute) => attribute.toString()).join(",")}]`;
   }
 
   /**TODO add documentation
@@ -46,10 +41,7 @@ export class Selector {
    * @returns
    */
   contains(parameter: string): boolean {
-    return (
-      this.attributes.findIndex((attribute) => attribute.name === parameter) !==
-      -1
-    );
+    return this.attributes.findIndex((attribute) => attribute.name === parameter) !== -1;
   }
 
   /**TODO add documentation
@@ -126,21 +118,13 @@ export namespace Selector {
     offset += type.length;
 
     if (data.startsWith("[") && data.endsWith("]")) {
-      SelectorAttribute.parseParameters(
-        data.substring(1, data.length - 1),
-        offset + 1,
-        Out.attributes
-      );
+      SelectorAttribute.parseParameters(data.substring(1, data.length - 1), offset + 1, Out.attributes);
     }
 
     return Out;
   }
 
-  export function isSelector(
-    value: string,
-    wildcard: boolean = false,
-    allowFakePlayers: boolean = false
-  ): boolean {
+  export function isSelector(value: string, wildcard: boolean = false, allowFakePlayers: boolean = false): boolean {
     if (value.startsWith("@")) return true;
 
     if (wildcard === true) {
@@ -183,11 +167,7 @@ export namespace SelectorAttribute {
    * @param selector
    * @param receiver
    */
-  export function parseParameters(
-    text: string,
-    offset: number,
-    receiver: SelectorAttribute[]
-  ): void {
+  export function parseParameters(text: string, offset: number, receiver: SelectorAttribute[]): void {
     let start: number = 0;
     let level: number = 0;
 
@@ -226,11 +206,7 @@ export namespace SelectorAttribute {
    * @param selector
    * @param receiver
    */
-  export function parse(
-    text: string,
-    offset: number,
-    receiver: SelectorAttribute[]
-  ): void {
+  export function parse(text: string, offset: number, receiver: SelectorAttribute[]): void {
     let Index = text.indexOf("=");
 
     if (Index < 0) throw new Error("index cannot be lower then 0");
