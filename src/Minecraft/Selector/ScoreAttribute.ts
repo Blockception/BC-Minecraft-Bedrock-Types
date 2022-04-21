@@ -53,14 +53,12 @@ export class SelectorScoreAttribute {
 
 export namespace SelectorScoreAttribute {
   /** */
-  export function parse(
-    text: string,
-    offset: number = 0
-  ): SelectorScoreAttribute {
+  export function parse(text: string,offset: number = 0): SelectorScoreAttribute {
     const index = text.indexOf("=");
     const values = text
       .substring(index + 2, text.length - 1)
       .split(",")
+      .filter((v) => v.length > 0)
       .map((v) => SelectorValueAttribute.parse(v, text.indexOf(v) + offset));
 
     return new SelectorScoreAttribute(values, offset);

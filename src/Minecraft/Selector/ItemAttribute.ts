@@ -60,6 +60,7 @@ export namespace SelectorItemAttribute {
     const values = text
       .substring(index + 2, text.length - 1)
       .split(",")
+      .filter((v) => v.length > 0)
       .map((v) => SelectorValueAttribute.parse(v, text.indexOf(v) + offset));
 
     return new SelectorItemAttribute(values, offset);

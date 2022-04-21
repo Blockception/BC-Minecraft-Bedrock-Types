@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { SelectorScoreAttribute } from '../../src/Minecraft/Selector/ScoreAttribute';
-import { Selector } from "../../src/Minecraft/Selector/Selector";
+import { SelectorScoreAttribute } from '../../../src/Minecraft/Selector/ScoreAttribute';
+import { Selector } from "../../../src/Minecraft/Selector/Selector";
 
 describe("Selector", () => {
   it("parse1", () => {

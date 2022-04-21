@@ -31,11 +31,13 @@ export class Selector {
    * @returns
    */
   toString(): string {
-    if (this.attributes.length=== 0) {
+    if (this.attributes.length === 0) {
       return this.type;
     }
 
-    return `${this.type}[${this.attributes.map((attribute) => attribute.toString()).join(",")}]`;
+    return `${this.type}[${this.attributes
+      .map((attribute) => attribute.toString())
+      .join(",")}]`;
   }
 
   /**TODO add documentation
@@ -69,9 +71,9 @@ export class Selector {
   }
 
   /**
-   * 
-   * @param cursor 
-   * @returns 
+   *
+   * @param cursor
+   * @returns
    */
   getParameterCursorIn(cursor: number): SelectorAttribute | undefined {
     return this.attributes.find((attribute) => attribute.isCursorHere(cursor));
@@ -127,7 +129,6 @@ export namespace Selector {
       SelectorAttribute.parseParameters(
         data.substring(1, data.length - 1),
         offset + 1,
-        Out,
         Out.attributes
       );
     }
@@ -185,7 +186,6 @@ export namespace SelectorAttribute {
   export function parseParameters(
     text: string,
     offset: number,
-    selector: Selector,
     receiver: SelectorAttribute[]
   ): void {
     let start: number = 0;
@@ -226,7 +226,11 @@ export namespace SelectorAttribute {
    * @param selector
    * @param receiver
    */
-  export function parse(text: string,offset: number,receiver: SelectorAttribute[]): void {
+  export function parse(
+    text: string,
+    offset: number,
+    receiver: SelectorAttribute[]
+  ): void {
     let Index = text.indexOf("=");
 
     if (Index < 0) throw new Error("index cannot be lower then 0");
