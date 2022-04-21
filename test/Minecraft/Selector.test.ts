@@ -17,7 +17,7 @@ describe("Selector", () => {
 
   it("parse2", () => {
     const offset = 5;
-    const text = "@a[x=~0.5,y=50,z=~50,r=50,rm=3,tag=something,tag=!foo]";
+    const text = "@a[x=~0.5,y=50,z=~50,r=50,rm=3,tag=something]";
 
     const sel = Selector.parse(text, offset);
     testBaseParse(text, offset, sel);
@@ -73,7 +73,7 @@ function testBaseParse(text: string, offset: number, selector: Selector) {
     const attr = selector.attributes[I];
     const found_offset = offset + text.indexOf(attr.name)
     
-    expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`);
+    expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' found ${attr.toString()} at: '${found_offset}' should be: ${attr.offset - offset}`);
   }
 
   const required = text.indexOf("scores={");
@@ -86,7 +86,7 @@ function testBaseParse(text: string, offset: number, selector: Selector) {
         const attr = scores.values[I];
         const found_offset = offset + text.indexOf(attr.name)
 
-        expect(attr.offset).to.equal(found_offset, `offset is not correct: '${text}' offset: '${offset}' found it at: '${attr.offset}' of ${attr.toString()}`);
+        expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' found ${attr.toString()} at: '${found_offset}' should be: ${attr.offset - offset}`);
       }
     }
   }
