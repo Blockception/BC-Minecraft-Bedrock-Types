@@ -75,7 +75,7 @@ export namespace SelectorValueAttribute {
     if (typeof value === "object") {
       if (typeof value.offset !== "number") return false;
       if (typeof value.name !== "string") return false;
-      if (!Array.isArray(value.values)) return false;
+      if (typeof value.value !== "string") return false;
 
       return true;
     }
