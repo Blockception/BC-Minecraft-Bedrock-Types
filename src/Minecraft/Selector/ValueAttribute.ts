@@ -34,6 +34,14 @@ export class SelectorValueAttribute {
     return this.offset + this.offset + 1;
   }
 
+  /**
+   * 
+   * @returns 
+   */
+  getValue(): OffsetWord {
+    return { text: this.value, offset: this.getValueOffset()};
+  }
+
   isCursorHere(cursor : number) : boolean {
     return cursor >= this.offset && cursor <= (this.offset + this.name.length + this.value.length + 1);
   }
