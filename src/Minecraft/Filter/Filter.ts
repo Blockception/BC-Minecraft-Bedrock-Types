@@ -55,9 +55,16 @@ export namespace Filter {
     return false;
   }
 
-  export function forEach(item: FilterType, callback: (item: Filter) => void) {
+  /**
+   *
+   * @param item
+   * @param callback
+   * @returns
+   */
+  export function forEach(item: FilterType, callback: (item: Filter) => void): void {
     if (Array.isArray(item)) {
-      return item.forEach((i) => forEach(i, callback));
+      item.forEach((i) => forEach(i, callback));
+      return;
     }
 
     if (typeof item !== "object") return;
