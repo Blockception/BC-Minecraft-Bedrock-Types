@@ -7,9 +7,10 @@ export class SelectorItemAttribute {
   /** */
   public name: "hasitem";
   /** */
-  public values: SelectorValueAttribute[];
+  public values: (SelectorValueAttribute[])[];
 
-  /**TODO add documentation
+  /**
+   * TODO add documentation
    * @param name
    * @param value
    * @param offset
@@ -17,7 +18,7 @@ export class SelectorItemAttribute {
   constructor(values: SelectorValueAttribute[], offset: number = 0) {
     this.name = "hasitem";
     this.offset = offset;
-    this.values = values;
+    this.values = [values];
   }
 
   getName(): OffsetWord {
@@ -32,11 +33,20 @@ export class SelectorItemAttribute {
     return this.offset + this.offset + 1;
   }
 
+  /**
+   * Checks if the cursor is on the item attribute.
+   * @param cursor
+   * @returns
+   */
   isCursorHere(cursor: number): boolean {
     if (cursor >= this.offset && cursor <= this.offset + this.name.length + 1) return true;
 
     for (let i = 0; i < this.values.length; i++) {
-      if (this.values[i].isCursorHere(cursor)) return true;
+      const set = this.values[i];
+
+      for (let j = 0; j < set.length; j++) {
+        if (set[i].isCursorHere(cursor)) return true;
+      }
     }
 
     return false;
