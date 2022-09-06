@@ -1,5 +1,5 @@
-/**TODO add documentation
- *
+/**
+ * The namespace for the float type
  */
 export namespace Float {
   /**The regex pattern that matches a float */
