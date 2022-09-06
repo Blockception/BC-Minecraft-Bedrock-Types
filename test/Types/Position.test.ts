@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Position } from "../../src/Types/include";
+import { Position } from "../../src/Types";
 
 const jsonData = `{
   "format_version": "1.17.0",

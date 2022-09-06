@@ -6,7 +6,7 @@ export interface Conditional {
 }
 
 /**
- *
+ * The namespace of the conditional
  */
 export namespace Conditional {
   /**Returns the idenfitication

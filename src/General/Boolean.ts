@@ -1,4 +1,4 @@
-/**The boolean data type, but related to minecraft*/
+/** The boolean data type, but related to minecraft */
 export namespace Boolean {
   /**Checks if the given text value is a valid boolean
    * @param value The valued to compare to

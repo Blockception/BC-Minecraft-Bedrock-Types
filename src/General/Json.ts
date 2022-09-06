@@ -1,4 +1,6 @@
-/** */
+/**
+ * The namespace for the json values as strings
+ */
 export namespace Json {
   /**Checks if the given text value is a valid json object
    * @param value The valued to compare to

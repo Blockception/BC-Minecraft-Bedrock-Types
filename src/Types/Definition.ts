@@ -8,9 +8,9 @@ export interface Definition {
 /**The namespace that provides functionallity to definitions*/
 export namespace Definition {
   /**
-   *
-   * @param data
-   * @returns
+   * Counts the number of definitions in the given object
+   * @param data The object to count the definitions in
+   * @returns The number of definitions
    */
   export function count(data: Definition): number {
     return Object.getOwnPropertyNames(data).length;

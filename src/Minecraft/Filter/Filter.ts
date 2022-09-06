@@ -4,34 +4,28 @@ import { OperatorType } from "./Operator";
 import { SubjectType } from "./Subject";
 
 /**
- *
+ * The interface for a filter
  */
 export interface Filter {
-  /**
-   *
-   */
+  /** The type of filter */
   test: TestType;
-  /**
-   *
-   */
+  /** The subject of the filter*/
   subject?: SubjectType;
-  /**
-   *
-   */
+  /** The operator of the filter*/
   operator?: OperatorType;
-  /**
-   *
-   */
+  /** The domain of the filter*/
   domain?: DomainType;
-  /**
-   *
-   */
+  /** The value of the filter*/
   value?: string | boolean | number;
 }
 
+/** The interface for a filter container */
 export interface FilterContainerType {
+  /** any filters to be true */
   any_of?: FilterItemType;
+  /** all filters to be true */
   all_of?: FilterItemType;
+  /** any filters to be false */
   none_of?: FilterItemType;
 }
 

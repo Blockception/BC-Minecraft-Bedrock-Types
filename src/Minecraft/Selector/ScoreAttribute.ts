@@ -1,4 +1,4 @@
-import { OffsetWord } from "../../Types/include";
+import { OffsetWord } from "../../Types";
 import { SelectorValueAttribute } from "./ValueAttribute";
 
 export class SelectorScoreAttribute {
