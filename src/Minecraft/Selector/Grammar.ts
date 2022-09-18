@@ -1,3 +1,8 @@
+/**
+ * Finds the first index of a character in a string that is a comma or the end of the string
+ * @param text 
+ * @returns 
+ */
 export function findCommaOrEnd(text: string): number {
   let index = 0;
   let depth = 0;
@@ -35,4 +40,23 @@ export function findCommaOrEnd(text: string): number {
   }
 
   return text.length;
+}
+
+
+export function trimBraces(text: string): string {
+  switch (text.charAt(0)) {
+    case "[":
+    case "{":
+    case "(":
+      text = text.substring(1);
+  }
+
+  switch (text.charAt(text.length - 1)) {
+    case "]":
+    case "}":
+    case ")":
+      text = text.substring(0, text.length - 1);
+  }
+
+  return text;
 }

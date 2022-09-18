@@ -1,10 +1,10 @@
 import { OffsetWord } from "../../Types";
-import { Attribute } from "./Attributes/Attribute";
-import { BaseAttribute } from "./Attributes/Base";
-import { SelectorBuilder } from "./Builder";
-import { findCommaOrEnd } from "./Grammar";
+import { PartArrayBuilder, PartBuilder } from "./Builder";
+import { findCommaOrEnd, trimBraces } from "./Grammar";
 import { Selector } from "./Selector";
 import { SelectorType } from "./SelectorTypes";
+
+//This code will parses minecraft selector text such as  @a[x=1,y=2,z=3,hasitem=[{item=minecraft:stone}]] Into an object
 
 /**
  *
@@ -23,60 +23,79 @@ export function ParseSelector(word: OffsetWord): Selector | undefined {
   }
 
   const type = text.substring(0, index) as SelectorType;
-  const builder = new SelectorBuilder(type);
+  const builder = new PartBuilder();
 
   text = text.substring(index);
 
   //Get attributes
   if (text.startsWith("[") && text.endsWith("]")) {
+    text = text.substring(1, text.length - 1);
+
+    parseItems(text, offset + index + 1, builder);
   } else {
     return undefined;
   }
 
-  text = text.substring(1, text.length - 1);
-  ParseValue(text, offset + index + 1, builder);
-
-  return builder.toSelector();
+  return new Selector(type, builder.data);
 }
 
-function ParseValue(text: string, offset: number, builder: SelectorBuilder): void {
-  const index = text.indexOf("=");
+function parseItems(text: string, offset: number, builder: PartBuilder): void {
+  while (text.length > 0) {
+    let index = findCommaOrEnd(text);
+    if (index === -1) {
+      return;
+    }
 
-  if (index <= 0) return;
-
-  const attribute = text.slice(0, index).trim() as BaseAttribute;
-  const value = text.slice(index + 1).trim();
-  const end = findCommaOrEnd(value);
-
-  if (end === -1) {
-    throw new Error("Invalid selector");
-  }
-
-  const attrValue = value.slice(0, end);
-  ProcessAttribute(attribute, attrValue, offset, builder);
-
-  const next = value.slice(end + 1);
-  if (next.length > 0) {
-    ParseValue(next, offset + end + 1, builder);
+    let attr = text.substring(0, index);
+    parseItem(attr, offset, builder);
+    text = text.substring(index + 1);
+    offset += index + 1;
   }
 }
 
-function ProcessAttribute(attribute: BaseAttribute, value: string, offset: number, builder: SelectorBuilder): void {
-  const item: Partial<Attribute<string | object>> = {
-    offset: offset,
-    negative: false,
-    value: undefined,
-  };
+function parseItem(text: string, offset: number, builder: PartBuilder): void {
+  let index = text.indexOf("=");
+  let key: string;
+  let value: string;
+  let negative = false;
+
+  if (index === -1) {
+    key = "";
+    value = text;
+  } else {
+    key = text.substring(0, index);
+    value = text.substring(index + 1);
+  }
 
   if (value.startsWith("!")) {
-    item.negative = true;
+    negative = true;
     value = value.substring(1);
   }
 
-  if (value.startsWith("{")) {
+  //Value is an object or array
+  if (value.startsWith("{") || value.startsWith("[")) {
+    const { builder: arrayBuilder } = builder.startNewArray(key, offset, negative);
+    let part = trimBraces(value);
+    offset += index + 2 + (negative ? 1 : 0);
+    parseArray(part, offset, arrayBuilder);
   }
+  //Value is a string
+  else {
+    builder.startNewString(key, value, offset, negative);
+  }
+}
 
-  if (item.value !== undefined) {
-    builder.push(attribute, item);
+function parseArray(part: string, offset: number, arrayBuilder: PartArrayBuilder): void {
+  while (part.length > 0) {
+    let index = findCommaOrEnd(part);
+    if (index === -1) {
+      return;
+    }
+
+    const partBuilder = arrayBuilder.startNew();
+    let attr = part.substring(0, index);
+    parseItem(attr, offset, partBuilder);
+    part = part.substring(index + 1);
+    offset += index + 1;
   }
 }

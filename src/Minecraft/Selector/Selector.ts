@@ -1,7 +1,7 @@
 import { Modes } from "../../Modes/Modes";
 import { OffsetWord } from "../../Types";
-import { BaseAttribute, BaseAttributeItemType, BaseAttributeType, BaseData } from "./Attributes/Base";
-import { Attribute } from "./Attributes/Attribute";
+import { Attribute, AttributeContainer } from "./Attributes/Attribute";
+import { AttributeContainerReader, AttributeReader } from "./Attributes/Reader";
 import { ParseSelector } from "./Parse";
 import { SelectorType } from "./SelectorTypes";
 
@@ -16,9 +16,9 @@ export class Selector {
   /**
    *
    */
-  private _data: Partial<BaseData>;
+  private _data: AttributeContainer;
 
-  constructor(type?: SelectorType, data?: Partial<BaseData>) {
+  constructor(type?: SelectorType, data?: AttributeContainer) {
     this._type = type || "@a";
     this._data = data || {};
   }
@@ -27,7 +27,7 @@ export class Selector {
     return this._type;
   }
 
-  get data(): Partial<BaseData> {
+  get data(): AttributeContainer {
     return this._data;
   }
 
@@ -36,8 +36,8 @@ export class Selector {
    * @param attribute
    * @returns
    */
-  get<T extends BaseAttribute>(attribute: T): BaseAttributeType<T> {
-    let values = this._data[attribute] as BaseAttributeType<T> | undefined;
+  get(attribute: string): Attribute[] {
+    let values = this._data[attribute];
 
     if (!values) {
       values = [];
@@ -52,7 +52,7 @@ export class Selector {
    * @param attribute
    * @param value
    */
-  push<T extends BaseAttribute>(attribute: T, value: BaseAttributeItemType<T>): void {
+  push(attribute: string, value: Attribute): void {
     this.get(attribute)?.push(value as any);
   }
 
@@ -61,8 +61,8 @@ export class Selector {
    * @param attribute The attribute to count
    * @returns The amount of attributes
    */
-  count(attribute: BaseAttribute): number {
-    return this.get(attribute)?.length || 0;
+  count(attribute: string): number {
+    return this.get(attribute).length;
   }
 
   /**
@@ -70,22 +70,26 @@ export class Selector {
    * @param attribute The attribute to check for
    * @returns True if the attribute is present
    */
-  contains(attribute: BaseAttribute): boolean {
+  contains(attribute: string): boolean {
     return this.count(attribute) > 0;
   }
 
   /**
-   *
-   * @param callback
+   * Loops over all attributes
+   * @param callback The callback to call for each attribute
    */
-  forEach(callback: (attribute: BaseAttribute, values: BaseAttributeItemType<BaseAttribute>) => void): void {
+  forEach(callback: (attribute: string, values: Attribute) => void): void {
     for (const attribute in this._data) {
-      const value = this._data[attribute as BaseAttribute];
-
-      if (value) {
-        value.forEach((item) => callback(attribute as BaseAttribute, item));
-      }
+      this.get(attribute).forEach((item) => callback(attribute, item));
     }
+  }
+
+  /**
+   * Returns the first attribute
+   * @returns A reader
+   */
+  read() {
+    return new AttributeContainerReader(this._data);
   }
 }
 

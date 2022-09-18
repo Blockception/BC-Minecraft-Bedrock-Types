@@ -1,8 +1,12 @@
-import { BaseAttribute, BaseAttributeItemType } from "./Base";
-import { HasItemData } from "./HasItem";
-import { ScoreData } from "./Scores";
+export type AttributeContainer = Record<string, Attribute[]>;
 
-export interface Attribute<T extends string | HasItemData | ScoreData> {
+export enum AttributeType {
+  String = 0,
+  Object = 1,
+  Array = 2,
+}
+
+export interface AttributeBase {
   /**
    *
    */
@@ -11,14 +15,27 @@ export interface Attribute<T extends string | HasItemData | ScoreData> {
    *
    */
   negative: boolean;
-  /**
-   *
-   */
-  value: T;
 }
 
+export interface AttributeString extends AttributeBase {
+  type: AttributeType.String;
+  value: string;
+}
+
+export interface AttributeObject extends AttributeBase {
+  type: AttributeType.Object;
+  value: AttributeContainer;
+}
+
+export interface AttributeArray extends AttributeBase {
+  type: AttributeType.Array;
+  value: AttributeContainer[];
+}
+
+export type Attribute = AttributeString | AttributeObject | AttributeArray;
+
 export namespace Attribute {
-  export function is(attr: any): attr is Attribute<string | object> {
+  export function is(attr: any): attr is Attribute {
     if (typeof attr !== "object") {
       return false;
     }
@@ -31,7 +48,7 @@ export namespace Attribute {
     return false;
   }
 
-  export function isArray(attr: any): attr is Attribute<string | object>[] {
+  export function isArray(attr: any): attr is Attribute[] {
     if (!Array.isArray(attr)) {
       return false;
     }
@@ -45,11 +62,7 @@ export namespace Attribute {
     return true;
   }
 
-  export function cast<T extends BaseAttribute>(attr: Attribute<string | object>): BaseAttributeItemType<T> {
-    return attr as BaseAttributeItemType<T>;
-  }
-
-  export function toString(attribute: Attribute<string | object>): string {
+  export function toString(attribute: Attribute): string {
     let result = attribute.negative ? "!" : "";
     result += attribute.value;
     return result;

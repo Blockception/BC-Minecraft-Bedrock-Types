@@ -8,14 +8,14 @@
     "compile": "tsc -b",
     "build": "npm run clean && npm run compile",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "test": "mocha --debug-brk",
+    "test": "mocha -r ts-node/register 'test/**/*.ts'",
     "clean": "tsc -b --clean",
     "pretest": "npm run compile",
     "prepublishOnly": "npm test && npm run compile",
     "preversion": "",
     "postversion": "git push && git push --tags",
     "version": "git add -A src",
-    "watch": "tsc -w -p ./src"
+    "watch": "tsc -w"
   },
   "files": [
     "lib/src/**/*.js",

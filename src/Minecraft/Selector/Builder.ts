@@ -1,94 +1,77 @@
-import { Attribute } from "./Attributes/Attribute";
-import { BaseAttributeItemType, BaseData } from "./Attributes/Base";
-import { HasItemData } from "./Attributes/HasItem";
-import { ScoreData } from "./Attributes/Scores";
-import { Selector } from "./Selector";
-import { SelectorType } from "./SelectorTypes";
+import { Attribute, AttributeArray, AttributeContainer, AttributeObject, AttributeString, AttributeType } from "./Attributes/Attribute";
 
-type GetElementType<T extends any[] | undefined> = T extends (infer U)[] ? U : never;
-type Data = BaseData | HasItemData | ScoreData;
-type DataKey<T> = keyof T;
-type DataType<T extends Data, U extends DataKey<T>> = any[] & T[U];
-type DataItemType<T extends Data, U extends DataKey<T>> = GetElementType<DataType<T, U>>;
+export class PartBuilder {
+  private _data: AttributeContainer;
 
-function test<T extends Data, U extends DataKey<T>>(value: DataType<T, U>): void {}
-
-/**
- *
- */
-export class PartBuilder<T extends Data> {
-  protected _data: Partial<T>;
-
-  /**
-   *
-   * @param data
-   */
-  constructor(data?: T) {
+  constructor(data?: AttributeContainer) {
     this._data = data || {};
   }
 
-  get<U extends keyof T>(attribute: U): DataType<T, U> {
-    let values = this._data[attribute] as DataType<T, U>;
+  get(key: string): Attribute[] {
+    let values = this._data[key];
 
     if (values === undefined) {
-      values = [] as DataType<T, U>;
-      this._data[attribute] = values;
+      values = [];
+      this._data[key] = values;
     }
 
     return values;
   }
 
-  push<U extends keyof T>(attribute: U, value: DataItemType<T, U>): this {
-    const values = this.get(attribute);
-    values.push(value);
+  startNew(key: string, offset?: number, negative?: boolean): Attribute {
+    const base: Partial<Attribute> = {
+      offset: offset || 0,
+      negative: negative || false,
+      value: undefined,
+    };
 
-    return this;
+    this.get(key).push(base as Attribute);
+    return base as Attribute;
   }
 
-  startSub<U extends keyof T>(attribute: U, offset: number = 0): PartBuilder<DataItemType<T, U>> {
-    const values = this.get(attribute);
-    const item = { offset, negative: false, value: {} } as DataItemType<T, U>;
-    values.push(item);
+  startNewString(key: string, value: string, offset?: number, negative?: boolean): AttributeString {
+    const n = this.startNew(key, offset, negative) as AttributeString;
+    n.type = AttributeType.String;
+    n.value = value;
 
-    return new PartBuilder<DataItemType<T, U>>(item.value);
+    return n;
+  }
+
+  startNewObject(key: string, offset?: number, negative?: boolean): { attribute: AttributeObject; builder: PartBuilder } {
+    const n = this.startNew(key, offset, negative) as AttributeObject;
+    n.type = AttributeType.Object;
+    n.value = {};
+
+    return { attribute: n, builder: new PartBuilder(n.value) };
+  }
+
+  startNewArray(key: string, offset?: number, negative?: boolean): { attribute: AttributeArray; builder: PartArrayBuilder } {
+    const n = this.startNew(key, offset, negative) as AttributeArray;
+    n.type = AttributeType.Array;
+    n.value = [];
+
+    return { attribute: n, builder: new PartArrayBuilder(n.value) };
+  }
+
+  get data() {
+    return this._data;
   }
 }
 
-/**
- * The selector builder
- */
-export class SelectorBuilder extends PartBuilder<BaseData> {
-  private _type: SelectorType;
+export class PartArrayBuilder {
+  private _data: AttributeContainer[];
 
-  constructor(type?: SelectorType, data?: BaseData) {
-    super(data);
-    this._type = type || "@e";
-    this._data = data || {};
+  constructor(data?: AttributeContainer[]) {
+    this._data = data || [];
   }
 
-  /**
-   *
-   * @returns
-   */
-  toSelector(): Selector {
-    return new Selector(this._type, this._data as Partial<BaseData>);
+  startNew(): PartBuilder {
+    const base: AttributeContainer = {};
+    this._data.push(base);
+    return new PartBuilder(base);
   }
 
-  /**
-   *
-   * @param offset
-   * @returns
-   */
-  startScores(offset = 0): PartBuilder<ScoreData> {
-    return this.startSub("scores", offset);
-  }
-
-  /**
-   *
-   * @param offset
-   * @returns
-   */
-  startHasItem(offset = 0): PartBuilder<HasItemData> {
-    return this.startSub("hasitem", offset);
+  get data() {
+    return this._data;
   }
 }
