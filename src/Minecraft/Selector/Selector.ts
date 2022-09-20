@@ -1,4 +1,5 @@
 import { off } from "process";
+import { String } from "../../General";
 import { Modes } from "../../Modes/Modes";
 import { OffsetWord } from "../../Types";
 import { CompactJson } from "../Json/Compact";
@@ -45,6 +46,31 @@ export namespace Selector {
     }
 
     return Modes.SelectorType.isValue(type);
+  }
+
+  export function isSelector(value: string, wildcard?: boolean, allowFakePlayer?: boolean): boolean {
+    if (wildcard === true) {
+      if (value === "*") return true;
+    }
+
+    if (!value.startsWith("@")) {
+      if (allowFakePlayer === true) {
+        if (String.is(value)) return true;
+      }
+
+      return false;
+    }
+
+    const index = value.indexOf("[");
+    const type = index === -1 ? value : value.slice(0, index);
+
+    if (index > -1) {
+      if (!value.endsWith("]")) {
+        return false;
+      }
+    }
+
+    return isValidType(type);
   }
 
   /**
