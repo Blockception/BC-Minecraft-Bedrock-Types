@@ -38,9 +38,5 @@ describe("XP", () => {
     it(`is(${value}) should return false`, () => {
       expect(XP.is(value)).to.be.false;
     });
-
-    it(`isLevel(${value}) should return false`, () => {
-      expect(XP.isLevel(value)).to.be.false;
-    });
   });
 });

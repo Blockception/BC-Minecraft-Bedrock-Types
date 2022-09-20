@@ -45,7 +45,7 @@ describe("Coordinates", () => {
 
   invalid.forEach((value) => {
     it(`is(${value}) should return false`, () => {
-      expect_coordinate(value, true);
+      expect_coordinate(value, false);
     });
   });
 });
