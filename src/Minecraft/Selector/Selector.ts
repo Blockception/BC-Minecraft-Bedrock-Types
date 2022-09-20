@@ -1,95 +1,32 @@
+import { off } from "process";
 import { Modes } from "../../Modes/Modes";
 import { OffsetWord } from "../../Types";
-import { Attribute, AttributeContainer } from "./Attributes/Attribute";
-import { AttributeContainerReader, AttributeReader } from "./Attributes/Reader";
-import { ParseSelector } from "./Parse";
+import { CompactJson } from "../Json/Compact";
+import { CompactJsonReader } from "../Json/Reader";
 import { SelectorType } from "./SelectorTypes";
 
 /**
  * The class that represents a selector.
  */
-export class Selector {
+export class Selector extends CompactJsonReader {
   /**
    * @example '@a' | '@e'
    */
   private _type: SelectorType;
-  /**
-   *
-   */
-  private _data: AttributeContainer;
+  private _offset: number;
 
-  constructor(type?: SelectorType, data?: AttributeContainer) {
+  constructor(type?: SelectorType, offset?: number, data?: CompactJson.IArray) {
+    super(data || CompactJson.empty());
     this._type = type || "@a";
-    this._data = data || {};
+    this._offset = offset || 0;
   }
 
-  get type(): SelectorType {
+  get selectorType() {
     return this._type;
   }
 
-  get data(): AttributeContainer {
-    return this._data;
-  }
-
-  /**
-   *
-   * @param attribute
-   * @returns
-   */
-  get(attribute: string): Attribute[] {
-    let values = this._data[attribute];
-
-    if (!values) {
-      values = [];
-      this._data[attribute] = values;
-    }
-
-    return values;
-  }
-
-  /**
-   *
-   * @param attribute
-   * @param value
-   */
-  push(attribute: string, value: Attribute): void {
-    this.get(attribute)?.push(value as any);
-  }
-
-  /**
-   * Counts the amount of attributes
-   * @param attribute The attribute to count
-   * @returns The amount of attributes
-   */
-  count(attribute: string): number {
-    return this.get(attribute).length;
-  }
-
-  /**
-   * Checks if the selector contains the attribute
-   * @param attribute The attribute to check for
-   * @returns True if the attribute is present
-   */
-  contains(attribute: string): boolean {
-    return this.count(attribute) > 0;
-  }
-
-  /**
-   * Loops over all attributes
-   * @param callback The callback to call for each attribute
-   */
-  forEach(callback: (attribute: string, values: Attribute) => void): void {
-    for (const attribute in this._data) {
-      this.get(attribute).forEach((item) => callback(attribute, item));
-    }
-  }
-
-  /**
-   * Returns the first attribute
-   * @returns A reader
-   */
-  read() {
-    return new AttributeContainerReader(this._data);
+  get selectorOffset() {
+    return this._offset;
   }
 }
 
@@ -104,7 +41,7 @@ export namespace Selector {
    */
   export function isValidType(type: string | Selector): boolean {
     if (typeof type !== "string") {
-      type = type.type;
+      type = type.selectorType;
     }
 
     return Modes.SelectorType.isValue(type);
@@ -120,10 +57,25 @@ export namespace Selector {
   export function parse(word: OffsetWord): Selector;
 
   export function parse(text: string | OffsetWord, offset?: number): Selector | undefined {
-    if (typeof text === "string") {
-      text = OffsetWord.create(text, offset);
+    if (typeof text !== "string") {
+      offset = text.offset;
+      text = text.text;
+    }
+    offset = offset || 0;
+
+    const index = text.indexOf("[");
+
+    if (index === -1) {
+      return new Selector(text as SelectorType);
     }
 
-    return ParseSelector(text);
+    const type = text.substring(0, index) as SelectorType;
+    const data = CompactJson.parse(text, offset + index);
+
+    if (CompactJson.isArray(data)) {
+      return new Selector(type, offset, data);
+    }
+
+    return undefined;
   }
 }
