@@ -2,49 +2,41 @@ import { expect } from "chai";
 import { XP } from "../../src/Minecraft/Xp";
 
 describe("XP", () => {
-  it("is", () => {
-    expect(XP.is("13")).to.be.true;
-    expect(XP.is("1000")).to.be.true;
-    expect(XP.is("-1000")).to.be.true;
+  const valid = ["13", "1000", "-1000", "13L", "1000L", "-1000L"];
 
-    expect(XP.is("13L")).to.be.true;
-    expect(XP.is("1000L")).to.be.true;
-    expect(XP.is("-1000L")).to.be.true;
+  const invalid = ["13.64", "1000.74", "-1000.26", "13.15376L", "1000.546L", "-1000.123L", "asdb", "xpL", "-aL"];
 
-    expect(XP.is("13.64")).to.be.false;
-    expect(XP.is("1000.74")).to.be.false;
-    expect(XP.is("-1000.26")).to.be.false;
+  valid.forEach((value) => {
+    it(`is(${value}) should return true`, () => {
+      expect(XP.is(value)).to.be.true;
+    });
 
-    expect(XP.is("13.15376L")).to.be.false;
-    expect(XP.is("1000.546L")).to.be.false;
-    expect(XP.is("-1000.123L")).to.be.false;
+    if (value.endsWith("L") || value.endsWith("l")) {
+      const integer = parseInt(value.slice(0, -1));
 
-    expect(XP.is("asdb")).to.be.false;
-    expect(XP.is("xpL")).to.be.false;
-    expect(XP.is("-aL")).to.be.false;
+      it(`isLevel(${value}) should return true`, () => {
+        expect(XP.isLevel(value)).to.be.true;
+      });
+
+      it(`parse(${value}) should return ${integer}`, () => {
+        expect(XP.parse(value)).to.equal(integer);
+      });
+    } else {
+      it(`isLevel(${value}) should return false`, () => {
+        expect(XP.isLevel(value)).to.be.false;
+      });
+
+      const integer = parseInt(value);
+
+      it(`parse(${value}) should return ${integer}`, () => {
+        expect(XP.parse(value)).to.equal(integer);
+      });
+    }
   });
 
-  it("isLevel", () => {
-    expect(XP.isLevel("13")).to.be.false;
-    expect(XP.isLevel("1000")).to.be.false;
-    expect(XP.isLevel("-1000")).to.be.false;
-
-    expect(XP.isLevel("13L")).to.be.true;
-    expect(XP.isLevel("1000L")).to.be.true;
-    expect(XP.isLevel("-1000L")).to.be.true;
-
-    expect(XP.isLevel("13l")).to.be.true;
-    expect(XP.isLevel("1000l")).to.be.true;
-    expect(XP.isLevel("-1000l")).to.be.true;
-  });
-
-  it("parse", () => {
-    expect(XP.parse("13")).to.equal(13);
-    expect(XP.parse("1000")).to.equal(1000);
-    expect(XP.parse("-1000")).to.equal(-1000);
-
-    expect(XP.parse("13L")).to.equal(13);
-    expect(XP.parse("1000L")).to.equal(1000);
-    expect(XP.parse("-1000L")).to.equal(-1000);
+  invalid.forEach((value) => {
+    it(`is(${value}) should return false`, () => {
+      expect(XP.is(value)).to.be.false;
+    });
   });
 });

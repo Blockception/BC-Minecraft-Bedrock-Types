@@ -2,42 +2,51 @@ import { expect } from "chai";
 import { Coordinate } from "../../src/Minecraft/Coordinate";
 
 describe("Coordinates", () => {
-  it("is", () => {
+  const valid = [
     //Positive integers
-    expect_coordinate("^+5", true);
-    expect_coordinate("~+5", true);
-    expect_coordinate("^5", true);
-    expect_coordinate("~5", true);
+    "^+5",
+    "~+5",
+    "^5",
+    "~5",
 
     //Positive floats
-    expect_coordinate("^+5.2", true);
-    expect_coordinate("~+5.3", true);
-    expect_coordinate("~+0.5", true);
-    expect_coordinate("~+.5", true);
-    expect_coordinate("^5.2", true);
-    expect_coordinate("~5.3", true);
-    expect_coordinate("~.5", true);
-    expect_coordinate("~0.5", true);
+    "^+5.2",
+    "~+5.3",
+    "~+0.5",
+    "~+.5",
+    "^5.2",
+    "~5.3",
+    "~.5",
+    "~0.5",
 
     //Negative integers
-    expect_coordinate("^-5", true);
-    expect_coordinate("~-5", true);
-    expect_coordinate("~-.5", true);
+    "^-5",
+    "~-5",
+    "~-.5",
 
     //Negative floats
-    expect_coordinate("^-5.2", true);
-    expect_coordinate("~-5.3", true);
+    "^-5.2",
+    "~-5.3",
 
     //Other
-    expect_coordinate("^", true);
-    expect_coordinate("~", true);
-    expect_coordinate("^0", true);
-    expect_coordinate("~0", true);
+    "^",
+    "~",
+    "^0",
+    "~0",
+  ];
 
-    expect_coordinate("&16", false);
-    expect_coordinate("*4341", false);
-    expect_coordinate("x", false);
-    expect_coordinate("y", false);
+  const invalid = ["&16", "*4341", "x", "y"];
+
+  valid.forEach((value) => {
+    it(`is(${value}) should return true`, () => {
+      expect_coordinate(value, true);
+    });
+  });
+
+  invalid.forEach((value) => {
+    it(`is(${value}) should return false`, () => {
+      expect_coordinate(value, false);
+    });
   });
 });
 

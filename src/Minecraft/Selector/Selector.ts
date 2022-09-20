@@ -1,246 +1,81 @@
+import { off } from "process";
 import { Modes } from "../../Modes/Modes";
-import { SelectorItemAttribute } from "./ItemAttribute";
-import { SelectorScoreAttribute } from "./ScoreAttribute";
-import { SelectorValueAttribute } from "./ValueAttribute";
+import { OffsetWord } from "../../Types";
+import { CompactJson } from "../Json/Compact";
+import { CompactJsonReader } from "../Json/Reader";
+import { SelectorType } from "./SelectorTypes";
 
-export type SelectorAttribute = SelectorValueAttribute | SelectorScoreAttribute | SelectorItemAttribute;
-
-/**An object that represents a selector*/
-export class Selector {
-  /**The offset in the document where this selector starts*/
-  public offset: number;
-  /**The selector type such as @a | @e*/
-  public type: string;
-  /**The attribute assigned to the selector*/
-  public attributes: SelectorAttribute[];
-
-  /**Creates a new instance of a selector
-   * @param type The type of the selector such as @a | @e
-   * @param offset The offset the selector starts in the document*/
-  constructor(type: string, offset: number = 0) {
-    this.type = type;
-    this.offset = offset;
-    this.attributes = [];
-  }
-
-  /**TODO add documentation
-   *
-   * @returns
-   */
-  toString(): string {
-    if (this.attributes.length === 0) {
-      return this.type;
-    }
-
-    return `${this.type}[${this.attributes.map((attribute) => attribute.toString()).join(",")}]`;
-  }
-
-  /**TODO add documentation
-   *
-   * @param parameter
-   * @returns
-   */
-  contains(parameter: string): boolean {
-    return this.attributes.findIndex((attribute) => attribute.name === parameter) !== -1;
-  }
-
-  /**TODO add documentation
-   *
-   * @param parameter
-   * @returns
-   */
-  count(parameter: string): number {
-    return this.get(parameter).length;
-  }
-
-  /**TODO add documentation
-   *
-   * @param parameter
-   * @returns
-   */
-  get(parameter: string): SelectorAttribute[] {
-    return this.attributes.filter((attribute) => attribute.name === parameter);
-  }
-
+/**
+ * The class that represents a selector.
+ */
+export class Selector extends CompactJsonReader {
   /**
-   *
-   * @param cursor
-   * @returns
+   * @example '@a' | '@e'
    */
-  getParameterCursorIn(cursor: number): SelectorAttribute | undefined {
-    return this.attributes.find((attribute) => attribute.isCursorHere(cursor));
+  private _type: SelectorType;
+  private _offset: number;
+
+  constructor(type?: SelectorType, offset?: number, data?: CompactJson.IArray) {
+    super(data || CompactJson.empty());
+    this._type = type || "@a";
+    this._offset = offset || 0;
+  }
+
+  get selectorType() {
+    return this._type;
+  }
+
+  get selectorOffset() {
+    return this._offset;
   }
 }
 
-/**TODO add documentation
- *
+/**
+ * The namespace for the `Selector` class.
  */
 export namespace Selector {
-  /**TODO add documentation
-   *
+  /**
+   * Returns
    * @param type
    * @returns
    */
   export function isValidType(type: string | Selector): boolean {
     if (typeof type !== "string") {
-      type = type.type;
+      type = type.selectorType;
     }
 
     return Modes.SelectorType.isValue(type);
   }
 
-  /**TODO add documentation
-   *
-   * @param text
-   * @returns
+  /**
+   * Parses the given text into a selector.
+   * @param text The text to parse.
+   * @param offset The offset of the text
+   * @returns The parsed selector. or undefined if something went wrong
    */
-  export function getType(text: string): string {
-    let index = text.indexOf("[");
-    if (index < 0) index = text.length;
+  export function parse(text: string, offset?: number): Selector | undefined;
+  export function parse(word: OffsetWord): Selector | undefined;
 
-    return text.substring(0, index);
-  }
+  export function parse(text: string | OffsetWord, offset?: number): Selector | undefined {
+    if (typeof text !== "string") {
+      offset = text.offset;
+      text = text.text;
+    }
+    offset = offset || 0;
 
-  /**TODO add documentation
-   *
-   * @param text
-   * @param offset
-   * @returns
-   */
-  export function parse(text: string, offset: number = 0): Selector {
-    const type = getType(text);
-    const Out = new Selector(type, offset);
+    const index = text.indexOf("[");
 
-    //remove prefix
-    if (type.length >= text.length) return Out;
-
-    const data = text.substring(type.length, text.length);
-    offset += type.length;
-
-    if (data.startsWith("[") && data.endsWith("]")) {
-      SelectorAttribute.parseParameters(data.substring(1, data.length - 1), offset + 1, Out.attributes);
+    if (index === -1) {
+      return new Selector(text as SelectorType);
     }
 
-    return Out;
-  }
+    const type = text.slice(0, index) as SelectorType;
+    const data = CompactJson.parse(text.slice(index), offset + index);
 
-  export function isSelector(value: string, wildcard: boolean = false, allowFakePlayers: boolean = false): boolean {
-    if (value.startsWith("@")) return true;
-
-    if (wildcard === true) {
-      if (value === "*") return true;
+    if (CompactJson.isArray(data)) {
+      return new Selector(type, offset, data);
     }
 
-    if (allowFakePlayers === true) {
-      if (value.startsWith('"') && value.endsWith('"')) return true;
-
-      if (value.includes(" ")) {
-        return false;
-      }
-
-      return true;
-    }
-
-    return false;
-  }
-
-  export function getAttribute(attribute: string, selector: string): string[] {
-    const regex = new RegExp(`${attribute}=([^\,\]]+)`, "gim");
-    const matches = regex.exec(selector);
-
-    if (matches) {
-      return matches;
-    }
-
-    return [];
-  }
-}
-
-/**TODO add documentation
- *
- */
-export namespace SelectorAttribute {
-  /**TODO add documentation
-   *
-   * @param text
-   * @param offset
-   * @param selector
-   * @param receiver
-   */
-  export function parseParameters(text: string, offset: number, receiver: SelectorAttribute[]): void {
-    let start: number = 0;
-    let level: number = 0;
-
-    for (let index = 0; index < text.length; index++) {
-      const char = text[index];
-
-      switch (char) {
-        case "{":
-        case "[":
-          level++;
-          break;
-        case "}":
-        case "]":
-          level--;
-          break;
-
-        case ",":
-          if (level == 0) {
-            const p = text.substring(start, index);
-            SelectorAttribute.parse(p, offset + start, receiver);
-            start = index + 1;
-          }
-
-        default:
-          continue;
-      }
-    }
-
-    if (start < text.length) {
-      const p = text.substring(start, text.length);
-      SelectorAttribute.parse(p, offset + start, receiver);
-    }
-  }
-
-  /**TODO add documentation
-   * @param text
-   * @param offset
-   * @param selector
-   * @param receiver
-   */
-  export function parse(text: string, offset: number, receiver: SelectorAttribute[]): void {
-    let Index = text.indexOf("=");
-
-    if (Index < 0) throw new Error("index cannot be lower then 0");
-
-    const name = text.substring(0, Index).trim();
-
-    switch (name) {
-      case "scores":
-        receiver.push(SelectorScoreAttribute.parse(text, offset));
-        break;
-
-      case "hasitem":
-        receiver.push(SelectorItemAttribute.parse(text, offset));
-        break;
-
-      default:
-        Index = Index + 1;
-        const value = text.substring(Index, text.length);
-        receiver.push(new SelectorValueAttribute(name, value, offset));
-        break;
-    }
-  }
-
-  export function is(value: any): value is SelectorAttribute {
-    if (typeof value === "object") {
-      if (typeof value.offset !== "number") return false;
-      if (typeof value.name !== "string") return false;
-      if (typeof value.value !== "string") return false;
-
-      return true;
-    }
-
-    return false;
+    return undefined;
   }
 }

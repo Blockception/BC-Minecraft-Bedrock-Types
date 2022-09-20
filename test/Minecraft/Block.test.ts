@@ -11,7 +11,7 @@ const blockStates: BlockState[] = [
 ];
 
 describe("Block", () => {
-  it("get id", () => {
+  it("get id works", () => {
     const id = Block.getId(blockDescription);
 
     expect(id).to.equal(blockID);

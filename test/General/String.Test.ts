@@ -2,10 +2,19 @@ import { expect } from "chai";
 import { String } from "../../src/General/String";
 
 describe("String", () => {
-  it("is", () => {
-    expect(String.is("example")).to.be.true;
-    expect(String.is("im not valid")).to.be.false;
+  const valid = ["foo", "bar", '"im valid now"'];
 
-    expect(String.is('"im valid now"')).to.be.true;
+  const invalid = ["im not valid"];
+
+  valid.forEach((value) => {
+    it(`is(${value}) should return true`, () => {
+      expect(String.is(value)).to.be.true;
+    });
+  });
+
+  invalid.forEach((value) => {
+    it(`is(${value}) should return false`, () => {
+      expect(String.is(value)).to.be.false;
+    });
   });
 });

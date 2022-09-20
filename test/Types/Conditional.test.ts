@@ -24,7 +24,7 @@ describe("Conditional", () => {
     expect(Conditional.getCondition(example)).to.equal("foo");
   });
 
-  it("forEach", () => {
+  it("forEach works as intented", () => {
     const example: (Conditional | string)[] = [{ example: "foo" }, "foo", { example2: 1 }];
 
     const values: (string | number)[] = [];

@@ -39,9 +39,9 @@ export namespace ModeCollection {
     const M = Collection.modes;
 
     for (var I = 0; I < M.length; I++) {
-      const elemt = M[I];
+      const elem = M[I];
 
-      if (elemt.name === value) return true;
+      if (elem.name === value) return true;
     }
 
     return false;
@@ -58,9 +58,9 @@ export namespace ModeCollection {
       const M = Collection.modes;
 
       for (var I = 0; I < M.length; I++) {
-        const elemt = M[I];
+        const elem = M[I];
 
-        if (elemt.name === index) return elemt;
+        if (elem.name === index) return elem;
       }
     } else {
       return Collection.modes[index];

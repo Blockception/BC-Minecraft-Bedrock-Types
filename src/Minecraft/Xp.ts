@@ -21,7 +21,7 @@ export namespace XP {
    * @param text The text to convert*/
   export function parse(text: string): number {
     if (isLevel(text)) {
-      text = text.substring(0, text.length - 1);
+      text = text.slice(0, text.length - 1);
     }
 
     return Number.parseInt(text);

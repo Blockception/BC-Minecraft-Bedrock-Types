@@ -30,9 +30,9 @@ describe("Mode", () => {
 
   M.forEach((mode) => {
     describe(mode.name, () => {
-      it("SanityCheck", () => SanityCheckMode(mode));
-      it("is", () => expect(ModeCollection.is(mode), "ModeCollection failed").to.be.true);
-      it("Values", () => Values(mode));
+      it("SanityCheck should pass", () => SanityCheckMode(mode));
+      it("is should be true", () => expect(ModeCollection.is(mode), "ModeCollection failed").to.be.true);
+      it("Values check", () => Values(mode));
     });
   });
 });
