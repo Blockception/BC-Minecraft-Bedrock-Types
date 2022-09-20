@@ -1,7 +1,7 @@
 /**
  * Finds the first index of a character in a string that is a comma or the end of the string
- * @param text 
- * @returns 
+ * @param text
+ * @returns
  */
 export function findCommaOrEnd(text: string): number {
   let index = 0;
@@ -42,21 +42,34 @@ export function findCommaOrEnd(text: string): number {
   return text.length;
 }
 
-
 export function trimBraces(text: string): string {
   switch (text.charAt(0)) {
     case "[":
     case "{":
     case "(":
-      text = text.substring(1);
+      text = text.slice(1);
   }
 
   switch (text.charAt(text.length - 1)) {
     case "]":
     case "}":
     case ")":
-      text = text.substring(0, text.length - 1);
+      text = text.slice(0, text.length - 1);
   }
 
   return text;
+}
+
+/**
+ * Parses the items of an array or object
+ * @param text
+ * @param offset
+ * @returns
+ */
+export function trimWithOffset(text: string, offset: number): [string, number] {
+  const n = text.trimStart();
+  offset += text.length - n.length;
+
+  text = n.trimEnd();
+  return [text, offset];
 }

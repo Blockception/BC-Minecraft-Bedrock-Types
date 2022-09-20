@@ -2,19 +2,34 @@ import { expect } from "chai";
 import { Json } from "../../src/General/Json";
 
 describe("Json", () => {
-  it("isObject", () => {
-    expect(Json.isObject('{"rawtext":[{"text":"example"}]}')).be.true;
+  const isObject = ['{"rawtext":[{"text":"example"}]}', '{"rawtext":[{"text":"example}]}'];
+  const isObjectInvalid= ['{"rawtext":[{"text":"example"}]', '{"rawtext"'];
 
-    expect(Json.isObject('{"rawtext":[{"text":"example}]')).be.false;
+  isObject.forEach((value) => {
+    it(`isObject(${value}) should return true`, () => {
+      expect(Json.isObject(value)).to.be.true;
+    });
   });
 
-  it("isArray", () => {
-    expect(Json.isArray("[foo:1]")).be.true;
+  isObjectInvalid.forEach((value) => {
+    it(`isObject(${value}) should return false`, () => {
+      expect(Json.isObject(value)).to.be.false;
+    });
+  });
 
-    expect(Json.isArray("[example:something,hello:1]")).be.true;
+  const isArray = ['["rawtext",[{"text":"example"}]]'];
 
-    expect(Json.isArray("[foo:1")).be.false;
+  const isArrayInvalid = ["example:something,hello:1", "[foo:1"];
 
-    expect(Json.isArray("example:something,hello:1")).be.false;
+  isArray.forEach((value) => {
+    it(`isArray(${value}) should return true`, () => {
+      expect(Json.isArray(value)).to.be.true;
+    });
+  });
+
+  isArrayInvalid.forEach((value) => {
+    it(`isArray(${value}) should return false`, () => {
+      expect(Json.isArray(value)).to.be.false;
+    });
   });
 });

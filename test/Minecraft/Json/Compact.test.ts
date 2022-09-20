@@ -249,6 +249,24 @@ describe("Compact Json", () => {
           ],
         },
       },
+      {
+        text: "[x =~0.5, y=50, z =~50,r =50, rm =3,tag =something,tag =!foo]",
+        offset: 10,
+        result: {
+          type: CompactJson.Type.Array,
+          offset: 11,
+          negative: false,
+          value: [
+            { key: "x", type: CompactJson.Type.String, offset: 11, negative: false, value: "~0.5" },
+            { key: "y", type: CompactJson.Type.String, offset: 19, negative: false, value: "50" },
+            { key: "z", type: CompactJson.Type.String, offset: 25, negative: false, value: "~50" },
+            { key: "r", type: CompactJson.Type.String, offset: 33, negative: false, value: "50" },
+            { key: "rm", type: CompactJson.Type.String, offset: 39, negative: false, value: "3" },
+            { key: "tag", type: CompactJson.Type.String, offset: 46, negative: false, value: "something" },
+            { key: "tag", type: CompactJson.Type.String, offset: 61, negative: true, value: "foo" },
+          ]
+        }
+      }
     ];
 
     dataSet.forEach((item) => {

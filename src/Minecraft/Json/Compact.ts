@@ -1,4 +1,4 @@
-import { findCommaOrEnd, trimBraces } from "./Grammar";
+import { findCommaOrEnd, trimBraces, trimWithOffset } from "./Grammar";
 
 /**
  * Namespace that governs minecraft "compact json"
@@ -99,6 +99,8 @@ export namespace CompactJson {
   export function parse(text: string, offset: number = 0): INode {
     let negative = false;
     let node: INode;
+    [text, offset] = trimWithOffset(text, offset);
+
     if (text.startsWith("!")) {
       negative = true;
       text = text.slice(1);
@@ -156,6 +158,10 @@ export namespace CompactJson {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   export function empty(): IString {
     return {
       type: Type.String,
@@ -174,6 +180,7 @@ export namespace CompactJson {
  */
 function parseItems(text: string, offset: number, receiver: CompactJson.IArray) {
   let index = findCommaOrEnd(text);
+  [text, offset] = trimWithOffset(text, offset);
 
   while (index > 0) {
     const attr = text.slice(0, index);
@@ -185,7 +192,7 @@ function parseItems(text: string, offset: number, receiver: CompactJson.IArray) 
       const equalIndex = attr.indexOf("=");
 
       if (equalIndex > 0) {
-        const key = attr.slice(0, equalIndex);
+        const key = attr.slice(0, equalIndex).trim();
         const value = attr.slice(equalIndex + 1);
 
         const node = CompactJson.parse(value, offset + equalIndex + 1) as CompactJson.IKeyNode;

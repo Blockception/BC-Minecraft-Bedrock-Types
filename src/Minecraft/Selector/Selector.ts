@@ -53,8 +53,8 @@ export namespace Selector {
    * @param offset The offset of the text
    * @returns The parsed selector. or undefined if something went wrong
    */
-  export function parse(text: string, offset?: number): Selector;
-  export function parse(word: OffsetWord): Selector;
+  export function parse(text: string, offset?: number): Selector | undefined;
+  export function parse(word: OffsetWord): Selector | undefined;
 
   export function parse(text: string | OffsetWord, offset?: number): Selector | undefined {
     if (typeof text !== "string") {
@@ -69,8 +69,8 @@ export namespace Selector {
       return new Selector(text as SelectorType);
     }
 
-    const type = text.substring(0, index) as SelectorType;
-    const data = CompactJson.parse(text, offset + index);
+    const type = text.slice(0, index) as SelectorType;
+    const data = CompactJson.parse(text.slice(index), offset + index);
 
     if (CompactJson.isArray(data)) {
       return new Selector(type, offset, data);
