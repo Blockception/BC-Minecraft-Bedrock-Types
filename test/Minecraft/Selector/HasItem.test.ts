@@ -1,33 +1,81 @@
 import { expect } from "chai";
-import { Minecraft } from "../../../src/main";
-import { SelectorItemAttribute } from "../../../src/Minecraft/Selector/ItemAttribute";
+import { Selector } from "../../../src/Minecraft/Selector";
+import { Attribute } from "../../../src/Minecraft/Selector/Attributes/Attribute";
+import { HasItemAttribute, HasItemData, HasItemSet } from "../../../src/Minecraft/Selector/Attributes/HasItem";
 
-describe("HasItem", () => {
-  it("empty parse1", () => {
-    const selectortext = "@a[hasitem={}]";
-    const selector = Minecraft.Selector.Selector.parse(selectortext);
+interface TestData {
+  selector: string;
+  expectedHasItem: HasItemSet<string>[];
+}
 
-    expect(selector.attributes.length).to.equal(1);
+describe("Checking HasItem processing", () => {
+  const testData: TestData[] = [
+    {
+      selector: "@a[hasitem={item=minecraft:stone}]",
+      expectedHasItem: [
+        {
+          item: "minecraft:stone",
+        },
+      ],
+    },
+    {
+      selector: "@a[hasitem=[{item=minecraft:stone}]]",
+      expectedHasItem: [
+        {
+          item: "minecraft:stone",
+        },
+      ],
+    },
+    {
+      selector: "@a[hasitem=[{item=minecraft:stone},{quantity=1}]]",
+      expectedHasItem: [
+        {
+          item: "minecraft:stone",
+        },
+        {
+          quantity: "1",
+        },
+      ],
+    },
+  ];
 
-    const attr = selector.attributes[0];
-    expect(attr.name).to.equal("hasitem");
+  testData.forEach((data) => {
+    describe(`Selector: ${data.selector}`, () => {
+      const selector = Selector.parse(data.selector);
 
-    if (!(attr instanceof SelectorItemAttribute)) expect.fail("expected SelectorItemAttribute");
+      it("Parsed properly", () => {
+        expect(selector).to.not.be.undefined;
+      });
 
-    expect(attr.values.length).to.equal(0);
-  });
+      if (selector === undefined) return;
+      const hasItems = selector.get("hasitem");
 
-  it("double hasitem definition", () => {
-    const selectortext = "@a[hasitem=[{item=shovel},{item=pickaxe,data=1}]]";
-    const selector = Minecraft.Selector.Selector.parse(selectortext);
+      it("Correct amount of hasItem entries", () => {
+        expect(hasItems.length).to.equal(data.expectedHasItem.length);
+      });
 
-    expect(selector.attributes.length).to.equal(1);
+      it("Matches expected data", () => {
+        if (hasItems.length !== data.expectedHasItem.length) expect.fail("HasItem length mismatch");
 
-    const attr = selector.attributes[0];
-    expect(attr.name).to.equal("hasitem");
+        for (let i = 0; i < hasItems.length; i++) {
+          const item = hasItems[i];
+          const expected = data.expectedHasItem[i];
 
-    if (!(attr instanceof SelectorItemAttribute)) expect.fail("expected SelectorItemAttribute");
-
-    expect(attr.values.length).to.equal(3);
+          EqualProperty("data", item, expected);
+          EqualProperty("item", item, expected);
+          EqualProperty("location", item, expected);
+          EqualProperty("quantity", item, expected);
+          EqualProperty("slot", item, expected);
+        }
+      });
+    });
   });
 });
+
+function EqualProperty<T extends HasItemAttribute>(field: T, attr: Attribute<HasItemData>, expected: HasItemSet<string>) {
+  const values = (attr.value[field] || []) as Array<Attribute<HasItemData>>;
+  const casted = values.map((v) => v.value);
+  const find = expected[field];
+
+  expect(casted, field).to.include(find);
+}

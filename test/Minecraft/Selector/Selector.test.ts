@@ -1,6 +1,7 @@
 import { expect } from "chai";
-import { SelectorScoreAttribute } from '../../../src/Minecraft/Selector/ScoreAttribute';
-import { Selector } from "../../../src/Minecraft/Selector/Selector";
+import { Selector } from "../../../src/Minecraft/Selector";
+import { Attribute } from "../../../src/Minecraft/Selector/Attributes/Attribute";
+import { BaseAttribute } from "../../../src/Minecraft/Selector/Attributes/Base";
 
 describe("Selector", () => {
   it("parse1", () => {
@@ -44,13 +45,13 @@ describe("Selector", () => {
     expect(Selector.isValidType("@x")).to.be.false;
   });
 
-  it("parse3", ()=>{
+  it("parse3", () => {
     const offset = 5;
     const text = "@e[family=]";
-    
+
     const sel = Selector.parse(text, offset);
     testBaseParse(text, offset, sel);
-  })
+  });
 
   it("parse spaces test", () => {
     const offset = 5;
@@ -59,35 +60,36 @@ describe("Selector", () => {
     const sel = Selector.parse(text, offset);
 
     expect(sel.type).to.equal("@a");
-    expect(sel.contains("x")).to.be.true;
-    expect(sel.contains("y")).to.be.true;
-    expect(sel.contains("z")).to.be.true;
-    expect(sel.contains("r")).to.be.true;
-    expect(sel.contains("rm")).to.be.true;
-    expect(sel.contains("tag")).to.be.true;
+    contains(sel, "x");
+    contains(sel, "y");
+    contains(sel, "z");
+    contains(sel, "r");
+    contains(sel, "rm");
+    contains(sel, "tag");
   });
 });
 
+function contains(sel: Selector, attr: BaseAttribute) {
+  expect(sel.contains(attr), `Contains ${attr}`).to.be.true;
+}
+
 function testBaseParse(text: string, offset: number, selector: Selector) {
-  for (let I = 0; I < selector.attributes.length; I++) {
-    const attr = selector.attributes[I];
-    const found_offset = offset + text.indexOf(attr.name)
-    
-    expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' found ${attr.toString()} at: '${found_offset}' should be: ${attr.offset - offset}`);
-  }
+  selector.forEach((attr, value) => {
+    expect(attr).to.be.a("string");
 
-  const required = text.indexOf("scores={");
+    switch (attr) {
+      default:
+        const find = `!${Attribute.toString(value)}`;
+        const index = text.indexOf(find);
 
-  if (required >= 0) {
-    const scores = selector.get("scores")[0];
+        expect(index).to.be.greaterThan(-1);
+        expect(index).to.be.equal(offset + value.offset);
 
-    if (SelectorScoreAttribute.is(scores)) {
-      for (let I = 0; I < scores.values.length; I++) {
-        const attr = scores.values[I];
-        const found_offset = offset + text.indexOf(attr.name)
-
-        expect(attr.offset).to.equal(found_offset,`offset is not correct: '${text}' found ${attr.toString()} at: '${found_offset}' should be: ${attr.offset - offset}`);
-      }
+        break;
+      case "scores":
+      case "hasitem":
+        expect(value).to.be.a("object");
+        break;
     }
-  }
+  });
 }
