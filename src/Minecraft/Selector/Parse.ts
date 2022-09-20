@@ -1,6 +1,6 @@
 import { OffsetWord } from "../../Types";
 import { PartArrayBuilder, PartBuilder } from "./Builder";
-import { findCommaOrEnd, trimBraces } from "./Grammar";
+import { findCommaOrEnd, trimBraces } from "../Json/Grammar";
 import { Selector } from "./Selector";
 import { SelectorType } from "./SelectorTypes";
 

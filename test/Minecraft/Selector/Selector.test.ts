@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { Selector } from "../../../src/Minecraft/Selector";
 import { Attribute } from "../../../src/Minecraft/Selector/Attributes/Attribute";
-import { BaseAttribute } from "../../../src/Minecraft/Selector/Attributes/Base";
 
 describe("Selector", () => {
   it("parse1", () => {
@@ -69,7 +68,7 @@ describe("Selector", () => {
   });
 });
 
-function contains(sel: Selector, attr: BaseAttribute) {
+function contains(sel: Selector, attr: string) {
   expect(sel.contains(attr), `Contains ${attr}`).to.be.true;
 }
 
