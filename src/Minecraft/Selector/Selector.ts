@@ -36,7 +36,7 @@ export class Selector extends CompactJsonReader {
  */
 export namespace Selector {
   /**
-   * Returns
+   * Checks if the given type is a valid selector type.
    * @param type
    * @returns
    */
@@ -48,6 +48,13 @@ export namespace Selector {
     return Modes.SelectorType.isValue(type);
   }
 
+  /**
+   * Checks if the given text is a valid selector.
+   * @param value The text to check.
+   * @param wildcard If the wildcard is allowed.
+   * @param allowFakePlayer If fake players are allowed.
+   * @returns True if the text is a valid selector, false otherwise.
+   */
   export function isSelector(value: string, wildcard?: boolean, allowFakePlayer?: boolean): boolean {
     if (wildcard === true) {
       if (value === "*") return true;

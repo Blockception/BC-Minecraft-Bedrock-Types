@@ -1,3 +1,4 @@
+import { OffsetWord } from "../../Types";
 import { findCommaOrEnd, trimBraces, trimWithOffset } from "./Grammar";
 
 /**
@@ -168,6 +169,18 @@ export namespace CompactJson {
       offset: 0,
       negative: false,
       value: "",
+    };
+  }
+
+  /**
+   * Parses the items of a node
+   * @param node 
+   * @returns 
+   */
+  export function toOffsetWord(node: INode | IKeyNode): OffsetWord {
+    return {
+      offset: node.offset,
+      text: stringify(node),
     };
   }
 }
