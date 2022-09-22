@@ -32,6 +32,11 @@ export class CompactJsonReader {
     return this._data.value;
   }
 
+  /** The key of the node */
+  get key(): string | undefined {
+    return (this._data as any).key;
+  }
+
   /**
    * Gets the name of child nodes
    * @returns The names of the child nodes

@@ -54,6 +54,7 @@ export namespace CompactJson {
   export function isObject(value: INode): value is IObject {
     return value.type === Type.Object;
   }
+
   /**
    * Returns true if the node is an object array
    * @param value The value to check
@@ -63,6 +64,11 @@ export namespace CompactJson {
     return value.type === Type.Array;
   }
 
+  /**
+   * Returns true if the node is an array of object node
+   * @param value The value to check
+   * @returns True if the node is an array of object node
+   */
   export function isArrayOrObject(value: INode): value is IArray | IObject {
     return isArray(value) || isObject(value);
   }
@@ -89,6 +95,87 @@ export namespace CompactJson {
     type: Type.Array;
     /** The value of this node */
     value: (INode | IKeyNode)[];
+  }
+
+  /**
+   *
+   * @param node
+   * @returns
+   */
+  export function stringify(node: INode | IKeyNode): string {
+    const value = stringifyValue(node);
+
+    if (hasKey(node)) {
+      return `${node.key}=${value}`;
+    }
+
+    return value;
+  }
+
+  /**
+   * 
+   * @param node 
+   * @returns 
+   */
+  export function stringifyValue(node: INode): string {
+    switch (node.type) {
+      case Type.String:
+        return node.value;
+      case Type.Object:
+        return "{" + node.value.map(stringify).join(",") + "}";
+      case Type.Array:
+        return "[" + node.value.map(stringify).join(",") + "]";
+    }
+  }
+
+  /**
+   *
+   * @returns
+   */
+  export function empty(): IString {
+    return {
+      type: Type.String,
+      offset: 0,
+      negative: false,
+      value: "",
+    };
+  }
+
+  /**
+   * Parses the items of a node
+   * @param node
+   * @returns
+   */
+  export function toOffsetWord(node: INode | IKeyNode): OffsetWord {
+    return {
+      offset: node.offset,
+      text: stringify(node),
+    };
+  }
+
+  /**
+   * Parses the items of a node
+   * @param node
+   * @returns
+   */
+  export function valueToOffsetWord(node: INode | IKeyNode): OffsetWord {
+    return {
+      offset: node.offset,
+      text: stringify(node),
+    };
+  }
+
+  /**
+   *
+   * @param node
+   * @param key
+   * @returns
+   */
+  export function toKeyed(node: INode, key: string): IKeyNode {
+    let result = node as IKeyNode;
+    result.key = key;
+
+    return result;
   }
 
   /**
@@ -139,49 +226,6 @@ export namespace CompactJson {
     }
 
     return node;
-  }
-
-  /**
-   *
-   * @param node
-   * @returns
-   */
-  export function stringify(node: INode | IKeyNode): string {
-    const key = hasKey(node) ? node.key + "=" : "";
-
-    switch (node.type) {
-      case Type.String:
-        return key + node.value;
-      case Type.Object:
-        return key + "{" + node.value.map(stringify).join(",") + "}";
-      case Type.Array:
-        return key + "[" + node.value.map(stringify).join(",") + "]";
-    }
-  }
-
-  /**
-   *
-   * @returns
-   */
-  export function empty(): IString {
-    return {
-      type: Type.String,
-      offset: 0,
-      negative: false,
-      value: "",
-    };
-  }
-
-  /**
-   * Parses the items of a node
-   * @param node 
-   * @returns 
-   */
-  export function toOffsetWord(node: INode | IKeyNode): OffsetWord {
-    return {
-      offset: node.offset,
-      text: stringify(node),
-    };
   }
 }
 
