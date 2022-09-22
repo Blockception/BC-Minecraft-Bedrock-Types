@@ -113,9 +113,9 @@ export namespace CompactJson {
   }
 
   /**
-   * 
-   * @param node 
-   * @returns 
+   *
+   * @param node
+   * @returns
    */
   export function stringifyValue(node: INode): string {
     switch (node.type) {
@@ -142,9 +142,9 @@ export namespace CompactJson {
   }
 
   /**
-   * Parses the items of a node
-   * @param node
-   * @returns
+   * Transform the items of a node into a @see {@link OffsetWord}
+   * @param node The node to transform
+   * @returns The offset word
    */
   export function toOffsetWord(node: INode | IKeyNode): OffsetWord {
     return {
@@ -154,25 +154,31 @@ export namespace CompactJson {
   }
 
   /**
-   * Parses the items of a node
-   * @param node
-   * @returns
+   * Transform only the value of the items of a node into a @see {@link OffsetWord}
+   * Transform the items of a node
+   * @param node The node to transform
+   * @returns The offset word
    */
   export function valueToOffsetWord(node: INode | IKeyNode): OffsetWord {
+    let offset = node.offset;
+    if (hasKey(node)) {
+      offset += node.key.length + 1;
+    }
+
     return {
-      offset: node.offset,
-      text: stringify(node),
+      offset: offset,
+      text: stringifyValue(node),
     };
   }
 
   /**
-   *
-   * @param node
-   * @param key
-   * @returns
+   * Transforms a node into a keyed node
+   * @param node The node to transform
+   * @param key The key to use
+   * @returns The transformed node
    */
-  export function toKeyed(node: INode, key: string): IKeyNode {
-    let result = node as IKeyNode;
+  export function toKeyed<T extends INode>(node: T, key: string): T & IKeyNode {
+    let result = node as IKeyNode & T;
     result.key = key;
 
     return result;
