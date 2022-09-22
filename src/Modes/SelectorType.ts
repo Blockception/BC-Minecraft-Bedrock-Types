@@ -24,7 +24,7 @@ export namespace InternalSelectorTypeMode {
 
 /** */
 export const SelectorTypeMode: ModeCollection = {
-  name: "selector Type",
+  name: "Selector Type",
   modes: [
     InternalSelectorTypeMode.Agents,
     InternalSelectorTypeMode.AllAgents,
