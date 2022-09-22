@@ -171,6 +171,9 @@ export namespace CompactJson {
     if (hasKey(node)) {
       offset += node.key.length + 1;
     }
+    if (node.negative) {
+      offset ++;
+    }
 
     return {
       offset: offset,
