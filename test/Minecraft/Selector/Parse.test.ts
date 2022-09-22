@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { text } from "stream/consumers";
+import { CompactJson } from '../../../src/Minecraft/Json';
 import { Selector } from "../../../src/Minecraft/Selector";
 
 interface TestData {
@@ -51,7 +51,8 @@ describe("Selector - Parse", () => {
       expect(sel).to.not.be.undefined;
       if (sel === undefined) return;
 
-      expect(sel?.selectorType).to.equal(test.type);
+      expect(sel.selectorType).to.equal(test.type);
+      expect(sel.type).to.equal(CompactJson.Type.Array);
 
       test.contains.forEach((attr) => contains(sel, attr));
     });

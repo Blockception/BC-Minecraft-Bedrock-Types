@@ -9,7 +9,7 @@ import { SelectorType } from "./SelectorTypes";
 /**
  * The class that represents a selector.
  */
-export class Selector extends CompactJsonReader {
+export class Selector extends CompactJsonReader<CompactJson.IArray> {
   /**
    * @example '@a' | '@e'
    */
@@ -17,9 +17,11 @@ export class Selector extends CompactJsonReader {
   private _offset: number;
 
   constructor(type?: SelectorType, offset?: number, data?: CompactJson.IArray) {
-    super(data || CompactJson.empty());
+    data = data || { negative: false, offset: offset || 0, type: CompactJson.Type.Array, value: [] };
+
+    super(data);
     this._type = type || "@a";
-    this._offset = offset || 0;
+    this._offset = data.offset;
   }
 
   get selectorType() {

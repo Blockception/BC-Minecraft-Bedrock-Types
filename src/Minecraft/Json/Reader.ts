@@ -1,14 +1,13 @@
 import { CompactJson } from "./Compact";
 
-/** Parses a list of items into nodes */
-export class CompactJsonReader {
-  private _data: CompactJson.INode;
+export class CompactJsonReader<T extends CompactJson.INode> {
+  protected _data: T;
 
   /**
    * Creates a new instance of the CompactJsonReader class
    * @param data The data to read
    */
-  constructor(data: CompactJson.INode) {
+  constructor(data: T) {
     this._data = data;
   }
 
@@ -37,6 +36,34 @@ export class CompactJsonReader {
     return (this._data as any).key;
   }
 
+  /** Checks if this reader is a string or not */
+  isString(): this is CompactJsonReader<CompactJson.IString> {
+    return CompactJson.isString(this._data);
+  }
+
+  /** Checks if this reader is a object or not */
+  isObject(): this is CompactJsonReader<CompactJson.IObject> {
+    return CompactJson.isObject(this._data);
+  }
+
+  /** Checks if this reader is a array or not */
+  isArray(): this is CompactJsonReader<CompactJson.IArray> {
+    return CompactJson.isArray(this._data);
+  }
+
+  /** Checks if this reader is a array or object or not */
+  isArrayOrObject(): this is CompactJsonReader<CompactJson.IArray | CompactJson.IObject> {
+    return CompactJson.isArrayOrObject(this._data);
+  }
+
+  /**
+   * Checks if this node has a key
+   * @returns True if this node has a key
+   */
+  hasKey(): this is T & CompactJson.IKeyNode {
+    return CompactJson.hasKey(this._data);
+  }
+
   /**
    * Gets the name of child nodes
    * @returns The names of the child nodes
@@ -63,8 +90,8 @@ export class CompactJsonReader {
    * @param name The name of the node to get
    * @returns The value of the node
    */
-  get(name: string): CompactJsonReader[] {
-    const result: CompactJsonReader[] = [];
+  get(name: string): CompactJsonReader<CompactJson.IKeyNode>[] {
+    const result: CompactJsonReader<CompactJson.IKeyNode>[] = [];
     const data = this._data;
 
     if (CompactJson.isString(data)) {
@@ -85,7 +112,7 @@ export class CompactJsonReader {
    * @param callbackfn The callback function to call for each item
    * @returns The result of the callback function
    */
-  forEach(callbackfn: (value: CompactJsonReader, index: number) => void) {
+  forEach(callbackfn: (value: CompactJsonReader<CompactJson.INode>, index: number) => void) {
     const data = this._data;
 
     if (CompactJson.isString(data)) {
