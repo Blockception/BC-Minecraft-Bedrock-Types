@@ -1,6 +1,6 @@
 import { CompactJson } from "./Compact";
 
-export class CompactJsonReader<T extends CompactJson.INode> {
+export class CompactJsonReader<T extends CompactJson.IBase> {
   protected _data: T;
 
   /**
@@ -12,27 +12,27 @@ export class CompactJsonReader<T extends CompactJson.INode> {
   }
 
   /** The type of the node */
-  get type() {
+  get type(): T["type"] {
     return this._data.type;
   }
 
   /** The offset this node was found at */
-  get offset() {
+  get offset(): number {
     return this._data.offset;
   }
 
   /** If the value of this node is negative or not */
-  get negative() {
+  get negative(): boolean {
     return this._data.negative;
   }
 
   /** The value of the node */
-  get value() {
+  get value(): T["value"] {
     return this._data.value;
   }
 
   /** The key of the node */
-  get key(): string | undefined {
+  get key(): T["key"] {
     return (this._data as any).key;
   }
 
@@ -100,7 +100,7 @@ export class CompactJsonReader<T extends CompactJson.INode> {
 
     for (const item of data.value) {
       if (CompactJson.hasKey(item) && item.key === name) {
-        result.push(new CompactJsonReader(item));
+        result.push(new CompactJsonReader(item as CompactJson.IKeyNode));
       }
     }
 
@@ -120,7 +120,7 @@ export class CompactJsonReader<T extends CompactJson.INode> {
     }
 
     for (let i = 0; i < data.value.length; i++) {
-      callbackfn(new CompactJsonReader(data.value[i]), i);
+      callbackfn(new CompactJsonReader(data.value[i] as CompactJson.IKeyNode), i);
     }
   }
 

@@ -21,6 +21,12 @@ export namespace CompactJson {
     offset: number;
     /** If this value is negative check */
     negative: boolean;
+    /** The type of the node */
+    type: Type.String | Type.Object | Type.Array;
+    /** The value of the node */
+    value: string | IBase[];
+    /** The key of the node */
+    key?: string | undefined;
   }
 
   /** The different types of nodes */
@@ -33,7 +39,7 @@ export namespace CompactJson {
    * @param value The value to check
    * @returns True if the node is a key node
    */
-  export function hasKey(value: any): value is { key: string } {
+  export function hasKey<T extends IBase>(value: any): value is T & { key: string } {
     return typeof value.key === "string";
   }
 
@@ -42,7 +48,7 @@ export namespace CompactJson {
    * @param value The value to check
    * @returns True if the node is a string node
    */
-  export function isString(value: INode): value is IString {
+  export function isString(value: IBase): value is IString {
     return value.type === Type.String;
   }
 
@@ -51,7 +57,7 @@ export namespace CompactJson {
    * @param value The value to check
    * @returns True if the node is an object node
    */
-  export function isObject(value: INode): value is IObject {
+  export function isObject(value: IBase): value is IObject {
     return value.type === Type.Object;
   }
 
@@ -60,7 +66,7 @@ export namespace CompactJson {
    * @param value The value to check
    * @returns True if the node is an object array
    */
-  export function isArray(value: INode): value is IArray {
+  export function isArray(value: IBase): value is IArray {
     return value.type === Type.Array;
   }
 
@@ -69,7 +75,7 @@ export namespace CompactJson {
    * @param value The value to check
    * @returns True if the node is an array of object node
    */
-  export function isArrayOrObject(value: INode): value is IArray | IObject {
+  export function isArrayOrObject(value: IBase): value is IArray | IObject {
     return isArray(value) || isObject(value);
   }
 
@@ -134,6 +140,7 @@ export namespace CompactJson {
    */
   export function empty(): IString {
     return {
+      key: "",
       type: Type.String,
       offset: 0,
       negative: false,
