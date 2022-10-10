@@ -3,13 +3,13 @@ import { ComponentBehavior } from "./Interfaces";
 export function getUsedComponents(data: ComponentBehavior): string[] {
   const out: string[] = [];
 
-  if (data.components) {
+  if (data?.components) {
     Object.getOwnPropertyNames(data.components).forEach((c) => {
       if (!out.includes(c)) out.push(c);
     });
   }
 
-  const groups = data.component_groups;
+  const groups = data?.component_groups;
 
   if (groups) {
     Object.entries(groups).forEach(([name, group]) => {
@@ -23,7 +23,7 @@ export function getUsedComponents(data: ComponentBehavior): string[] {
 }
 
 export function getUsedGroups(data: ComponentBehavior): string[] {
-  const groups = data.component_groups;
+  const groups = data?.component_groups;
 
   if (groups) {
     return Object.getOwnPropertyNames(groups);
@@ -39,8 +39,8 @@ export function getUsedGroups(data: ComponentBehavior): string[] {
  * @returns
  */
 export function hasGroup(data: ComponentBehavior, group: string): boolean {
-  if (data.component_groups) {
-    if (data.component_groups[group]) {
+  if (data?.component_groups) {
+    if (data?.component_groups[group]) {
       return true;
     }
   }
