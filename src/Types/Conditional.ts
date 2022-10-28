@@ -1,7 +1,7 @@
 /**A conditional object
  * @example { "walk.anim": "query.random" }*/
 export interface Conditional {
-  /**The id is an animation / controller that is to be activated if the string value is evualated to be 1.0 or higher*/
+  /**The id is an animation / controller that is to be activated if the string value is evaluated to be 1.0 or higher*/
   [id: string]: string | number;
 }
 
