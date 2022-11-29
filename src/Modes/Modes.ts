@@ -1,9 +1,11 @@
 import { CameraShakeMode } from "./CameraShake";
+import { CauseTypeMode } from "./CauseType";
 import { CloneMode } from "./Clone";
 import { DifficultyMode } from "./Difficulty";
+import { DimensionMode } from "./Dimension";
 import { FillMode } from "./Fill";
 import { GameMode } from "./GameMode";
-import { HandTypeMode } from './HandType';
+import { HandTypeMode } from "./HandType";
 import { LocateFeatureMode } from "./LocateFeature";
 import { MaskMode } from "./Mask";
 import { MirrorMode } from "./Mirror";
@@ -16,13 +18,13 @@ import { RideFillMode } from "./RideFill";
 import { RideRulesMode } from "./RideRules";
 import { RotationMode } from "./Rotation";
 import { SaveMode } from "./Save";
+import { ScanMode } from "./Scan";
 import { SelectorAttributeMode } from "./SelectorAttribute";
 import { SelectorTypeMode } from "./SelectorType";
 import { SlotTypeModes } from "./SlotType";
 import { StructureAnimationMode } from "./StructureAnimation";
 import { TeleportRulesMode } from "./TeleportRules";
 import { TimeMode } from "./Time";
-import {CauseTypeMode } from "./CauseType";
 
 /**The collection of modes for minecraft */
 export namespace Modes {
@@ -34,6 +36,8 @@ export namespace Modes {
   export const Clone = new ModeHandler(CloneMode);
   /** The mode: Difficulty **/
   export const Difficulty = new ModeHandler(DifficultyMode);
+  /** The mode: Dimension **/
+  export const Dimension = new ModeHandler(DimensionMode);
   /** The mode: Fill **/
   export const Fill = new ModeHandler(FillMode);
   /** The mode: Gamemode **/
@@ -62,6 +66,8 @@ export namespace Modes {
   export const Rotation = new ModeHandler(RotationMode);
   /** The mode: Save **/
   export const Save = new ModeHandler(SaveMode);
+  /** The mode: Scan **/
+  export const Scan = new ModeHandler(ScanMode);
   /** The mode: Selector Attribute **/
   export const SelectorAttribute = new ModeHandler(SelectorAttributeMode);
   /** The mode: Selector Type **/
