@@ -13,6 +13,7 @@ import { ModeHandler } from "./ModeHandler";
 import { MusicRepeatMode } from "./MusicRepeat";
 import { OldBlockMode } from "./OldBlock";
 import { OperationMode } from "./Operation";
+import { PermissionMode, PermissionStateMode } from './Permissions';
 import { ReplaceMode } from "./Replace";
 import { RideFillMode } from "./RideFill";
 import { RideRulesMode } from "./RideRules";
@@ -56,6 +57,10 @@ export namespace Modes {
   export const OldBlock = new ModeHandler(OldBlockMode);
   /** The mode: Operation **/
   export const Operation = new ModeHandler(OperationMode);
+  /** The mode: Permission **/
+  export const Permission = new ModeHandler(PermissionMode);
+  /** The mode: Permission State **/
+  export const PermissionState = new ModeHandler(PermissionStateMode);
   /** The mode: Replace **/
   export const Replace = new ModeHandler(ReplaceMode);
   /** The mode: RideFill **/
