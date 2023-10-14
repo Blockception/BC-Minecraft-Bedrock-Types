@@ -1,29 +1,21 @@
-/**
- * 
- */
+/** A version object*/
 export interface Version {
-  /**
-   * 
-   */
-  major: number,
-  /**
-   * 
-   */
-  minor: number,
-  /**
-   * 
-   */
-  patch: number
+  /**The major version*/
+  major: number;
+  /**The minor version*/
+  minor: number;
+  /**The patch version*/
+  patch: number;
 }
 
 /**
- * 
+ * A namespace containing functions for working with version numbers.
  */
 export namespace Version {
   /**
-   * 
-   * @param value 
-   * @returns 
+   * Determines whether the given value is a valid Version object.
+   * @param value - The value to check.
+   * @returns True if the value is a valid Version object, false otherwise.
    */
   export function is(value: any): value is Version {
     if (typeof value === "object") {
@@ -38,18 +30,18 @@ export namespace Version {
   }
 
   /**
-   * 
-   * @param value 
-   * @returns 
+   * Parses a version string into a Version object.
+   * @param value - The version string to parse.
+   * @returns A Version object representing the parsed version string.
    */
   export function parse(value: string): Version {
     const out: Version = {
       major: 0,
       minor: 0,
-      patch: 0
-    }
+      patch: 0,
+    };
 
-    const p = value.split('.');
+    const p = value.split(".");
 
     switch (p.length) {
       default:
@@ -69,12 +61,17 @@ export namespace Version {
     return out;
   }
 
+  /**
+   * Creates a Version object from an array of version numbers.
+   * @param version - An array of version numbers.
+   * @returns A Version object representing the given version numbers.
+   */
   export function fromArray(version: number[]): Version {
     const out: Version = {
       major: 0,
       minor: 0,
-      patch: 0
-    }
+      patch: 0,
+    };
 
     switch (version.length) {
       default:
@@ -95,24 +92,32 @@ export namespace Version {
   }
 
   /**
-   * 
-   * @param value 
-   * @returns 
+   * Converts a Version object to a string.
+   * @param value - The Version object to convert.
+   * @returns A string representation of the given Version object.
    */
   export function toString(value: Version): string {
     return `${value.major}.${value.minor}.${value.patch}`;
   }
 
-  /**Compares A to B, returns 1 if A is greater then B, returns -1 if B is greater then A, returns 0 if equal
-   * @param a 
-   * @param b 
+  /**
+   * Compares two Version objects, or two version strings, or two arrays of version numbers.
+   * @param a - The first version to compare.
+   * @param b - The second version to compare.
+   * @returns 1 if a is greater than b, -1 if b is greater than a, or 0 if they are equal.
    */
   export function compare(a: Version | string | number[], b: Version | string | number[]): number {
-    if (typeof a === "string") { a = Version.parse(a); }
-    else if (Array.isArray(a)) { a = Version.fromArray(a); }
+    if (typeof a === "string") {
+      a = Version.parse(a);
+    } else if (Array.isArray(a)) {
+      a = Version.fromArray(a);
+    }
 
-    if (typeof b === "string") { b = Version.parse(b); }
-    else if (Array.isArray(b)) { b = Version.fromArray(b); }
+    if (typeof b === "string") {
+      b = Version.parse(b);
+    } else if (Array.isArray(b)) {
+      b = Version.fromArray(b);
+    }
 
     let r: number;
     if ((r = Math.sign(a.major - b.major)) !== 0) return r;

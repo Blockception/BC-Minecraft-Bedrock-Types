@@ -9,7 +9,7 @@ export interface Conditional {
  * The namespace of the conditional
  */
 export namespace Conditional {
-  /**Returns the idenfitication
+  /**Returns the identification
    * @param data
    * @returns*/
   export function getId(data: Conditional | string): string {
