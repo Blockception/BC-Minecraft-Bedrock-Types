@@ -6,3 +6,4 @@ export * as Selector from "./Selector/index";
 export * from "./Block";
 export * from "./Coordinate";
 export * from "./Xp";
+export * from "./format-version";
