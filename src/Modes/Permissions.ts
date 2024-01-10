@@ -13,6 +13,6 @@ export const PermissionStateMode: ModeCollection = {
   name: "Permission State",
   modes: [
     { name: "enabled", documentation: "Enables the permission" },
-    { name: "disenabled", documentation: "Disables the permission" },
+    { name: "disabled", documentation: "Disables the permission" },
   ],
 };
