@@ -1,7 +1,7 @@
-import { JsonPath } from "./JsonPath";
-import { OffsetWord } from './OffsetWord';
-import { Position } from "./Position";
-import { Range } from "./Range";
+import { JsonPath } from "./json-path";
+import { OffsetWord } from './offset-word';
+import { Position } from "./position";
+import { Range } from "./range";
 
 /**The type of a document location */
 export type DocumentLocation = Position | OffsetWord | JsonPath | number;

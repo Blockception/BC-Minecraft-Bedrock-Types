@@ -1,4 +1,4 @@
-import { Location } from "./Location";
+import { Location } from "./location";
 
 /**An object that carries a location*/
 export interface Locatable {
