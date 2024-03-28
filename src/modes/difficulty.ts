@@ -1,4 +1,4 @@
-import { ModeCollection } from "./ModeCollection";
+import { ModeCollection } from "./mode-collection";
 
 /** */
 export const DifficultyMode: ModeCollection = {

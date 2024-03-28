@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Json } from "../../src/general/Json";
+import { Json } from "../../src/general";
 
 describe("Json", () => {
   const isObject = ['{"rawtext":[{"text":"example"}]}', '{"rawtext":[{"text":"example}]}'];

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { String } from "../../src/general/String";
+import { String } from "../../src/general";
 
 describe("String", () => {
   const valid = ["foo", "bar", '"im valid now"'];

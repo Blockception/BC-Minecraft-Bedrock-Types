@@ -1,7 +1,4 @@
-import { Documentated } from "../types/Documentated";
-import { Identifiable } from "../types/Identifiable";
-import { Locatable } from "../types/Locatable";
-import { Location } from "../types/Location";
+import { Locatable, Documentated, Identifiable, Location } from '../types';
 
 /**TODO add documentation
  *

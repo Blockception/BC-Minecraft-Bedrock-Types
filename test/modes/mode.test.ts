@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { Json } from "../../src/general/Json";
+import { Json } from "../../src/general/json";
 import { Modes } from "../../src/main";
-import { Mode, ModeCollection } from "../../src/modes/ModeCollection";
+import { Mode, ModeCollection } from "../../src/modes/mode-collection";
 
 describe("Mode", () => {
   let M = [

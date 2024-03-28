@@ -1,7 +1,7 @@
-import { Documentated } from './Documentated';
-import { Identifiable } from './Identifiable';
-import { Locatable } from './Locatable';
-import { Location } from './Location';
+import { Documentated } from './documentated';
+import { Identifiable } from './identifiable';
+import { Locatable } from './locatable';
+import { Location } from './location';
 
 /** */
 export interface BaseObject extends Identifiable, Documentated, Locatable {

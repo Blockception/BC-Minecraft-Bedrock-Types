@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Boolean } from "../../src/general/Boolean";
+import { Boolean } from "../../src/general";
 
 describe("Boolean", () => {
   it("is", () => {

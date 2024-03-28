@@ -1,7 +1,7 @@
 /*	Auto generated	*/
 
-export * from "./Domain";
-export * from "./Filter";
-export * from "./Operator";
-export * from "./Subject";
-export * from "./TestType";
+export * from "./domain";
+export * from "./filter";
+export * from "./operator";
+export * from "./subject";
+export * from "./testtype";

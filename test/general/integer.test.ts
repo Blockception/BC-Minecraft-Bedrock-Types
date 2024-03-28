@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Integer } from "../../src/general/Integer";
+import { Integer } from "../../src/general";
 
 describe("Integer", () => {
   const valid = ["-123456", "123456"];

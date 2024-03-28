@@ -1,7 +1,8 @@
-import { DomainType } from "./Domain";
-import { TestType } from "./TestType";
-import { OperatorType } from "./Operator";
-import { SubjectType } from "./Subject";
+import { DomainType } from './domain';
+import { OperatorType } from './operator';
+import { SubjectType } from './subject';
+import { TestType } from './testtype';
+
 
 /**
  * The interface for a filter

@@ -1,4 +1,4 @@
-import { Mode, ModeCollection } from "./ModeCollection";
+import { Mode, ModeCollection } from "./mode-collection";
 
 /** */
 export interface SlotTypeModeCollection extends ModeCollection {
