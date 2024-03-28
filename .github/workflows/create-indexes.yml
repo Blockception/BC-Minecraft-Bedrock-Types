@@ -29,20 +29,20 @@ jobs:
         id: general_create
         name: Indexes for General
         with:
-          folder: ${{github.workspace}}/src/General
+          folder: ${{github.workspace}}/src/general
           # Runs a single command using the runners shell
 
       - uses: DaanV2/Typescript-Action-Create-Indexes@latest
         id: types_create
         name: Indexes for Types
         with:
-          folder: ${{github.workspace}}/src/Types
+          folder: ${{github.workspace}}/src/types
           
       - uses: DaanV2/Typescript-Action-Create-Indexes@latest
         id: minecraft_create
         name: Indexes for Types
         with:
-          folder: ${{github.workspace}}/src/Minecraft
+          folder: ${{github.workspace}}/src/minecraft
 
       - name: ✏️ Commit changes
         continue-on-error: true
