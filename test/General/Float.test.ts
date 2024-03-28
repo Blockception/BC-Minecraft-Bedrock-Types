@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Float } from "../../src/General/Float";
+import { Float } from "../../src/general/Float";
 
 describe("Float", () => {
   const valid = ["0.2", "-0.2", "-.2", ".2", "123456.987654", "-123456.987654", "-.987654", ".987654"];

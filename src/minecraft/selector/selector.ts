@@ -1,10 +1,10 @@
 import { off } from "process";
-import { String } from "../../General";
-import { Modes } from "../../Modes/Modes";
-import { OffsetWord } from "../../Types";
-import { CompactJson } from "../Json/Compact";
-import { CompactJsonReader } from "../Json/Reader";
-import { SelectorType } from "./SelectorTypes";
+import { String } from "../../general";
+import { Modes } from "../../modes/Modes";
+import { OffsetWord } from "../../types";
+import { CompactJson } from "../json/compact";
+import { CompactJsonReader } from "../json/reader";
+import { SelectorType } from "./selector-types";
 
 /**
  * The class that represents a selector.

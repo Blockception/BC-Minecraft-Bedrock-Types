@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Version } from '../../src/Types/Version';
+import { Version } from '../../src/types/Version';
 
 describe("Version", () => {
   it("parse", () => {

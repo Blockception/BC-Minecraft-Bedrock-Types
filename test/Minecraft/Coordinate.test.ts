@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Coordinate } from "../../src/Minecraft/Coordinate";
+import { Coordinate } from "../../src/minecraft/coordinate";
 
 describe("Coordinates", () => {
   const valid = [

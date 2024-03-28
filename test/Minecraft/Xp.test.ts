@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { XP } from "../../src/Minecraft/Xp";
+import { XP } from "../../src/minecraft/xp";
 
 describe("XP", () => {
   const valid = ["13", "1000", "-1000", "13L", "1000L", "-1000L"];

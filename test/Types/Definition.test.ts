@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Definition } from "../../src/Types";
+import { Definition } from "../../src/types";
 
 describe("Definition", () => {
   it("getId", () => {

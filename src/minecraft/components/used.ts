@@ -1,4 +1,4 @@
-import { ComponentBehavior } from "./Interfaces";
+import { ComponentBehavior } from "./interfaces";
 
 /**
  * Returns all the used components in the given data

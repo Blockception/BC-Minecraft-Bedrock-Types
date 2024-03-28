@@ -1,5 +1,5 @@
-import { OffsetWord } from "../../Types";
-import { findCommaOrEnd, trimBraces, trimWithOffset } from "./Grammar";
+import { OffsetWord } from "../../types";
+import { findCommaOrEnd, trimBraces, trimWithOffset } from "./grammar";
 
 /**
  * Namespace that governs minecraft "compact json"

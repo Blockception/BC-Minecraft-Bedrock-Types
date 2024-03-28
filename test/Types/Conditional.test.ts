@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Conditional } from "../../src/Types";
+import { Conditional } from "../../src/types";
 
 describe("Conditional", () => {
   it("getId", () => {

@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { CompactJson } from '../../../src/Minecraft/Json';
-import { Selector } from "../../../src/Minecraft/Selector";
+import { CompactJson } from '../../../src/minecraft/json';
+import { Selector } from "../../../src/minecraft/selector";
 
 interface TestData {
   selector: string;

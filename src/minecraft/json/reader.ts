@@ -1,4 +1,4 @@
-import { CompactJson } from "./Compact";
+import { CompactJson } from "./compact";
 
 export class CompactJsonReader<T extends CompactJson.IBase> {
   protected _data: T;

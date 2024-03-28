@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { CompactJsonReader } from "../../../src/Minecraft/Json";
-import { CompactJson } from "../../../src/Minecraft/Json/Compact";
+import { CompactJsonReader } from "../../../src/minecraft/json";
+import { CompactJson } from "../../../src/minecraft/json/compact";
 
 interface TestData {
   text: string;

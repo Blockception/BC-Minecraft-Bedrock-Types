@@ -1,4 +1,4 @@
-export * from "./Modes/Modes";
-export * as Types from "./Types/";
-export * as General from "./General/";
+export * from "./modes/Modes";
+export * as Types from "./types";
+export * as General from "./general";
 export * as Minecraft from "./Minecraft/";
