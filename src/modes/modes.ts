@@ -6,6 +6,8 @@ import { DimensionMode } from "./dimension";
 import { FillMode } from "./fill";
 import { GameMode } from "./gamemode";
 import { HandTypeMode } from "./handtype";
+import { HudElementMode } from "./hud-elements";
+import { HudVisibilityMode } from "./hud-visibility";
 import { LocateFeatureMode } from "./locate-feature";
 import { MaskMode } from "./mask";
 import { MirrorMode } from "./mirror";
@@ -13,7 +15,7 @@ import { ModeHandler } from "./mode-handler";
 import { MusicRepeatMode } from "./music-repeat";
 import { OldBlockMode } from "./old-block";
 import { OperationMode } from "./operation";
-import { PermissionMode, PermissionStateMode } from './permissions';
+import { PermissionMode, PermissionStateMode } from "./permissions";
 import { ReplaceMode } from "./replace";
 import { RideFillMode } from "./ride-fill";
 import { RideRulesMode } from "./ride-rules";
@@ -43,8 +45,12 @@ export namespace Modes {
   export const Fill = new ModeHandler(FillMode);
   /** The mode: Gamemode **/
   export const Gamemode = new ModeHandler(GameMode);
-  /** The mode: Gamemode **/
+  /** The mode: Hand type **/
   export const HandType = new ModeHandler(HandTypeMode);
+  /** The mode: Hud element **/
+  export const HudElement = new ModeHandler(HudElementMode);
+  /** The mode: Hud visiblity **/
+  export const HudVisibility = new ModeHandler(HudVisibilityMode);
   /** The mode: LocateFeature **/
   export const LocateFeature = new ModeHandler(LocateFeatureMode);
   /** The mode: Mask **/
