@@ -16,6 +16,6 @@ export const GameMode: ModeCollection = {
     { name: "d", documentation: "The default gamemode" },
     { name: "default", documentation: "The default gamemode" },
     { name: "5", documentation: "The default gamemode" },
-    { name: "spectator ", documentation: "The spectator gamemode" },
+    { name: "spectator", documentation: "The spectator gamemode" },
   ],
 };
