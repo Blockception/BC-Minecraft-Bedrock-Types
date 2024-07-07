@@ -92,3 +92,31 @@ export namespace Modes {
   /** The mode: Time **/
   export const Time = new ModeHandler(TimeMode);
 }
+
+export namespace ModeUtil {
+  /**
+   * gets all the modes
+   * @returns A collection of modes
+   */
+  export function getModes() : ModeHandler[] {
+    return Object.values(Modes)
+      .filter(value => value instanceof ModeHandler) as ModeHandler[];
+  }
+
+  /**
+   * tries to get the mode by name
+   * @param name The name of the mode
+   * @returns The mode or undefined
+   */
+  export function getMode(name: string) : ModeHandler | undefined {
+    return getModes().find(mode => mode.name === name);
+  }
+
+  /**
+   * gets all the mode names
+   * @returns A collection of mode names
+   */
+  export function getModeNames() : string[] {
+    return getModes().map(mode => mode.name);
+  }
+}
