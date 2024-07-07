@@ -128,9 +128,9 @@ export namespace CompactJson {
       case Type.String:
         return node.value;
       case Type.Object:
-        return "{" + node.value.map(stringify).join(",") + "}";
+        return `{${node.value.map(stringify).join(",")}}`;
       case Type.Array:
-        return "[" + node.value.map(stringify).join(",") + "]";
+        return `[${node.value.map(stringify).join(",")}]`;
     }
   }
 
