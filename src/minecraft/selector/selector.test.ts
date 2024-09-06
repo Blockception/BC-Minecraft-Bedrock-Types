@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { Selector } from "../../../src/minecraft/selector";
+import { Selector } from ".";
 
 describe("Selector", () => {
   describe("Types", () => {
@@ -8,13 +7,13 @@ describe("Selector", () => {
 
     validTypes.forEach((type) => {
       it(`Type: ${type} should be valid`, () => {
-        expect(Selector.isValidType(type)).to.be.true;
+        expect(Selector.isValidType(type)).toBeTruthy();
       });
     });
 
     invalidType.forEach((type) => {
       it(`Type: ${type} should be invalid`, () => {
-        expect(Selector.isValidType(type)).to.be.false;
+        expect(Selector.isValidType(type)).toBeFalsy();
       });
     });
   });
@@ -41,13 +40,13 @@ describe("Selector", () => {
 
     valid.forEach((args) => {
       it(`Type: ${args[0]} should be valid`, () => {
-        expect(Selector.isSelector(args[0], args[1], args[2])).to.be.true;
+        expect(Selector.isSelector(args[0], args[1], args[2])).toBeTruthy();
       });
     });
 
     invalid.forEach((args) => {
       it(`Type: ${args[0]} should be invalid`, () => {
-        expect(Selector.isSelector(args[0], args[1], args[2])).to.be.false;
+        expect(Selector.isSelector(args[0], args[1], args[2])).toBeFalsy();
       });
     });
   });

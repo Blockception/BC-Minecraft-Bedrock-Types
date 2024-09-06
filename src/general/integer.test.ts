@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { Integer } from "../../src/general";
+import { Integer } from ".";
 
 describe("Integer", () => {
   const valid = ["-123456", "123456"];
@@ -8,13 +7,13 @@ describe("Integer", () => {
 
   valid.forEach((value) => {
     it(`is(${value}) should return true`, () => {
-      expect(Integer.is(value)).to.be.true;
+      expect(Integer.is(value)).toBeTruthy();
     });
   });
 
   invalid.forEach((value) => {
     it(`is(${value}) should return false`, () => {
-      expect(Integer.is(value)).to.be.false;
+      expect(Integer.is(value)).toBeFalsy();
     });
   });
 });

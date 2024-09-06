@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { DocumentLocation, Position } from '../../src/types';
+import { DocumentLocation, Position } from '.';
 
 const jsonData = `{
   "format_version": "1.17.0",
@@ -36,7 +35,7 @@ describe("DocumentLocation", () => {
   it("Const Check", () => {
     const p = jsonData.slice(identifierOffset, identifierKey.length + identifierOffset);
 
-    expect(p).to.equal(p);
+    expect(p).toEqual(p);
   });
 
   it("toOffset - number", () => {
@@ -44,7 +43,7 @@ describe("DocumentLocation", () => {
     for (var I = 0; I < 1000; I += 72) {
       const offset = DocumentLocation.toOffset(I, jsonData);
 
-      expect(offset).to.equal(I);
+      expect(offset).toEqual(I);
     }
   });
 
@@ -53,37 +52,37 @@ describe("DocumentLocation", () => {
     for (var I = 0; I < 1000; I += 72) {
       const offset = DocumentLocation.toOffset(I, jsonWrapper);
 
-      expect(offset).to.equal(I);
+      expect(offset).toEqual(I);
     }
   });
 
   it("toOffset - JsonPath", () => {
     const offset = DocumentLocation.toOffset("minecraft:entity/description/identifier", jsonData);
 
-    expect(offset).to.equal(identifierOffset);
+    expect(offset).toEqual(identifierOffset);
   });
 
   it("toOffset - Position", () => {
     const offset = DocumentLocation.toOffset({ character: 7, line: 4 }, jsonData);
 
-    expect(offset).to.equal(identifierOffset);
+    expect(offset).toEqual(identifierOffset);
   });
 
   it("toPosition - JsonPath", () => {
     const P = DocumentLocation.toPosition("minecraft:entity/description/identifier", jsonData);
 
-    expect(P).to.eql(identifierPos);
+    expect(P).toEqual(identifierPos);
   });
 
   it("toPosition - JsonPath", () => {
     const P = DocumentLocation.toPosition(identifierPos, jsonData);
 
-    expect(P).to.eql(identifierPos);
+    expect(P).toEqual(identifierPos);
   });
 
   it("toPosition - offset", () => {
     const P = DocumentLocation.toPosition(identifierOffset, jsonData);
 
-    expect(P).to.eql(identifierPos);
+    expect(P).toEqual(identifierPos);
   });
 });

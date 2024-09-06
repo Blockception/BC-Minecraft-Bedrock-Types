@@ -1,6 +1,5 @@
-import { expect } from "chai";
-import { CompactJson } from '../../../src/minecraft/json';
-import { Selector } from "../../../src/minecraft/selector";
+import { CompactJson } from '../json';
+import { Selector } from ".";
 
 interface TestData {
   selector: string;
@@ -48,11 +47,11 @@ describe("Selector - Parse", () => {
       const { selector, offset } = test;
       const sel = Selector.parse(selector, offset);
 
-      expect(sel).to.not.be.undefined;
+      expect(sel).toBeDefined();
       if (sel === undefined) return;
 
-      expect(sel.selectorType).to.equal(test.type);
-      expect(sel.type).to.equal(CompactJson.Type.Array);
+      expect(sel.selectorType).toEqual(test.type);
+      expect(sel.type).toEqual(CompactJson.Type.Array);
 
       test.contains.forEach((attr) => contains(sel, attr));
     });
@@ -60,5 +59,5 @@ describe("Selector - Parse", () => {
 });
 
 function contains(sel: Selector, attr: string) {
-  expect(sel.contains(attr), `Contains ${attr}`).to.be.true;
+  expect(sel.contains(attr)).toBeTruthy();
 }

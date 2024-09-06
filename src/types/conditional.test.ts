@@ -1,27 +1,26 @@
-import { expect } from "chai";
-import { Conditional } from "../../src/types";
+import { Conditional } from ".";
 
 describe("Conditional", () => {
   it("getId", () => {
     const example: Conditional = { example: 1 };
 
-    expect(Conditional.getId(example)).to.equal("example");
+    expect(Conditional.getId(example)).toEqual("example");
   });
 
   it("getId2", () => {
-    expect(Conditional.getId("example")).to.equal("example");
+    expect(Conditional.getId("example")).toEqual("example");
   });
 
   it("getCondition", () => {
     const example: Conditional = { example: 1 };
 
-    expect(Conditional.getCondition(example)).to.equal(1);
+    expect(Conditional.getCondition(example)).toEqual(1);
   });
 
   it("getCondition2", () => {
     const example: Conditional = { example: "foo" };
 
-    expect(Conditional.getCondition(example)).to.equal("foo");
+    expect(Conditional.getCondition(example)).toEqual("foo");
   });
 
   it("forEach works as intented", () => {
@@ -36,7 +35,7 @@ describe("Conditional", () => {
       ids.push(id);
     });
 
-    expect(ids).to.contain.members(["example", "foo", "example2"]);
-    expect(values).to.contain.members(["foo", 1, "1.0"]);
+    expect(ids).toEqual(expect.arrayContaining(["example", "foo", "example2"]));
+    expect(values).toEqual(expect.arrayContaining(["foo", 1, "1.0"]));
   });
 });

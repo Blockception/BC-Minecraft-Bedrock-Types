@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { Coordinate } from "../../src/minecraft/coordinate";
+import { Coordinate } from "./coordinate";
 
 describe("Coordinates", () => {
   const valid = [
@@ -51,5 +50,5 @@ describe("Coordinates", () => {
 });
 
 function expect_coordinate(coordinate: string, correct: boolean = true) {
-  expect(Coordinate.is(coordinate)).to.equal(correct, `${coordinate} was expected to be ${correct ? "correct" : "incorrect"}`);
+  expect(Coordinate.is(coordinate)).toEqual(correct);
 }

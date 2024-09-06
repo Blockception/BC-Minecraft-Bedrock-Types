@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { Json } from "../../src/general";
+import { Json } from ".";
 
 describe("Json", () => {
   const isObject = ['{"rawtext":[{"text":"example"}]}', '{"rawtext":[{"text":"example}]}'];
@@ -7,13 +6,13 @@ describe("Json", () => {
 
   isObject.forEach((value) => {
     it(`isObject(${value}) should return true`, () => {
-      expect(Json.isObject(value)).to.be.true;
+      expect(Json.isObject(value)).toBeTruthy();
     });
   });
 
   isObjectInvalid.forEach((value) => {
     it(`isObject(${value}) should return false`, () => {
-      expect(Json.isObject(value)).to.be.false;
+      expect(Json.isObject(value)).toBeFalsy();
     });
   });
 
@@ -23,13 +22,13 @@ describe("Json", () => {
 
   isArray.forEach((value) => {
     it(`isArray(${value}) should return true`, () => {
-      expect(Json.isArray(value)).to.be.true;
+      expect(Json.isArray(value)).toBeTruthy();
     });
   });
 
   isArrayInvalid.forEach((value) => {
     it(`isArray(${value}) should return false`, () => {
-      expect(Json.isArray(value)).to.be.false;
+      expect(Json.isArray(value)).toBeFalsy();
     });
   });
 });

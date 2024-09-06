@@ -1,6 +1,5 @@
-import { expect } from "chai";
-import { BlockState, Block } from "../../src/minecraft/block";
-import { Location } from "../../src/types/location";
+import { BlockState, Block } from "./block";
+import { Location } from "../types/location";
 
 const blockDescription: string = "minecraft:log[direction=west,stripped=true,half=top]";
 const blockID = "minecraft:log";
@@ -14,19 +13,19 @@ describe("Block", () => {
   it("get id works", () => {
     const id = Block.getId(blockDescription);
 
-    expect(id).to.equal(blockID);
+    expect(id).toEqual(blockID);
   });
 
   it("get states", () => {
     const states = Block.getStates(blockDescription);
 
-    expect(states).to.have.deep.members(blockStates, "Block states do not match");
+    expect(states).toEqual(expect.arrayContaining(blockStates));
   });
 
   it("parse", () => {
     const block = Block.fromBlockDescriptor(blockDescription, Location.create("", 0));
 
-    expect(block.id).to.equal(blockID);
-    expect(block.states).to.have.deep.members(blockStates, "Block states do not match");
+    expect(block.id).toEqual(blockID);
+    expect(block.states).toEqual(expect.arrayContaining(blockStates));
   });
 });
