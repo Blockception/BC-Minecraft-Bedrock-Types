@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { CompactJsonReader } from "../../../src/minecraft/json";
 import { CompactJson } from "../../../src/minecraft/json/compact";
 
@@ -17,11 +16,9 @@ describe("Compact Json", () => {
       { text: "!abc", offset: 1, result: { type: CompactJson.Type.String, offset: 1, negative: true, value: "abc" } },
     ];
 
-    data.forEach((item) => {
-      it(`Should parse ${item.text}`, () => {
-        const result = CompactJson.parse(item.text, item.offset);
-        expect(result).to.deep.equal(item.result);
-      });
+    it.each(data)("Should be able to parse $test", (item) => {
+      const result = CompactJson.parse(item.text, item.offset);
+      expect(result).toEqual(expect.objectContaining(item.result));
     });
   });
 
@@ -33,11 +30,9 @@ describe("Compact Json", () => {
       { text: "!{}", offset: 1, result: { type: CompactJson.Type.Object, offset: 2, negative: true, value: [] } },
     ];
 
-    data.forEach((item) => {
-      it(`Should parse ${item.text}`, () => {
-        const result = CompactJson.parse(item.text, item.offset);
-        expect(result).to.deep.equal(item.result);
-      });
+    it.each(data)("Should be able to parse $test", (item) => {
+      const result = CompactJson.parse(item.text, item.offset);
+      expect(result).toEqual(expect.objectContaining(item.result));
     });
   });
 
@@ -49,17 +44,15 @@ describe("Compact Json", () => {
       { text: "![]", offset: 1, result: { type: CompactJson.Type.Array, offset: 2, negative: true, value: [] } },
     ];
 
-    data.forEach((item) => {
-      it(`Should parse ${item.text}`, () => {
-        const result = CompactJson.parse(item.text, item.offset);
-        expect(result).to.deep.equal(item.result);
-      });
+    it.each(data)("Should be able to parse $test", (item) => {
+      const result = CompactJson.parse(item.text, item.offset);
+      expect(result).toEqual(expect.objectContaining(item.result));
     });
   });
 
   describe("Examples", () => {
     //Examples set
-    const dataSet: TestData[] = [
+    const data: TestData[] = [
       {
         text: "{a=1,b=2}",
         offset: 0,
@@ -270,11 +263,9 @@ describe("Compact Json", () => {
       },
     ];
 
-    dataSet.forEach((item) => {
-      it("Example should parse correctly: " + item.text, () => {
-        const result = CompactJson.parse(item.text, item.offset);
-        expect(result).to.deep.equal(item.result);
-      });
+    it.each(data)("Should be able to parse $test", (item) => {
+      const result = CompactJson.parse(item.text, item.offset);
+      expect(result).toEqual(expect.objectContaining(item.result));
     });
   });
 
@@ -289,13 +280,17 @@ describe("Compact Json", () => {
       };
 
       const reader = new CompactJsonReader(data);
-      expect(reader.type).to.equal(data.type);
-      expect(reader.offset).to.equal(data.offset);
-      expect(reader.negative).to.equal(data.negative);
-      expect(reader.value).to.equal(data.value);
+      expect(reader).toEqual(
+        expect.objectContaining({
+          type: data.type,
+          offset: data.offset,
+          negative: data.negative,
+          value: data.value,
+          key: data.key,
+        })
+      );
 
-      expect(reader.hasKey()).to.be.true;
-      expect(reader.key).to.equal(data.key);
+      expect(reader.hasKey()).toBeTruthy();
     });
 
     it("Sanity check object reader", () => {
@@ -308,13 +303,17 @@ describe("Compact Json", () => {
       };
 
       const reader = new CompactJsonReader(data);
-      expect(reader.type).to.equal(data.type);
-      expect(reader.offset).to.equal(data.offset);
-      expect(reader.negative).to.equal(data.negative);
-      expect(reader.value).to.equal(data.value);
+      expect(reader).toEqual(
+        expect.objectContaining({
+          type: data.type,
+          offset: data.offset,
+          negative: data.negative,
+          value: data.value,
+          key: data.key,
+        })
+      );
 
-      expect(reader.hasKey()).to.be.true;
-      expect(reader.key).to.equal(data.key);
+      expect(reader.hasKey()).toBeTruthy();
     });
 
     it("Sanity check array reader", () => {
@@ -327,13 +326,17 @@ describe("Compact Json", () => {
       };
 
       const reader = new CompactJsonReader(data);
-      expect(reader.type).to.equal(data.type);
-      expect(reader.offset).to.equal(data.offset);
-      expect(reader.negative).to.equal(data.negative);
-      expect(reader.value).to.equal(data.value);
+      expect(reader).toEqual(
+        expect.objectContaining({
+          type: data.type,
+          offset: data.offset,
+          negative: data.negative,
+          value: data.value,
+          key: data.key,
+        })
+      );
 
-      expect(reader.hasKey()).to.be.true;
-      expect(reader.key).to.equal(data.key);
+      expect(reader.hasKey()).toBeTruthy();
     });
   });
 });

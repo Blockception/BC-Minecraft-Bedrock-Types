@@ -32,32 +32,32 @@ export namespace Position {
   const NewLine = "\n".charCodeAt(0);
 
   /**Converts the position to an offset
-   * @param P
+   * @param position
    * @param text
    * @returns
    */
-  export function toOffset(P: Position, text: string | { offsetAt(position: Position): number }): number {
-    if (typeof text === "object") return text.offsetAt(P);
+  export function toOffset(position: Position, text: string | { offsetAt(position: Position): number }): number {
+    if (typeof text === "object") return text.offsetAt(position);
 
     //Line count
     let count = 0;
     //Offset of the last newline found
-    let Index = 0;
+    let index = 0;
 
-    for (var I = 0; I < text.length; I++) {
-      const c = text.charCodeAt(I);
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
 
       if (c == NewLine) {
         count++;
-        Index = I + 1;
+        index = i + 1;
 
-        if (count >= P.line) {
-          return Index + P.character;
+        if (count >= position.line) {
+          return index + position.character;
         }
       }
     }
 
-    return P.character;
+    return position.character;
   }
 
   /**
@@ -72,17 +72,17 @@ export namespace Position {
     //Line count
     let count = 0;
     //Offset of the last newline found
-    let Index = 0;
+    let index = 0;
 
-    for (var I = 0; I < offset; I++) {
+    for (let I = 0; I < offset; I++) {
       const c = text.charCodeAt(I);
 
       if (c == NewLine) {
         count++;
-        Index = I + 1;
+        index = I + 1;
       }
     }
 
-    return Position.create(count, offset - Index);
+    return Position.create(count, offset - index);
   }
 }

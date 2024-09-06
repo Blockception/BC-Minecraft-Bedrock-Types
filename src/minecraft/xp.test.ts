@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { XP } from "../../src/minecraft/xp";
+import { XP } from "./xp";
 
 describe("XP", () => {
   const valid = ["13", "1000", "-1000", "13L", "1000L", "-1000L"];
@@ -8,35 +7,35 @@ describe("XP", () => {
 
   valid.forEach((value) => {
     it(`is(${value}) should return true`, () => {
-      expect(XP.is(value)).to.be.true;
+      expect(XP.is(value)).toBeTruthy();
     });
 
     if (value.endsWith("L") || value.endsWith("l")) {
       const integer = parseInt(value.slice(0, -1));
 
       it(`isLevel(${value}) should return true`, () => {
-        expect(XP.isLevel(value)).to.be.true;
+        expect(XP.isLevel(value)).toBeTruthy();
       });
 
       it(`parse(${value}) should return ${integer}`, () => {
-        expect(XP.parse(value)).to.equal(integer);
+        expect(XP.parse(value)).toEqual(integer);
       });
     } else {
       it(`isLevel(${value}) should return false`, () => {
-        expect(XP.isLevel(value)).to.be.false;
+        expect(XP.isLevel(value)).toBeFalsy();
       });
 
       const integer = parseInt(value);
 
       it(`parse(${value}) should return ${integer}`, () => {
-        expect(XP.parse(value)).to.equal(integer);
+        expect(XP.parse(value)).toEqual(integer);
       });
     }
   });
 
   invalid.forEach((value) => {
     it(`is(${value}) should return false`, () => {
-      expect(XP.is(value)).to.be.false;
+      expect(XP.is(value)).toBeFalsy();
     });
   });
 });

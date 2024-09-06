@@ -1,5 +1,4 @@
-import { expect } from "chai";
-import { Position } from "../../src/types";
+import { Position } from ".";
 
 const jsonData = `{
   "format_version": "1.17.0",
@@ -30,30 +29,30 @@ describe("Position", () => {
   it("Const Check", () => {
     const p = jsonData.slice(identifierOffset, identifierKey.length + identifierOffset);
 
-    expect(p).to.equal(p);
+    expect(p).toEqual(p);
   });
 
   it("toPosition", () => {
     const P = Position.toPosition(identifierOffset, jsonData);
 
-    expect(P).to.eql(identifierPos);
+    expect(P).toEqual(identifierPos);
   });
 
   it("toOffset", () => {
     const offset = Position.toOffset(identifierPos, jsonData);
 
-    expect(offset).to.eql(identifierOffset);
+    expect(offset).toEqual(identifierOffset);
   });
 
   it("is", () => {
-    expect(Position.is({ character: 0, line: 0 })).to.be.true;
-    expect(Position.is({ character: -15, line: 135 })).to.be.true;
+    expect(Position.is({ character: 0, line: 0 })).toBeTruthy();
+    expect(Position.is({ character: -15, line: 135 })).toBeTruthy();
 
-    expect(Position.is({ character: "false", line: 135 })).to.be.false;
-    expect(Position.is({ character: -15, line: "135" })).to.be.false;
+    expect(Position.is({ character: "false", line: 135 })).toBeFalsy();
+    expect(Position.is({ character: -15, line: "135" })).toBeFalsy();
 
-    expect(Position.is({ character: false, line: "135" })).to.be.false;
-    expect(Position.is({ line: 135 })).to.be.false;
-    expect(Position.is({ character: 0 })).to.be.false;
+    expect(Position.is({ character: false, line: "135" })).toBeFalsy();
+    expect(Position.is({ line: 135 })).toBeFalsy();
+    expect(Position.is({ character: 0 })).toBeFalsy();
   });
 });

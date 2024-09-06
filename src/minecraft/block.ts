@@ -104,7 +104,7 @@ export namespace Block {
 
       const parts = blockDescription.slice(startIndex, endIndex).split(",");
 
-      for (var I = 0; I < parts.length; I++) {
+      for (let I = 0; I < parts.length; I++) {
         const b = BlockState.parse(parts[I]);
         if (b) out.push(b);
       }
@@ -133,7 +133,7 @@ export namespace Block {
 
       const parts = blockDescription.slice(startIndex, endIndex).split(",");
 
-      for (var I = 0; I < parts.length; I++) {
+      for (let I = 0; I < parts.length; I++) {
         const b = BlockState.parse(parts[I]);
         if (b) out.push(b);
       }

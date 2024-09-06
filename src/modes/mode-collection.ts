@@ -38,7 +38,7 @@ export namespace ModeCollection {
   export function isValue(Collection: ModeCollection, value: string): boolean {
     const M = Collection.modes;
 
-    for (var I = 0; I < M.length; I++) {
+    for (let I = 0; I < M.length; I++) {
       const elem = M[I];
 
       if (elem.name === value) return true;
@@ -57,7 +57,7 @@ export namespace ModeCollection {
     if (typeof index === "string") {
       const M = Collection.modes;
 
-      for (var I = 0; I < M.length; I++) {
+      for (let I = 0; I < M.length; I++) {
         const elem = M[I];
 
         if (elem.name === index) return elem;
