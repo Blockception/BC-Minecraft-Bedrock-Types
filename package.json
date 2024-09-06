@@ -19,9 +19,9 @@
     "watch": "tsc -w"
   },
   "files": [
-    "lib/src/**/*.js",
-    "lib/src/**/*.js.map",
-    "lib/src/**/*.d.ts"
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "lib/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
