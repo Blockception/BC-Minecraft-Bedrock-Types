@@ -1,4 +1,3 @@
-import { off } from "process";
 import { String } from "../../general";
 import { Modes } from "../../modes/modes";
 import { OffsetWord } from "../../types";

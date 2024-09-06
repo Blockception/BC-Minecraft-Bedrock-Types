@@ -47,13 +47,13 @@ export namespace Version {
       default:
       case 3:
         out.patch = Number.parseInt(p[2]);
-
+        // fallthrough
       case 2:
         out.minor = Number.parseInt(p[1]);
-
+        // fallthrough
       case 1:
         out.major = Number.parseInt(p[0]);
-
+        // fallthrough
       case 0:
         break;
     }
@@ -77,13 +77,13 @@ export namespace Version {
       default:
       case 3:
         out.patch = version[2];
-
+        // fallthrough
       case 2:
         out.minor = version[1];
-
+        // fallthrough
       case 1:
         out.major = version[0];
-
+        // fallthrough
       case 0:
         break;
     }

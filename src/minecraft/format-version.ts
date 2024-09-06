@@ -13,12 +13,11 @@ export namespace FormatVersion {
    * @returns The parsed format version.
    */
   export function parse(data: string): [number, number, number] {
-    let parts = data.split(".");
-    let major: number, minor: number, patch: number;
+    const parts = data.split(".");
 
-    major = parseInt(parts[0] ?? "0");
-    minor = parseInt(parts[1] ?? "0");
-    patch = parseInt(parts[2] ?? "0");
+    const major = parseInt(parts[0] ?? "0");
+    const minor = parseInt(parts[1] ?? "0");
+    const patch = parseInt(parts[2] ?? "0");
 
     return [major, minor, patch];
   }

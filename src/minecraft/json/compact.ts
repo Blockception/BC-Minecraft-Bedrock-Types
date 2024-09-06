@@ -188,7 +188,7 @@ export namespace CompactJson {
    * @returns The transformed node
    */
   export function toKeyed<T extends INode>(node: T, key: string): T & IKeyNode {
-    let result = node as IKeyNode & T;
+    const result = node as IKeyNode & T;
     result.key = key;
 
     return result;

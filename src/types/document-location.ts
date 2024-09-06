@@ -1,5 +1,5 @@
 import { JsonPath } from "./json-path";
-import { OffsetWord } from './offset-word';
+import { OffsetWord } from "./offset-word";
 import { Position } from "./position";
 import { Range } from "./range";
 
@@ -14,7 +14,7 @@ function ToText(value: TextOrDoc): string {
 }
 
 /**
- * 
+ *
  */
 export namespace DocumentLocation {
   /**TODO add documentation
@@ -44,8 +44,6 @@ export namespace DocumentLocation {
         return 0;
     }
   }
-
-  const NewLine = "\n".charCodeAt(0);
 
   /**TODO add documentation
    *

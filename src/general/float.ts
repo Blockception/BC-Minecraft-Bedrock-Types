@@ -1,7 +1,7 @@
 /** The namespace for the float type */
 export namespace Float {
   /**The regex pattern that matches a float */
-  export const pattern: RegExp = /^[\-\.\d]*$/;
+  export const pattern: RegExp = /^[-.\d]*$/;
 
   /**Checks if the given text value is a valid float
    * @param value The valued to compare to

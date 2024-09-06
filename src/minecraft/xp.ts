@@ -1,7 +1,7 @@
 /** */
 export namespace XP {
   /**The regex pattern that matches a XP value */
-  export const pattern: RegExp = /^([\-\d]*|[\-\d]*[Ll])$/;
+  export const pattern: RegExp = /^([-\d]*|[-\d]*[Ll])$/;
 
   /**Checks if the given text value is a valid xp value
    * @param text The valued to check

@@ -40,7 +40,7 @@ describe("DocumentLocation", () => {
 
   it("toOffset - number", () => {
     //Rolled 10d20 = 72
-    for (var I = 0; I < 1000; I += 72) {
+    for (let I = 0; I < 1000; I += 72) {
       const offset = DocumentLocation.toOffset(I, jsonData);
 
       expect(offset).toEqual(I);
@@ -49,7 +49,7 @@ describe("DocumentLocation", () => {
 
   it("toOffset - number2", () => {
     //Rolled 10d20 = 72
-    for (var I = 0; I < 1000; I += 72) {
+    for (let I = 0; I < 1000; I += 72) {
       const offset = DocumentLocation.toOffset(I, jsonWrapper);
 
       expect(offset).toEqual(I);

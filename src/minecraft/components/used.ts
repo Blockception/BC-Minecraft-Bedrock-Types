@@ -17,7 +17,7 @@ export function getUsedComponents(data: ComponentBehavior): string[] {
   const groups = data?.component_groups;
 
   if (groups) {
-    Object.entries(groups).forEach(([name, group]) => {
+    Object.entries(groups).forEach(([, group]) => {
       Object.getOwnPropertyNames(group).forEach((c) => {
         if (!out.includes(c)) out.push(c);
       });
