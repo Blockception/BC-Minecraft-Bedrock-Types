@@ -9,6 +9,7 @@
     "build": "npm run clean && npm run compile",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "test": "jest",
+    "lint": "eslint",
     "clean": "tsc -b --clean",
     "pretest": "npm run compile",
     "prepublishOnly": "npm test && npm run compile",
