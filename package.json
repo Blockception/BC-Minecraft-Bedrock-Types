@@ -2,8 +2,8 @@
   "name": "bc-minecraft-bedrock-types",
   "version": "1.21.1-6",
   "description": "The typescript library that provides default types for minecraft bedrock",
-  "main": "./lib/src/main.js",
-  "types": "./lib/src/main.d.ts",
+  "main": "./lib/main.js",
+  "types": "./lib/main.d.ts",
   "scripts": {
     "compile": "tsc -b",
     "build": "npm run clean && npm run compile",
