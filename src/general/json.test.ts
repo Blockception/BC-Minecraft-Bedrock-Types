@@ -4,20 +4,15 @@ describe("Json", () => {
   const isObject = ['{"rawtext":[{"text":"example"}]}', '{"rawtext":[{"text":"example}]}'];
   const isObjectInvalid= ['{"rawtext":[{"text":"example"}]', '{"rawtext"'];
 
-  isObject.forEach((value) => {
-    it(`isObject(${value}) should return true`, () => {
-      expect(Json.isObject(value)).toBeTruthy();
-    });
+  test.each(isObject)("isObject($s) should return true", (value) => {
+    expect(Json.isObject(value)).toBeTruthy();
   });
 
-  isObjectInvalid.forEach((value) => {
-    it(`isObject(${value}) should return false`, () => {
-      expect(Json.isObject(value)).toBeFalsy();
-    });
+  test.each(isObjectInvalid)("isObject($s) should return false", (value) => {
+    expect(Json.isObject(value)).toBeFalsy();
   });
 
   const isArray = ['["rawtext",[{"text":"example"}]]'];
-
   const isArrayInvalid = ["example:something,hello:1", "[foo:1"];
 
   isArray.forEach((value) => {

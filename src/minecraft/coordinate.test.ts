@@ -36,19 +36,11 @@ describe("Coordinates", () => {
 
   const invalid = ["&16", "*4341", "x", "y"];
 
-  valid.forEach((value) => {
-    it(`is(${value}) should return true`, () => {
-      expect_coordinate(value, true);
-    });
+  test.each(valid)("$s should return true", (value) => {
+    expect(Coordinate.is(value)).toBeTruthy();
   });
 
-  invalid.forEach((value) => {
-    it(`is(${value}) should return false`, () => {
-      expect_coordinate(value, false);
-    });
+  test.each(invalid)("$s should return false", (value) => {
+    expect(Coordinate.is(value)).toBeFalsy();
   });
 });
-
-function expect_coordinate(coordinate: string, correct: boolean = true) {
-  expect(Coordinate.is(coordinate)).toEqual(correct);
-}

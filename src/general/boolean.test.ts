@@ -1,25 +1,20 @@
 import { Boolean } from ".";
 
 describe("Boolean", () => {
-  it("is", () => {
-    expect(Boolean.is("true")).toBeTruthy();
-    expect(Boolean.is("True")).toBeTruthy();
-    expect(Boolean.is("false")).toBeTruthy();
-    expect(Boolean.is("False")).toBeTruthy();
+  const tests = [
+    { value: "0", is: false, parse: false },
+    { value: "1", is: false, parse: true },
+    { value: "false", is: true, parse: false },
+    { value: "False", is: true, parse: false },
+    { value: "foo", is: false, parse: false },
+    { value: "true", is: true, parse: true },
+    { value: "True", is: true, parse: true },
+  ];
 
-    expect(Boolean.is("foo")).toBeFalsy();
-    expect(Boolean.is("1")).toBeFalsy();
-    expect(Boolean.is("0")).toBeFalsy();
-  });
+  test.each(tests)("parse and pass: '$value' -> is: $is, parse: $parse", (item) => {
+    const { value, is, parse } = item;
 
-  it("parse", () => {
-    expect(Boolean.parse("true")).toBeTruthy();
-    expect(Boolean.parse("True")).toBeTruthy();
-    expect(Boolean.parse("false")).toBeFalsy();
-    expect(Boolean.parse("False")).toBeFalsy();
-
-    expect(Boolean.parse("foo")).toBeFalsy();
-    expect(Boolean.parse("1")).toBeTruthy();
-    expect(Boolean.parse("0")).toBeFalsy();
+    expect(Boolean.is(value)).toEqual(is);
+    expect(Boolean.parse(value)).toEqual(parse);
   });
 });

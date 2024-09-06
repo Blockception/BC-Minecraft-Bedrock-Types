@@ -30,7 +30,6 @@ describe("Conditional", () => {
     const ids: string[] = [];
 
     Conditional.forEach(example, (id, value) => {
-      console.log(`${id}: ${value}`);
       values.push(value);
       ids.push(id);
     });

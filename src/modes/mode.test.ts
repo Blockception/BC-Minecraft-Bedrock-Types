@@ -29,7 +29,7 @@ describe("Mode", () => {
   describe.each(tests)("$name", (mode) => {
     it("SanityCheck should pass", () => SanityCheckMode(mode));
     it("is should be true", () => expect(ModeCollection.is(mode)).toBeTruthy());
-    it("Values check", () => Values(mode));
+    it("Values check", () => values(mode));
   });
 });
 
@@ -51,7 +51,7 @@ function SanityCheckMode(mode: ModeCollection): void {
   });
 }
 
-function Values(mode: ModeCollection): void {
+function values(mode: ModeCollection): void {
   for (let I = 0; I < mode.modes.length; I++) {
     const value = mode.modes[I];
 
