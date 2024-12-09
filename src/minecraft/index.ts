@@ -7,3 +7,4 @@ export * from "./block";
 export * from "./coordinate";
 export * from "./xp";
 export * from "./format-version";
+export * from "./timeInTicks";
