@@ -33,4 +33,12 @@ export namespace FormatVersion {
     }
     return false;
   }
+
+  export function isGreaterThan(a: [number, number, number], b: [number, number, number]): boolean {
+    for (let i = 0; i < 3; i++) {
+      if (a[i] > b[i]) return true;
+      if (a[i] < b[i]) return false;
+    }
+    return false;
+  }
 }
