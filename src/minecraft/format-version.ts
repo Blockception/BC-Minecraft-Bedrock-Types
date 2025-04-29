@@ -21,4 +21,24 @@ export namespace FormatVersion {
 
     return [major, minor, patch];
   }
+
+  export function isEqual(a: [number, number, number], b: [number, number, number]) {
+    return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+  }
+
+  export function isLessThan(a: [number, number, number], b: [number, number, number]) {
+    for (let i = 0; i < 3; i++) {
+      if (a[i] < b[i]) return true;
+      if (a[i] > b[i]) return false;
+    }
+    return false;
+  }
+
+  export function isGreaterThan(a: [number, number, number], b: [number, number, number]): boolean {
+    for (let i = 0; i < 3; i++) {
+      if (a[i] > b[i]) return true;
+      if (a[i] < b[i]) return false;
+    }
+    return false;
+  }
 }
