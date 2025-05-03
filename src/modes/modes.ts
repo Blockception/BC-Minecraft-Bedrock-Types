@@ -3,6 +3,7 @@ import { CauseTypeMode } from "./cause-type";
 import { CloneMode } from "./clone";
 import { DifficultyMode } from "./difficulty";
 import { DimensionMode } from "./dimension";
+import { EasingMode } from "./easing";
 import { FillMode } from "./fill";
 import { GameMode } from "./gamemode";
 import { HandTypeMode } from "./handtype";
@@ -41,6 +42,8 @@ export namespace Modes {
   export const Difficulty = new ModeHandler(DifficultyMode);
   /** The mode: Dimension **/
   export const Dimension = new ModeHandler(DimensionMode);
+  /** The mode: Easing */
+  export const Easing = new ModeHandler(EasingMode);
   /** The mode: Fill **/
   export const Fill = new ModeHandler(FillMode);
   /** The mode: Gamemode **/
@@ -98,9 +101,8 @@ export namespace ModeUtil {
    * gets all the modes
    * @returns A collection of modes
    */
-  export function getModes() : ModeHandler[] {
-    return Object.values(Modes)
-      .filter(value => value instanceof ModeHandler) as ModeHandler[];
+  export function getModes(): ModeHandler[] {
+    return Object.values(Modes).filter((value) => value instanceof ModeHandler) as ModeHandler[];
   }
 
   /**
@@ -108,15 +110,15 @@ export namespace ModeUtil {
    * @param name The name of the mode
    * @returns The mode or undefined
    */
-  export function getMode(name: string) : ModeHandler | undefined {
-    return getModes().find(mode => mode.name === name);
+  export function getMode(name: string): ModeHandler | undefined {
+    return getModes().find((mode) => mode.name === name);
   }
 
   /**
    * gets all the mode names
    * @returns A collection of mode names
    */
-  export function getModeNames() : string[] {
-    return getModes().map(mode => mode.name);
+  export function getModeNames(): string[] {
+    return getModes().map((mode) => mode.name);
   }
 }
