@@ -14,13 +14,15 @@ export namespace FormatVersion {
    * @returns The parsed format version.
    */
   export function parse(data: string): Version {
+    if (data === "") return [0, 0, 0];
+
     const parts = data.split(".");
 
     const major = parseInt(parts[0] ?? "0");
     const minor = parseInt(parts[1] ?? "0");
     const patch = parseInt(parts[2] ?? "0");
 
-    return [Number.isNaN(major) ? 0 : major, minor, patch];
+    return [major, minor, patch];
   }
 
   export function unwrap(value: Version | FormatVersion): Version {
