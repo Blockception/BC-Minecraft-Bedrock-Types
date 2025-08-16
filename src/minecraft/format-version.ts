@@ -20,7 +20,7 @@ export namespace FormatVersion {
     const minor = parseInt(parts[1] ?? "0");
     const patch = parseInt(parts[2] ?? "0");
 
-    return [major, minor, patch];
+    return [Number.isNaN(major) ? 0 : major, minor, patch];
   }
 
   export function unwrap(value: Version | FormatVersion): Version {
