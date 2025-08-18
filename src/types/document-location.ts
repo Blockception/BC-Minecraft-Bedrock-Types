@@ -17,19 +17,18 @@ function ToText(value: TextOrDoc): string {
  *
  */
 export namespace DocumentLocation {
-  /**TODO add documentation
-   *
-   * @param data
-   * @param text
-   * @returns
-   */
-  export function toOffset(data: DocumentLocation, text: TextOrDoc): number {
+  export function toOffset(data: number): number;
+  export function toOffset(data: OffsetWord): number;
+  export function toOffset(data: DocumentLocation, text: TextOrDoc): number;
+
+  export function toOffset(data: DocumentLocation, text?: TextOrDoc): number {
     switch (typeof data) {
       case "number":
         return data;
 
       //Json path
       case "string":
+        if (text === undefined) throw new Error("text or document must be provided");
         return JsonPath.resolve(text, data);
 
       //Position
@@ -38,6 +37,7 @@ export namespace DocumentLocation {
           return data.offset;
         }
 
+        if (text === undefined) throw new Error("text or document must be provided");
         return Position.toOffset(data, ToText(text));
 
       default:
@@ -73,18 +73,16 @@ export namespace DocumentLocation {
     }
   }
 
-  /**TODO add documentation
-   *
-   * @param data
-   * @param text
-   * @param length
-   * @returns
-   */
-  export function ToRange(data: DocumentLocation, text: TextOrDoc, length: number): Range {
+  export function toRange(data: OffsetWord): Range;
+  export function toRange(data: DocumentLocation, text: TextOrDoc, length: number): Range;
+
+  export function toRange(data: DocumentLocation, text?: TextOrDoc, length?: number): Range {
     if (OffsetWord.is(data)) {
       const t = data.text;
       return Range.create(Position.toPosition(data.offset, t), Position.toPosition(data.offset + t.length, t));
     }
+    if (text === undefined) throw new Error("requires text or document");
+    if (length === undefined) throw new Error("requires length");
 
     const startindex = toOffset(data, text);
     const endindex = startindex + length;
